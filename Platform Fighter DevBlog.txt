@@ -1,0 +1,110 @@
+Platform Fighter DevBlog
+
+Day 1 (8/9/26):
+Platform was made in Blender
+Made a cube for a placeholder fighter and started with defining movement
+	Using a character controller
+	Uses the FighterController script
+		New Unity input system
+		Left/Right + Jump + Double Jump logic implemented
+		Gravity in place
+		Instance variables to adjust run speed, num jumps, fall speed, and jump height
+	Added a rigidbody component for blast zone contact reading (you need at least one rigidbody to measure collision)
+Implemented blast zones (no stock system yet but reads contact with fighters)
+	Just a plane with a mesh collider on it
+	lso has a script that measures the collision with the fighter
+The gravity variable controls how quickly a character rises and falls with their jump
+	Each fighter will have different gravity for their own unique feel
+
+Day 2 (8/13/26):
+Implemented the stock system
+	Detects contact with one of the blast zones
+		Removes a stock from the player (UI still to be implemented)
+		Respawns the player at their designated spawn point (will change in the future)
+Timer implemented	
+	Still have to display the remaining time on the screen
+	Is in GameManager.cs
+Camera follows the fighters similar to smash
+	Takes the position of the fighters and builds a bounding box, calculates the center and lerps the camera transform to keep them in view
+
+Day 3 (8/20/26):
+Began implementing a state machine for the fighters
+	AirborneState.cs controls the double jump and checks if the player has returned the ground so then it can pass off to the GroundedState
+	GroundedState.cs controls the grounded movement, jumping changes the state to AirborneState
+	OnLedgeState.cs is called from the LedgeContact.cs script
+		The ledge collider detects a fighter and sets the fighters state to OnLedgeState.cs
+		On the ledge the fighter will have brief invulnerabilty (still need to implement)
+		The fighter will only be able to jump, get up attack, normal get up, or roll
+Made different color materials to be able to test state machine easier
+	Airborne = blue
+	Grouded = green
+	OnLedge = orange
+	Colors are set in the Enter() method in each state script
+
+Day 4 (8/21/26):
+Implemented ledge behavior for ledge hang and actions
+Ledge options are:
+	Jump
+	Roll (not yet implemented)
+	Normal get up
+	Drop
+	Attack (not yet implemented)
+Added the ability to roll complete with a RollState
+
+Day 5 (8/23/26):
+Created a dummy script to assist with testing hitboxes and knockback
+Fixed bug where fighter was floating when doing normal get up from the ledge
+Fixed bug where fighter.transform.position.z was getting set to 0.25 when grabbing the ledge and doing normal get up (lowkey a lazy fix, might be worth figuring out the real issue if it pops up again)
+
+Day 6 (8/24/26):
+Refactored where fighter specific stats are stored to make it easier for knockback calculation
+	Previously fighter stats were separated from fall speed, gravity, etc
+	References to fighter specific stats in States are done with fighter.Stats.'statName'
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Backlog:
+Hitboxes and hurtboxes
+	Knockback formula (can be found online)
+Game Manager
+	Fighter health system (percents set up, but no moves or other fighters yet)
+	Timer (functionally done, just needs UI)
+3d models
+Animations
+Multiplayer
+AI opponents
+Jump Effect
+Hit Effects
+Death Effects
+Character Intros like Guilty Gear Strive has
+	Use unity timeline to move the camera and have the character walk in
+Invulnerability on ledges for a period of time
+Implement rolling (brief invulnerability)
+	Make it so the invulnerability can be reused for all the other times its needed
+Tumble state (make sure theres a DI system with knockback)
+Use scriptable objects for making different fighters with unique stats
+	Read from the scriptable object in the fighter script to get those unique stats
+Each of the fighter states will have its own associated movesets
+	Grounded - dash attack, smash attacks, tilts
+	Airborne - aerials
+	Ledge - get up attack
+	Supine - get up Attack
+Create a Supine state for when the fighter is laying on the stage after being sent into tumble 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Knockback information:
+https://www.youtube.com/watch?v=CxvdO_kkXmY
+Knockback formula
+	(((((p / 10 + pd / 20) * 200 / w + 100 * 1.4) + 18) * s) + b) * r
+
+	p - current percent of the target Character
+	d - damage of the dealt attack (d = d1 * 0.3(StalingBonus) * 0.3(FreshnessBonus))
+	w - character's weight
+	s - knockback scaling (rate at which knockback increases with damage)
+	b - base knockback
+	r - Error term (rage, crounch cancelling, etc)
+
+	Launch speed = 0.3 * knockback
+		Decreases by 0.015 every frame until the horizontal speed reaches zero or the character hits the ground
+			Air traction values are disabled during this
+		DI changes launch speed
+		Tumble only occurs when the knockback value is over a certain threshold
+	Rage = 1 + (p - 35 / 115 * 0.15)
