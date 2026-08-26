@@ -8,8 +8,10 @@ public class DummyController : MonoBehaviour
 
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private CharacterController controller;
+    [SerializeField] private Fighter fighter;
 
-    private Vector3 velocity;
+    public Vector3 velocity;
+    public Vector2 knockbackVelocity;
 
     public bool IsGrounded()
     {
@@ -24,10 +26,6 @@ public class DummyController : MonoBehaviour
         );
     }
 
-    public void Start()
-    {
-    }
-
     public void Update()
     {
         if (IsGrounded() && velocity.y < 0f)
@@ -38,6 +36,9 @@ public class DummyController : MonoBehaviour
         float currentGravity = velocity.y < 0f ? gravity * fallMultiplier : gravity;
         velocity.y += currentGravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        Vector3 totalVelocity = velocity + new Vector3(fighter.knockbackVelocity.x, fighter.knockbackVelocity.y, 0f);
+        controller.Move(totalVelocity * Time.deltaTime);
+
+        knockbackVelocity = Vector2.Lerp(fighter.knockbackVelocity, Vector2.zero, fighter.decayRate * Time.deltaTime);
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class GroundedState : IFighterState
 {
@@ -41,6 +42,7 @@ public class GroundedState : IFighterState
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             EnableTestHitbox(fighter);
+            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
             return;
         }
 
@@ -65,8 +67,9 @@ public class GroundedState : IFighterState
         fighter.testHitbox.SetActive(true);
     }
 
-    public void DisableTestHitbox(FighterController fighter)
+    IEnumerator DisableHitboxCoroutine(FighterController fighter)
     {
+        yield return new WaitForSeconds(0.5f);
         fighter.testHitbox.SetActive(false);
     }
 }

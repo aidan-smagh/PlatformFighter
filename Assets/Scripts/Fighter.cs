@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class Fighter : MonoBehaviour
 {
-    public float runSpeed = 5f;
+    public float runSpeed = 10f;
     public float jumpHeight = 2.5f;
     public float fallMultiplier = 2.5f;
     public float gravity = -20f;
     public float numJumps = 1;
     public float weight = 100;
+    public float decayRate = 0.15f;
+    public bool facingRight;
+    public Vector2 knockbackVelocity;
+    public float knockbackPowerScaleFactor = 0.12f;
 
     [SerializeField] float currentPercent = 0f;
     [SerializeField] int stocks = 3;
     [SerializeField] GameObject spawnPoint;
+    [SerializeField] DummyController dummyController;
     
     public int Stocks => stocks;
     GameObject fighter;
@@ -38,6 +43,7 @@ public class Fighter : MonoBehaviour
         cc.enabled = false;
         fighter.transform.position = spawnPoint.transform.position;
         fighter.transform.rotation = spawnPoint.transform.rotation;
+        dummyController.velocity = Vector3.zero;
         cc.enabled = true;
     }
 
@@ -50,8 +56,23 @@ public class Fighter : MonoBehaviour
         //(((((p / 10 + pd / 20) * 200 / w + 100 * 1.4) + 18) * s) + b) * r
         
         double knockbackPower = ((((other.currentPercent / 10 + (other.currentPercent * payload.d) / 20) * (200 / (other.weight + 100) * 1.4) + 18) * payload.s) + payload.b) * payload.r;
-        Debug.Log(knockbackPower);
         return knockbackPower;
+    }
+
+    Vector2 AngleToDirection(float angleDegrees, bool facingRight)
+    {
+        float rad = angleDegrees * Mathf.Deg2Rad;
+        float x = Mathf.Cos(rad);
+        float y = Mathf.Sin(rad);
+
+        if (!facingRight) x = -x;
+
+        return new Vector2(x, y);
+    }
+
+    void ApplyKnockback(Fighter other, Vector2 velocity)
+    {
+        other.knockbackVelocity += velocity;
     }
 
     void CalculateMoveHit(Fighter other/*,hitbox move strength*/)
@@ -71,8 +92,11 @@ public class Fighter : MonoBehaviour
             r = r
         };
 
-        CalculateKnockback(other, payload);
+        double knockbackPower = CalculateKnockback(other, payload);
         other.currentPercent += d;
+        Vector2 direction = AngleToDirection(45f, facingRight);
+        Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
+        ApplyKnockback(other, knockbackVelocity);
     }
 
     void OnTriggerEnter(Collider other)
@@ -80,5 +104,19 @@ public class Fighter : MonoBehaviour
         //compare tags in here eventually so theres no problems with false collisions
         dummy = other.gameObject.GetComponent<Fighter>();
         CalculateMoveHit(dummy);
+    }
+
+    bool isFacingRight()
+    {
+        if (gameObject.transform.position.x > 0) 
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void Update()
+    {
+        facingRight = isFacingRight();
     }
 }

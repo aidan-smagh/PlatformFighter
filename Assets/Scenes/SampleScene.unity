@@ -308,6 +308,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   controller: {fileID: 168835482}
+  fighter: {fileID: 168835484}
+  velocity: {x: 0, y: 0, z: 0}
+  knockbackVelocity: {x: 0, y: 0}
 --- !u!114 &168835484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,9 +329,14 @@ MonoBehaviour:
   gravity: -20
   numJumps: 1
   weight: 100
-  currentPercent: 0
+  decayRate: 1
+  facingRight: 0
+  knockbackVelocity: {x: 0, y: 0}
+  knockbackPowerScaleFactor: 0.1
+  currentPercent: 45
   stocks: 3
   spawnPoint: {fileID: 1192005608}
+  dummyController: {fileID: 0}
 --- !u!1 &308079074
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,15 +690,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8f27e58dd7639439674ce99ef163fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
-  runSpeed: 5
+  runSpeed: 10
   jumpHeight: 2.5
   fallMultiplier: 2.5
   gravity: -20
   numJumps: 1
   weight: 100
+  decayRate: 0.015
+  facingRight: 0
+  knockbackVelocity: {x: 0, y: 0}
+  knockbackPowerScaleFactor: 0.24
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 1192005608}
+  dummyController: {fileID: 0}
 --- !u!54 &368078569
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -69,6 +69,9 @@ Continued working on implementing knockback
 	Logic lives in Fighter.cs
 	Collider grabs the information about the fighters and passes that to a method that calculates the changes as a result of collision
 		Then the target fighter and a payload with all the necessary data is passed to the knockback method which will calculate the knockback and apply it
+	Knockback is applied to the Character Controller not the rigidbody
+		For the dummy, this is done in the update loop but a more elegant solution is needed for players
+	Uses the smash ultimate formula but due to differences in scaling, I implemented a scaleFactor to lessen the power until it was more accurate
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -98,6 +101,7 @@ Each of the fighter states will have its own associated movesets
 	Supine - get up Attack
 Create a Supine state for when the fighter is laying on the stage after being sent into tumble 
 Create a Grabbing/Grabbed state
+Fix FacingRight() logic to actually take the fighters direction
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
