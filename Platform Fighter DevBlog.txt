@@ -60,6 +60,15 @@ Day 6 (8/24/26):
 Refactored where fighter specific stats are stored to make it easier for knockback calculation
 	Previously fighter stats were separated from fall speed, gravity, etc
 	References to fighter specific stats in States are done with fighter.Stats.'statName'
+
+Day 7 (8/25/26):
+Created the Github repo for this project so I can start working on my laptop tops
+
+Day 8 (8/26/26):
+Continued working on implementing knockback
+	Logic lives in Fighter.cs
+	Collider grabs the information about the fighters and passes that to a method that calculates the changes as a result of collision
+		Then the target fighter and a payload with all the necessary data is passed to the knockback method which will calculate the knockback and apply it
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -88,6 +97,7 @@ Each of the fighter states will have its own associated movesets
 	Ledge - get up attack
 	Supine - get up Attack
 Create a Supine state for when the fighter is laying on the stage after being sent into tumble 
+Create a Grabbing/Grabbed state
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
@@ -108,3 +118,4 @@ Knockback formula
 		DI changes launch speed
 		Tumble only occurs when the knockback value is over a certain threshold
 	Rage = 1 + (p - 35 / 115 * 0.15)
+Knockback is a vector in which the magnitude is the knockback value and the angle is the angle in which the hitbox sends
