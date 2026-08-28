@@ -11,7 +11,6 @@ public class DummyController : MonoBehaviour
     [SerializeField] private Fighter fighter;
 
     public Vector3 velocity;
-    public Vector2 knockbackVelocity;
 
     public bool IsGrounded()
     {
@@ -30,15 +29,15 @@ public class DummyController : MonoBehaviour
     {
         if (IsGrounded() && velocity.y < 0f)
         {
-            velocity.y = -2f; // small downward stick, keeps CharacterController grounded
+            velocity.y = -2f;
         }
 
         float currentGravity = velocity.y < 0f ? gravity * fallMultiplier : gravity;
         velocity.y += currentGravity * Time.deltaTime;
 
+        fighter.knockbackVelocity = Vector2.Lerp(fighter.knockbackVelocity, Vector2.zero, fighter.decayRate * Time.deltaTime);
+
         Vector3 totalVelocity = velocity + new Vector3(fighter.knockbackVelocity.x, fighter.knockbackVelocity.y, 0f);
         controller.Move(totalVelocity * Time.deltaTime);
-
-        knockbackVelocity = Vector2.Lerp(fighter.knockbackVelocity, Vector2.zero, fighter.decayRate * Time.deltaTime);
     }
 }

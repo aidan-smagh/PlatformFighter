@@ -10,8 +10,12 @@ public class FighterController : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] MeshRenderer meshRenderer;
-    [SerializeField] public GameObject testHitbox;
     [SerializeField] Fighter fighter;
+    [SerializeField] public Fighter grabbedFighter;
+
+    [SerializeField] public GameObject testHitbox;
+    [SerializeField] public GameObject grabHitbox;
+    [SerializeField] public GameObject pummelHitbox;
 
     public CharacterController Controller => controller;
     public Fighter Stats => fighter;

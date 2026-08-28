@@ -46,6 +46,13 @@ public class GroundedState : IFighterState
             return;
         }
 
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            EnableGrabHitbox(fighter);
+            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+            return;
+        }
+
         if (!fighter.IsGrounded())
         {
             fighter.ChangeState(new AirborneState());
@@ -67,9 +74,17 @@ public class GroundedState : IFighterState
         fighter.testHitbox.SetActive(true);
     }
 
+    public void EnableGrabHitbox(FighterController fighter)
+    {
+        fighter.grabHitbox.SetActive(true);
+    }
+
     IEnumerator DisableHitboxCoroutine(FighterController fighter)
     {
         yield return new WaitForSeconds(0.5f);
         fighter.testHitbox.SetActive(false);
+        fighter.grabHitbox.SetActive(false);
     }
+
+
 }

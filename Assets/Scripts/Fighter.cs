@@ -13,7 +13,7 @@ public class Fighter : MonoBehaviour
     public Vector2 knockbackVelocity;
     public float knockbackPowerScaleFactor = 0.12f;
 
-    [SerializeField] float currentPercent = 0f;
+    [SerializeField] public float currentPercent = 0f;
     [SerializeField] int stocks = 3;
     [SerializeField] GameObject spawnPoint;
     [SerializeField] DummyController dummyController;
@@ -44,6 +44,7 @@ public class Fighter : MonoBehaviour
         fighter.transform.position = spawnPoint.transform.position;
         fighter.transform.rotation = spawnPoint.transform.rotation;
         dummyController.velocity = Vector3.zero;
+        knockbackVelocity = Vector3.zero;
         cc.enabled = true;
     }
 
@@ -75,7 +76,7 @@ public class Fighter : MonoBehaviour
         other.knockbackVelocity += velocity;
     }
 
-    void CalculateMoveHit(Fighter other/*,hitbox move strength*/)
+    public void CalculateMoveHit(Fighter other/*,hitbox move strength*/)
     {
         //hard coded values for d, s, and b
         //ganon fsmash values as an example
@@ -102,8 +103,9 @@ public class Fighter : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         //compare tags in here eventually so theres no problems with false collisions
-        dummy = other.gameObject.GetComponent<Fighter>();
-        CalculateMoveHit(dummy);
+        //separate in here whether it was an attack so it can go through the knockback calculation or a grab to go with the grab flow
+
+
     }
 
     bool isFacingRight()
