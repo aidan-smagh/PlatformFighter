@@ -17,6 +17,8 @@ public class FighterController : MonoBehaviour
     [SerializeField] public GameObject grabHitbox;
     [SerializeField] public GameObject pummelHitbox;
 
+    [SerializeField] public MovesetData moveSet;
+
     public CharacterController Controller => controller;
     public Fighter Stats => fighter;
 
