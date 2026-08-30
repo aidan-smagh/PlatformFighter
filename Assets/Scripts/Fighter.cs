@@ -76,25 +76,18 @@ public class Fighter : MonoBehaviour
         other.knockbackVelocity += velocity;
     }
 
-    public void CalculateMoveHit(Fighter other/*,hitbox move strength*/)
+    public void CalculateMoveHit(Fighter other, MoveData move)
     {
-        //hard coded values for d, s, and b
-        //ganon fsmash values as an example
-        float d = 31f;
-        float s = 0.75f;
-        float b = 75f;
-        float r = 1f;
-
         KnockbackData payload = new KnockbackData 
         { 
-            d = d,
-            s = s,
-            b = b,
-            r = r
+            d = move.damage,
+            s = move.knockbackScaling,
+            b = move.baseKnockback,
+            r = 1f
         };
 
         double knockbackPower = CalculateKnockback(other, payload);
-        other.currentPercent += d;
+        other.currentPercent += move.damage;
         Vector2 direction = AngleToDirection(45f, facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
         ApplyKnockback(other, knockbackVelocity);

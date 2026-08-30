@@ -26,7 +26,7 @@ public class GrabbingState : IFighterState
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             //up throw
-            dummy.CalculateMoveHit(dummy);
+            dummy.CalculateMoveHit(dummy, fighter.moveSet.upThrow);
             fighter.ChangeState(new GroundedState());
             return;
         }

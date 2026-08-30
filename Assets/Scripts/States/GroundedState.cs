@@ -41,7 +41,14 @@ public class GroundedState : IFighterState
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            EnableTestHitbox(fighter);
+            EnableFSmashHitbox(fighter);
+            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+            return;
+        }
+
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            EnableDSmashHitbox(fighter);
             fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
             return;
         }
@@ -69,9 +76,14 @@ public class GroundedState : IFighterState
         fighter.Controller.Move(new Vector3(h, 0, 0) * fighter.Stats.runSpeed * Time.deltaTime);
     }
 
-    public void EnableTestHitbox(FighterController fighter)
+    public void EnableFSmashHitbox(FighterController fighter)
     {
-        fighter.testHitbox.SetActive(true);
+        fighter.fSmashHitbox.SetActive(true);
+    }
+
+    public void EnableDSmashHitbox(FighterController fighter)
+    {
+        fighter.dSmashHitbox.SetActive(true);
     }
 
     public void EnableGrabHitbox(FighterController fighter)
@@ -82,7 +94,8 @@ public class GroundedState : IFighterState
     IEnumerator DisableHitboxCoroutine(FighterController fighter)
     {
         yield return new WaitForSeconds(0.5f);
-        fighter.testHitbox.SetActive(false);
+        fighter.fSmashHitbox.SetActive(false);
+        fighter.dSmashHitbox.SetActive(false);
         fighter.grabHitbox.SetActive(false);
     }
 

@@ -753,9 +753,11 @@ MonoBehaviour:
   meshRenderer: {fileID: 368078572}
   fighter: {fileID: 368078568}
   grabbedFighter: {fileID: 0}
-  testHitbox: {fileID: 858718958}
+  fSmashHitbox: {fileID: 858718958}
+  dSmashHitbox: {fileID: 401842140}
   grabHitbox: {fileID: 566841355}
   pummelHitbox: {fileID: 792110749}
+  moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
 --- !u!143 &368078571
 CharacterController:
   m_ObjectHideFlags: 0
@@ -852,6 +854,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 858718959}
+  - {fileID: 401842141}
   - {fileID: 566841356}
   - {fileID: 792110750}
   m_Father: {fileID: 0}
@@ -982,6 +985,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &401842140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401842141}
+  - component: {fileID: 401842143}
+  - component: {fileID: 401842142}
+  m_Layer: 0
+  m_Name: DSmashHitbox
+  m_TagString: TestHitbox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &401842141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401842140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 368078574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &401842142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401842140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea301b1b2d775c4b98cc45b04a53886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
+  fighter: {fileID: 368078568}
+  move: {fileID: 11400000, guid: f587ff5e60ab1994b9d9e4bbc8da8283, type: 2}
+--- !u!65 &401842143
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401842140}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,7 +1530,7 @@ GameObject:
   - component: {fileID: 858718960}
   - component: {fileID: 858718961}
   m_Layer: 0
-  m_Name: TestHitbox
+  m_Name: FSmashHitbox
   m_TagString: TestHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1514,6 +1585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
   fighter: {fileID: 368078568}
+  move: {fileID: 11400000, guid: 1745ccad8e342dd48bebbc41cbf13969, type: 2}
 --- !u!1 &970130492
 GameObject:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ Started working on both Grabbing and Grabbed states for the fighters
 		Multiple attack hitboxes per fighter
 
 Day 10 (8/28/26):
-Still working on grabbing and grabbed states
+Finished working on grabbing and grabbed states
 	Pummeling has been implemented, increments grabbed fighters percent by 1 for each button press
 	Pummeling logic is done in the grabbing state which triggers a hitbox and the percent is incremented in the pummelhitbox.cs file in onTriggerEnter()
 Player initiated grab is completed
@@ -94,6 +94,12 @@ Adjusted the GrabHitbox.cs file so that I could test the GrabbedState and mashin
 GrabbedState mash mechanic is completed
 	Takes input until the number of buttons pressed is greater than or equal to the fighter's current percent
 Organized the hitboxes and the states into respective folders
+Created MoveData scriptable objects that contains all the info necessary for calculating knockback for individual moves
+	Each attack will have its own hitbox Gameobject that lives on the fighter and will have the MoveData as a serializefield on it for its own specific move
+Created MovesetData scriptable objects that contain all of the moves for a individual fighter
+
+Day 11 (8/30/26):
+Did research on various options for multiplayer functionality
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes

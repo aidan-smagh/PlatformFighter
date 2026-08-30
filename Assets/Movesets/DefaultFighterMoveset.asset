@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DefaultFighterMoveset
   m_EditorClassIdentifier: Assembly-CSharp::MovesetData
   jab: {fileID: 0}
-  forwardSmash: {fileID: 0}
-  downSmash: {fileID: 0}
-  upSmash: {fileID: 0}
+  forwardSmash: {fileID: 11400000, guid: 1745ccad8e342dd48bebbc41cbf13969, type: 2}
+  downSmash: {fileID: 11400000, guid: f587ff5e60ab1994b9d9e4bbc8da8283, type: 2}
+  upSmash: {fileID: 11400000, guid: 9a1eb2c588593c5429d12da22c894eb2, type: 2}
   forwardTilt: {fileID: 0}
   downTilt: {fileID: 0}
   upTilt: {fileID: 0}
