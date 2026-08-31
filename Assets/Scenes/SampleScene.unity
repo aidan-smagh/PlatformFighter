@@ -330,7 +330,6 @@ MonoBehaviour:
   numJumps: 1
   weight: 100
   decayRate: 0.15
-  facingRight: 0
   knockbackVelocity: {x: 0, y: 0}
   knockbackPowerScaleFactor: 0.12
   currentPercent: 0
@@ -697,7 +696,6 @@ MonoBehaviour:
   numJumps: 1
   weight: 100
   decayRate: 0.015
-  facingRight: 0
   knockbackVelocity: {x: 0, y: 0}
   knockbackPowerScaleFactor: 0.24
   currentPercent: 5
@@ -746,6 +744,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   currentJumps: 0
   groundCheckDistance: 0.2
+  facingRight: 0
   controller: {fileID: 368078571}
   groundMask:
     serializedVersion: 2

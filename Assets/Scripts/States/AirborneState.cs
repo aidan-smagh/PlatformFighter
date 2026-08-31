@@ -32,9 +32,6 @@ public class AirborneState : IFighterState
 
     void HandleMove(FighterController fighter)
     {
-        float h = 0f;
-        if (Keyboard.current.aKey.isPressed) h = -1f;
-        if (Keyboard.current.dKey.isPressed) h = 1f;
-        fighter.Controller.Move(new Vector3(h, 0, 0) * fighter.Stats.runSpeed * Time.deltaTime);
+        fighter.Controller.Move(new Vector3(fighter.HorizontalInput, 0, 0) * fighter.Stats.runSpeed * Time.deltaTime);
     }
 }

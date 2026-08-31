@@ -9,7 +9,6 @@ public class Fighter : MonoBehaviour
     public float numJumps = 1;
     public float weight = 100;
     public float decayRate = 0.15f;
-    public bool facingRight;
     public Vector2 knockbackVelocity;
     public float knockbackPowerScaleFactor = 0.12f;
 
@@ -22,6 +21,7 @@ public class Fighter : MonoBehaviour
     GameObject fighter;
 
     Fighter dummy;
+    FighterController fighterController;
 
     public struct KnockbackData
     {
@@ -34,6 +34,7 @@ public class Fighter : MonoBehaviour
     void Awake()
     {
         fighter = gameObject;
+        fighterController = gameObject.GetComponent<FighterController>();
     }
 
     public void RemoveStock()
@@ -88,30 +89,8 @@ public class Fighter : MonoBehaviour
 
         double knockbackPower = CalculateKnockback(other, payload);
         other.currentPercent += move.damage;
-        Vector2 direction = AngleToDirection(45f, facingRight);
+        Vector2 direction = AngleToDirection(45f, fighterController.facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
         ApplyKnockback(other, knockbackVelocity);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        //compare tags in here eventually so theres no problems with false collisions
-        //separate in here whether it was an attack so it can go through the knockback calculation or a grab to go with the grab flow
-
-
-    }
-
-    bool isFacingRight()
-    {
-        if (gameObject.transform.position.x > 0) 
-        {
-            return true;
-        }
-        return false;
-    }
-
-    void Update()
-    {
-        facingRight = isFacingRight();
     }
 }

@@ -6,6 +6,7 @@ public class FighterController : MonoBehaviour
     public Vector3 velocity;
     public float currentJumps;
     public float groundCheckDistance = 0.2f;
+    public bool facingRight;
 
     [SerializeField] CharacterController controller;
     [SerializeField] private LayerMask groundMask;
@@ -22,6 +23,7 @@ public class FighterController : MonoBehaviour
 
     public CharacterController Controller => controller;
     public Fighter Stats => fighter;
+    public float HorizontalInput { get; private set; }
 
     IFighterState currentState;
 
@@ -46,7 +48,20 @@ public class FighterController : MonoBehaviour
 
     void Update()
     {
+        ReadHorizontalState();
         currentState.Tick(this);
+    }
+
+    void ReadHorizontalState()
+    {
+        float h = 0f;
+        if (Keyboard.current.aKey.isPressed) h = -1f;
+        if (Keyboard.current.dKey.isPressed) h = 1f;
+
+        HorizontalInput = h;
+
+        if (h > 0f) facingRight = true;
+        else if (h < 0f) facingRight = false;
     }
 
     public void ChangeState(IFighterState newState)
