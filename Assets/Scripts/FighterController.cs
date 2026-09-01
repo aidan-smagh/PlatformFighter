@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class FighterController : MonoBehaviour
 {
@@ -21,6 +22,15 @@ public class FighterController : MonoBehaviour
 
     [SerializeField] public MovesetData moveSet;
 
+    [System.Serializable]
+    public struct FlippableHitbox
+    {
+        public Transform transform;
+        [HideInInspector] public Vector3 baseOffset;
+    }
+
+    [SerializeField] private List<FlippableHitbox> hitboxes;
+
     public CharacterController Controller => controller;
     public Fighter Stats => fighter;
     public float HorizontalInput { get; private set; }
@@ -38,6 +48,18 @@ public class FighterController : MonoBehaviour
             controller.height / 2f + groundCheckDistance - 0.1f - castRadius,
             groundMask
         );
+    }
+
+    void Awake()
+    {
+        for (int i = 0; i < hitboxes.Count; i++)
+        {
+            var hb = hitboxes[i];
+            hb.baseOffset = hb.transform.localPosition;
+            hitboxes[i] = hb;
+        }
+
+    UpdateHitboxFacing(facingRight);
     }
 
     void Start()
@@ -60,8 +82,15 @@ public class FighterController : MonoBehaviour
 
         HorizontalInput = h;
 
+        bool previousFacing = facingRight;
+
         if (h > 0f) facingRight = true;
         else if (h < 0f) facingRight = false;
+
+        if (facingRight != previousFacing)
+        {
+            UpdateHitboxFacing(facingRight);
+        }
     }
 
     public void ChangeState(IFighterState newState)
@@ -74,5 +103,15 @@ public class FighterController : MonoBehaviour
     public void DebugColor(Color color)
     {
         meshRenderer.material.color = color;
+    }
+
+    void UpdateHitboxFacing(bool facing)
+    {
+        foreach (var hb in hitboxes)
+        {
+            Vector3 pos = hb.baseOffset;
+            pos.x = facing ? Mathf.Abs(hb.baseOffset.x) : -Mathf.Abs(hb.baseOffset.x);
+            hb.transform.localPosition = pos;
+        }
     }
 }

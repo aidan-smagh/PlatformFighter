@@ -51,12 +51,6 @@ public class Fighter : MonoBehaviour
 
     double CalculateKnockback(Fighter other, KnockbackData payload)
     {
-        //figure out what to pass in here
-        //fighter specific stats are already here
-        //need opponent stats like specific move strength, rage
-        //could be read from the hitbox hurtbox collision and then passed in
-        //(((((p / 10 + pd / 20) * 200 / w + 100 * 1.4) + 18) * s) + b) * r
-        
         double knockbackPower = ((((other.currentPercent / 10 + (other.currentPercent * payload.d) / 20) * (200 / (other.weight + 100) * 1.4) + 18) * payload.s) + payload.b) * payload.r;
         return knockbackPower;
     }

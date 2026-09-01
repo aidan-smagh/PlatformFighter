@@ -757,6 +757,15 @@ MonoBehaviour:
   grabHitbox: {fileID: 566841355}
   pummelHitbox: {fileID: 792110749}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
+  hitboxes:
+  - transform: {fileID: 858718959}
+    baseOffset: {x: 0, y: 0, z: 0}
+  - transform: {fileID: 401842141}
+    baseOffset: {x: 0, y: 0, z: 0}
+  - transform: {fileID: 566841356}
+    baseOffset: {x: 0, y: 0, z: 0}
+  - transform: {fileID: 792110750}
+    baseOffset: {x: 0, y: 0, z: 0}
 --- !u!143 &368078571
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1602,7 +1611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &970130493
 Transform:
   m_ObjectHideFlags: 0

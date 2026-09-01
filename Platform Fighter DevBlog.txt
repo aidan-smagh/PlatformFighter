@@ -108,6 +108,10 @@ Updated the logic to determine if the fighter is facing right or not
 	Public property so it can be read in each of the states and Fighter.cs for knockback calculation;
 Updated player position when grabbed
 	Takes the Grabber's position and applies it to the Grabbed's position plus an offset
+
+Day 13 (9/1/26):
+Worked on flipping which side the hitboxes are on depending which way the fighter is facing
+	May also need to adjust the launch angle from the moves
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
