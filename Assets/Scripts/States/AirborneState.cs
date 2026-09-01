@@ -20,7 +20,10 @@ public class AirborneState : IFighterState
 
         float currentGravity = fighter.velocity.y < 0 ? fighter.Stats.gravity * fighter.Stats.fallMultiplier : fighter.Stats.gravity;
         fighter.velocity.y += currentGravity * Time.deltaTime;
-        fighter.Controller.Move(fighter.velocity * Time.deltaTime);
+        
+        Vector3 horizontal = new Vector3(fighter.HorizontalInput, 0, 0) * fighter.Stats.runSpeed;
+        Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
+        fighter.Controller.Move((fighter.velocity + horizontal + knockback) * Time.deltaTime);
 
         if (fighter.IsGrounded())
         {

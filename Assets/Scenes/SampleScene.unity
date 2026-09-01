@@ -130,10 +130,8 @@ GameObject:
   - component: {fileID: 168835479}
   - component: {fileID: 168835478}
   - component: {fileID: 168835477}
-  - component: {fileID: 168835476}
   - component: {fileID: 168835480}
   - component: {fileID: 168835482}
-  - component: {fileID: 168835483}
   - component: {fileID: 168835484}
   - component: {fileID: 168835485}
   m_Layer: 0
@@ -143,29 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &168835476
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168835475}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &168835477
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -295,27 +270,6 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &168835483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168835475}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb0b1ef299f7cf240b45b3349d975b4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DummyController
-  gravity: -20
-  groundCheckDistance: 0.2
-  fallMultiplier: 2.5
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  controller: {fileID: 168835482}
-  fighter: {fileID: 168835484}
-  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &168835484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +294,7 @@ MonoBehaviour:
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 1192005608}
-  dummyController: {fileID: 168835483}
+  dummyController: {fileID: 0}
 --- !u!114 &168835485
 MonoBehaviour:
   m_ObjectHideFlags: 0

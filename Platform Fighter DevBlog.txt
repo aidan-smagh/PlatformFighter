@@ -147,10 +147,13 @@ Each of the fighter states will have its own associated movesets
 	Supine - get up Attack
 Create a Supine state for when the fighter is laying on the stage after being sent into tumble 
 Implement shielding
-	Circle object with a collider and the radius of the collider shrinks on hit and over time
+	Just need the visual component
 DummyController y velocity hovers around 2 for some reason
 Roll from ledge
 Movement is updated twice in GroundedState.cs
+Adjust ledge mechanics
+	Cant grab the ledge when jumping up
+	Cant grab the ledge in tumble
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

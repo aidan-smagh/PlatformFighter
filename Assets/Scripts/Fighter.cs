@@ -40,6 +40,9 @@ public class Fighter : MonoBehaviour
     public void RemoveStock()
     {
         stocks --;
+        currentPercent = 0f;
+        knockbackVelocity = Vector2.zero;
+        fighterController.velocity = Vector3.zero;
         CharacterController cc = gameObject.GetComponent<CharacterController>();
         cc.enabled = false;
         fighter.transform.position = spawnPoint.transform.position;
