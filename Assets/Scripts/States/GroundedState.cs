@@ -60,6 +60,14 @@ public class GroundedState : IFighterState
             return;
         }
 
+        if (Keyboard.current.leftShiftKey.isPressed)
+        {
+            fighter.isShieldActive = true;
+        } else
+        {
+            fighter.isShieldActive = false;
+        }
+
         if (!fighter.IsGrounded())
         {
             fighter.ChangeState(new AirborneState());

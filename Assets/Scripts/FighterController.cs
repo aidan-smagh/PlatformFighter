@@ -8,6 +8,7 @@ public class FighterController : MonoBehaviour
     public float currentJumps;
     public float groundCheckDistance = 0.2f;
     public bool facingRight;
+    public bool isShieldActive;
 
     [SerializeField] CharacterController controller;
     [SerializeField] private LayerMask groundMask;
@@ -19,6 +20,7 @@ public class FighterController : MonoBehaviour
     [SerializeField] public GameObject dSmashHitbox;
     [SerializeField] public GameObject grabHitbox;
     [SerializeField] public GameObject pummelHitbox;
+    [SerializeField] public GameObject shield;
 
     [SerializeField] public MovesetData moveSet;
 

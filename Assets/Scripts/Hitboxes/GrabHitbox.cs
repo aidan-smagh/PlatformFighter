@@ -7,7 +7,7 @@ public class GrabHitbox : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Vector3 grabberPos = gameObject.transform.position;
-        fighter = other.GetComponent<FighterController>();
+        fighter = other.GetComponentInParent<FighterController>();
         fighter.ChangeState(new GrabbedState(grabberPos));
     }
 }

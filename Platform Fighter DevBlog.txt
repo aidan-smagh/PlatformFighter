@@ -115,6 +115,8 @@ Worked on flipping which side the hitboxes are on depending which way the fighte
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
+	Hitbox offset needs adjusting from flipping sides
+	May not be an issue once real hitboxes are added
 Game Manager
 	Fighter health system (percents set up, but no moves or other fighters yet)
 	Timer (functionally done, just needs UI)
@@ -140,13 +142,13 @@ Each of the fighter states will have its own associated movesets
 	Ledge - get up attack
 	Supine - get up Attack
 Create a Supine state for when the fighter is laying on the stage after being sent into tumble 
-Create a Grabbing/Grabbed state
-Fix FacingRight() logic to actually take the fighters direction
 Implement shielding
 	Circle object with a collider and the radius of the collider shrinks on hit and over time
 DummyController y velocity hovers around 2 for some reason
 Roll from ledge
 Movement is updated twice in GroundedState.cs
+Fix grabbing logic
+	Works when the other fighter has a fighterController but doesnt work for the DummyController because it has no state machine built in
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
