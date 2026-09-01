@@ -32,6 +32,7 @@ public class AirborneState : IFighterState
 
     void HandleMove(FighterController fighter)
     {
-        fighter.Controller.Move(new Vector3(fighter.HorizontalInput, 0, 0) * fighter.Stats.runSpeed * Time.deltaTime);
+        Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
+        fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
     }
 }

@@ -8,7 +8,7 @@ public class AttackHitbox : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        dummy = other.gameObject.GetComponent<Fighter>();
+        dummy = other.gameObject.GetComponentInParent<Fighter>();
         fighter.CalculateMoveHit(dummy, move);
     }
 }

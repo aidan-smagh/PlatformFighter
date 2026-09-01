@@ -9,6 +9,7 @@ public class FighterController : MonoBehaviour
     public float groundCheckDistance = 0.2f;
     public bool facingRight;
     public bool isShieldActive;
+    public bool isPlayerControlled;
 
     [SerializeField] CharacterController controller;
     [SerializeField] private LayerMask groundMask;
@@ -72,7 +73,10 @@ public class FighterController : MonoBehaviour
 
     void Update()
     {
-        ReadHorizontalState();
+        if (isPlayerControlled)
+        {
+            ReadHorizontalState();
+        }
         currentState.Tick(this);
     }
 
@@ -115,5 +119,14 @@ public class FighterController : MonoBehaviour
             pos.x = facing ? Mathf.Abs(hb.baseOffset.x) : -Mathf.Abs(hb.baseOffset.x);
             hb.transform.localPosition = pos;
         }
+    }
+
+    void ApplyKnockbackDecay()
+    {
+        fighter.knockbackVelocity = Vector2.Lerp(
+            fighter.knockbackVelocity, 
+            Vector2.zero, 
+            fighter.decayRate * Time.deltaTime
+        );
     }
 }

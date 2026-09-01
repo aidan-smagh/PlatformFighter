@@ -112,6 +112,10 @@ Updated player position when grabbed
 Day 13 (9/1/26):
 Worked on flipping which side the hitboxes are on depending which way the fighter is facing
 	May also need to adjust the launch angle from the moves
+Refactored the DummyController so it is no longer needed
+	Dummy uses the FighterController but there is a flag on it now that gates movement on isPlayerControlled, which is set to false for the dummy
+	Correct knockback calculation tied into the controller.move for each of the fighter states so the dummy has correct knockback, should be easier to test knockback on the player now
+Grab works now for both grabbing and grabbed for each fighter
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -147,8 +151,6 @@ Implement shielding
 DummyController y velocity hovers around 2 for some reason
 Roll from ledge
 Movement is updated twice in GroundedState.cs
-Fix grabbing logic
-	Works when the other fighter has a fighterController but doesnt work for the DummyController because it has no state machine built in
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

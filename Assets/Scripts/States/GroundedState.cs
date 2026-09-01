@@ -18,54 +18,58 @@ public class GroundedState : IFighterState
             fighter.currentJumps = fighter.Stats.numJumps;
         }
 
-        fighter.Controller.Move(fighter.velocity * Time.deltaTime);
+        Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
+        fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
 
-        if (Keyboard.current.rKey.wasPressedThisFrame)
+        if (fighter.isPlayerControlled)
         {
-            fighter.ChangeState(new RollState(1f));
-            return;
-        }
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                fighter.ChangeState(new RollState(1f));
+                return;
+            }
 
-        if (Keyboard.current.qKey.wasPressedThisFrame)
-        {
-            fighter.ChangeState(new RollState(-1f));
-            return;
-        }
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                fighter.ChangeState(new RollState(-1f));
+                return;
+            }
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
-            fighter.ChangeState(new AirborneState());
-            return;
-        }
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
+                fighter.ChangeState(new AirborneState());
+                return;
+            }
 
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            EnableFSmashHitbox(fighter);
-            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
-            return;
-        }
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                EnableFSmashHitbox(fighter);
+                fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+                return;
+            }
 
-        if (Keyboard.current.sKey.wasPressedThisFrame)
-        {
-            EnableDSmashHitbox(fighter);
-            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
-            return;
-        }
+            if (Keyboard.current.sKey.wasPressedThisFrame)
+            {
+                EnableDSmashHitbox(fighter);
+                fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+                return;
+            }
 
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            EnableGrabHitbox(fighter);
-            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
-            return;
-        }
+            if (Keyboard.current.tKey.wasPressedThisFrame)
+            {
+                EnableGrabHitbox(fighter);
+                fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+                return;
+            }
 
-        if (Keyboard.current.leftShiftKey.isPressed)
-        {
-            fighter.isShieldActive = true;
-        } else
-        {
-            fighter.isShieldActive = false;
+            if (Keyboard.current.leftShiftKey.isPressed)
+            {
+                fighter.isShieldActive = true;
+            } else
+            {
+                fighter.isShieldActive = false;
+            }
         }
 
         if (!fighter.IsGrounded())

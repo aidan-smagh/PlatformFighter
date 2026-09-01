@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class GrabHitbox : MonoBehaviour
 {
+    FighterController dummy;
     FighterController fighter;
 
     void OnTriggerEnter(Collider other)
     {
+        fighter = gameObject.GetComponentInParent<FighterController>();
+
         Vector3 grabberPos = gameObject.transform.position;
-        fighter = other.GetComponentInParent<FighterController>();
-        fighter.ChangeState(new GrabbedState(grabberPos));
+        dummy = other.GetComponentInParent<FighterController>();
+
+        dummy.ChangeState(new GrabbedState(grabberPos));
+        fighter.ChangeState(new GrabbingState());
     }
 }

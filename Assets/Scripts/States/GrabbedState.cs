@@ -21,7 +21,7 @@ public class GrabbedState : IFighterState
         Vector3 pos = grabberPos;
         pos.x = grabberPos.x += grabOffset;
         fighter.transform.position = pos;
-        inputsNeeded = (int)fighter.GetComponent<Fighter>().currentPercent;
+        inputsNeeded = Mathf.Max((int)fighter.GetComponent<Fighter>().currentPercent, 5);
     }
 
     public void Tick(FighterController fighter)
