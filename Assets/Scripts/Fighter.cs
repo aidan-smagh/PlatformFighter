@@ -15,7 +15,6 @@ public class Fighter : MonoBehaviour
     [SerializeField] public float currentPercent = 0f;
     [SerializeField] int stocks = 3;
     [SerializeField] GameObject spawnPoint;
-    [SerializeField] DummyController dummyController;
     
     public int Stocks => stocks;
     GameObject fighter;
@@ -44,10 +43,10 @@ public class Fighter : MonoBehaviour
         knockbackVelocity = Vector2.zero;
         fighterController.velocity = Vector3.zero;
         CharacterController cc = gameObject.GetComponent<CharacterController>();
+        Debug.Log(cc);
         cc.enabled = false;
         fighter.transform.position = spawnPoint.transform.position;
         fighter.transform.rotation = spawnPoint.transform.rotation;
-        dummyController.velocity = Vector3.zero;
         knockbackVelocity = Vector3.zero;
         cc.enabled = true;
     }

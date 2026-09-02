@@ -116,6 +116,16 @@ Refactored the DummyController so it is no longer needed
 	Dummy uses the FighterController but there is a flag on it now that gates movement on isPlayerControlled, which is set to false for the dummy
 	Correct knockback calculation tied into the controller.move for each of the fighter states so the dummy has correct knockback, should be easier to test knockback on the player now
 Grab works now for both grabbing and grabbed for each fighter
+
+Day 14 (9/2/26):
+Fix dummycontroller bug when respawning after losing stock
+Fix fastfall mechanics
+	Read input in Airborne state and if down is pressed, then increase the velocity.y by the fallMultiplier instead of just the gravity stat for the fighter
+Put a cube collider on the top of the stage to trigger the Supine state out of Tumble
+Created stub scripts for both Supine and Tumble States
+Made a script for detecting collision with the top of the stage
+	Changes the other's state to Supine if in Tumble
+	(Still to implement) if not in Tumble, then calculate knockback rebound
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -137,6 +147,8 @@ Character Intros like Guilty Gear Strive has
 Invulnerability on ledges for a period of time
 Implement rolling (brief invulnerability)
 	Make it so the invulnerability can be reused for all the other times its needed
+	Work on this once there are real playermodels with actual hurtboxes	
+		Just turn off the hurtboxes for the fighter while in the roll state
 Tumble state (make sure theres a DI system with knockback)
 Use scriptable objects for making different fighters with unique stats
 	Read from the scriptable object in the fighter script to get those unique stats

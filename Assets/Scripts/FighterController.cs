@@ -38,7 +38,7 @@ public class FighterController : MonoBehaviour
     public Fighter Stats => fighter;
     public float HorizontalInput { get; private set; }
 
-    IFighterState currentState;
+    public IFighterState currentState { get; set; }
 
     public bool IsGrounded()
     {
