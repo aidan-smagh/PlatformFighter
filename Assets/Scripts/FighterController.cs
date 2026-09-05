@@ -40,6 +40,8 @@ public class FighterController : MonoBehaviour
 
     public IFighterState currentState { get; set; }
 
+    private FighterControls controls;
+
     public bool IsGrounded()
     {
         float castRadius = controller.radius * 0.9f;
@@ -55,6 +57,7 @@ public class FighterController : MonoBehaviour
 
     void Awake()
     {
+        controls = new FighterControls();
         for (int i = 0; i < hitboxes.Count; i++)
         {
             var hb = hitboxes[i];
@@ -64,6 +67,18 @@ public class FighterController : MonoBehaviour
 
     UpdateHitboxFacing(facingRight);
     }
+
+    void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Player.Disable();
+    }
+
+    public FighterControls Controls => controls;
 
     void Start()
     {
@@ -82,9 +97,7 @@ public class FighterController : MonoBehaviour
 
     void ReadHorizontalState()
     {
-        float h = 0f;
-        if (Keyboard.current.aKey.isPressed) h = -1f;
-        if (Keyboard.current.dKey.isPressed) h = 1f;
+        float h = controls.Player.Move.ReadValue<Vector2>().x;    
 
         HorizontalInput = h;
 

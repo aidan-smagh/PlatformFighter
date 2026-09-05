@@ -142,6 +142,11 @@ Day 17 (9/5/26):
 Finished working on the sword
 Started working on adding gamecube controller functionality
 	Using this package - https://github.com/enfyy/Unity-GameCubeController.git
+	Uses the Input Action Asset
+		Define a control scheme - named it Player
+			Each control scheme has Actions on it which are tied to specific input from the controller
+				Done by hitting the plus next to the action, adding a binding, and hitting Listen in the Path section and selecting the correct input
+	Now I just need to go back through all of the Keyboard.current code and switch to the Input Action system
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -165,15 +170,14 @@ Implement rolling (brief invulnerability)
 	Make it so the invulnerability can be reused for all the other times its needed
 	Work on this once there are real playermodels with actual hurtboxes	
 		Just turn off the hurtboxes for the fighter while in the roll state
-Tumble state (make sure theres a DI system with knockback)
+	Fix bug where user can roll forever if input stick is held in a direction
 Use scriptable objects for making different fighters with unique stats
 	Read from the scriptable object in the fighter script to get those unique stats
 Each of the fighter states will have its own associated movesets
 	Grounded - dash attack, smash attacks, tilts
 	Airborne - aerials
 	Ledge - get up attack
-	Supine - get up Attack
-Create a Supine state for when the fighter is laying on the stage after being sent into tumble 
+	Supine - get up Attack 
 Implement shielding
 	Just need the visual component
 DummyController y velocity hovers around 2 for some reason
@@ -182,6 +186,7 @@ Movement is updated twice in GroundedState.cs
 Adjust ledge mechanics
 	Cant grab the ledge when jumping up
 	Cant grab the ledge in tumble
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
@@ -234,3 +239,18 @@ Blender Tips:
 How to create weapons - https://www.youtube.com/watch?v=71K5FiJCAGg
 Attaching weapons to player models - https://www.youtube.com/watch?v=hZI-GT_Z3ok
 How to create clothes in Blender - https://www.youtube.com/watch?v=j8LGGNylMOY
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Gamecube Controller Button Mappings
+
+A -> button2
+B -> button3
+Y -> button4
+X -> trigger
+Z -> button8
+LeftBumper -> button5
+RightBumper -> button6
+Start -> button10
+DpadRight -> button14
+DpadUp -> button13
+DpadLeft -> button16
+DpadDown -> button15

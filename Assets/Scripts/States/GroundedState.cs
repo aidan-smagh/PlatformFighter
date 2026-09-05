@@ -23,32 +23,39 @@ public class GroundedState : IFighterState
 
         if (fighter.isPlayerControlled)
         {
-            if (Keyboard.current.rKey.wasPressedThisFrame)
+            Vector2 dir = fighter.Controls.Player.Move.ReadValue<Vector2>();
+            
+            //if (Keyboard.current.rKey.wasPressedThisFrame)
+            if (fighter.Controls.Player.Shield.IsPressed() && dir.x > 0)
             {
                 fighter.ChangeState(new RollState(1f));
                 return;
             }
 
-            if (Keyboard.current.qKey.wasPressedThisFrame)
+            //if (Keyboard.current.qKey.wasPressedThisFrame)
+            if (fighter.Controls.Player.Shield.IsPressed() && dir.x < 0)
             {
                 fighter.ChangeState(new RollState(-1f));
                 return;
             }
 
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            //if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (fighter.Controls.Player.Jump.WasPressedThisFrame())
             {
                 fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
                 fighter.ChangeState(new AirborneState());
                 return;
             }
 
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            //if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (fighter.Controls.Player.Attack.WasPressedThisFrame())
             {
                 EnableFSmashHitbox(fighter);
                 fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
                 return;
             }
 
+            //will need to refactor this for combining attack and stick input
             if (Keyboard.current.sKey.wasPressedThisFrame)
             {
                 EnableDSmashHitbox(fighter);
@@ -56,14 +63,16 @@ public class GroundedState : IFighterState
                 return;
             }
 
-            if (Keyboard.current.tKey.wasPressedThisFrame)
+            //if (Keyboard.current.tKey.wasPressedThisFrame)
+            if (fighter.Controls.Player.Grab.WasPressedThisFrame())
             {
                 EnableGrabHitbox(fighter);
                 fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
                 return;
             }
 
-            if (Keyboard.current.leftShiftKey.isPressed)
+            //if (Keyboard.current.leftShiftKey.isPressed)
+            if (fighter.Controls.Player.Shield.IsPressed())
             {
                 fighter.isShieldActive = true;
             } else

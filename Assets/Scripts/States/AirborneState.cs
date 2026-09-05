@@ -11,16 +11,20 @@ public class AirborneState : IFighterState
     public void Tick(FighterController fighter)
     {
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && fighter.currentJumps > 0)
+        //if (Keyboard.current.spaceKey.wasPressedThisFrame && fighter.currentJumps > 0)
+        if (fighter.Controls.Player.Jump.WasPressedThisFrame() && fighter.currentJumps > 0)
         {
             fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
             fighter.currentJumps -= 1;
         }
-        if (Keyboard.current.sKey.isPressed)
-        {
+        
+        //if (Keyboard.current.sKey.isPressed)
+        if (fighter.Controls.Player.FastFall.IsPressed())
+        {  
             float currentGravity = fighter.velocity.y < 0 ? fighter.Stats.gravity * fighter.Stats.fallMultiplier : fighter.Stats.gravity;
             fighter.velocity.y += currentGravity * Time.deltaTime;
-        } else
+        } 
+        else
         {
             fighter.velocity.y += fighter.Stats.gravity * Time.deltaTime;
         }

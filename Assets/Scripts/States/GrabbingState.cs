@@ -15,7 +15,8 @@ public class GrabbingState : IFighterState
 
     public void Tick(FighterController fighter)
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        //if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (fighter.Controls.Player.Attack.WasPressedThisFrame())
         {
             //pummel
             EnablePummelHitbox(fighter);
@@ -23,6 +24,7 @@ public class GrabbingState : IFighterState
             return;
         }
 
+        //will need to swap this out with a single function that will read Move input, apply its magnitude to a given threshold, and trigger a throw depending on which direction the Move stick is going
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             //up throw
