@@ -11,6 +11,7 @@ public class Fighter : MonoBehaviour
     public float decayRate = 0.15f;
     public Vector2 knockbackVelocity;
     public float knockbackPowerScaleFactor = 0.12f;
+    public float tumbleThreshold = 80f;
 
     [SerializeField] public float currentPercent = 0f;
     [SerializeField] int stocks = 3;
@@ -43,12 +44,12 @@ public class Fighter : MonoBehaviour
         knockbackVelocity = Vector2.zero;
         fighterController.velocity = Vector3.zero;
         CharacterController cc = gameObject.GetComponent<CharacterController>();
-        Debug.Log(cc);
         cc.enabled = false;
         fighter.transform.position = spawnPoint.transform.position;
         fighter.transform.rotation = spawnPoint.transform.rotation;
         knockbackVelocity = Vector3.zero;
         cc.enabled = true;
+        fighterController.ChangeState(new GroundedState());
     }
 
     double CalculateKnockback(Fighter other, KnockbackData payload)
@@ -68,9 +69,10 @@ public class Fighter : MonoBehaviour
         return new Vector2(x, y);
     }
 
-    void ApplyKnockback(Fighter other, Vector2 velocity)
+    void ApplyKnockback(Fighter other, Vector2 velocity, bool enterTumble)
     {
         other.knockbackVelocity += velocity;
+        if (enterTumble) other.fighterController.ChangeState(new TumbleState());
     }
 
     public void CalculateMoveHit(Fighter other, MoveData move)
@@ -84,9 +86,15 @@ public class Fighter : MonoBehaviour
         };
 
         double knockbackPower = CalculateKnockback(other, payload);
+        bool enterTumble = false;
+        if (knockbackPower > tumbleThreshold)
+        {
+            enterTumble = true;
+        }
+
         other.currentPercent += move.damage;
         Vector2 direction = AngleToDirection(45f, fighterController.facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
-        ApplyKnockback(other, knockbackVelocity);
+        ApplyKnockback(other, knockbackVelocity, enterTumble);
     }
 }

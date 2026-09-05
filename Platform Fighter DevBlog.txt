@@ -126,6 +126,22 @@ Created stub scripts for both Supine and Tumble States
 Made a script for detecting collision with the top of the stage
 	Changes the other's state to Supine if in Tumble
 	(Still to implement) if not in Tumble, then calculate knockback rebound
+Fighter gets sent into tumble when the knockbackPower of a move is over 80 Unitys
+If a fighter is in Tumble and then hits the ground they enter Supine State
+
+Day 15 (9/3/26):
+Started modeling a sword to be used by the first actually modeled character
+	Sword is around 45 inches
+	Sword fighter is around 5'10
+	The goal is to have a mostly completed character so I can refine hitboxes and hurtboxes
+
+Day 16 (9/4/26):
+Kept working on the sword
+
+Day 17 (9/5/26):
+Finished working on the sword
+Started working on adding gamecube controller functionality
+	Using this package - https://github.com/enfyy/Unity-GameCubeController.git
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -213,3 +229,8 @@ Rollback Netcode:
 		Not sure how it works with Unity
 
 I think Ill start with Netcode for gameobjects and see if that performs well enough
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Blender Tips:
+How to create weapons - https://www.youtube.com/watch?v=71K5FiJCAGg
+Attaching weapons to player models - https://www.youtube.com/watch?v=hZI-GT_Z3ok
+How to create clothes in Blender - https://www.youtube.com/watch?v=j8LGGNylMOY

@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.nfysoft.gamecubecontroller": {
+      "version": "https://github.com/enfyy/Unity-GameCubeController.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.inputsystem": "1.2.0"
+      },
+      "hash": "e17cc438b3ea480552fec685c9d44a1d1f2923d4"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.11",
       "depth": 0,
@@ -151,7 +160,7 @@
       }
     },
     "com.unity.test-framework.performance": {
-      "version": "3.3.0",
+      "version": "3.2.0",
       "depth": 3,
       "source": "registry",
       "dependencies": {
