@@ -50,8 +50,8 @@ public class OnLedgeState : IFighterState
         }
         //get up
         bool getUpPressed = onRightSide
-            ? Keyboard.current.aKey.wasPressedThisFrame
-            : Keyboard.current.dKey.wasPressedThisFrame;
+            ? fighter.Controls.Player.Move.ReadValue<Vector2>().x < 0
+            : fighter.Controls.Player.Move.ReadValue<Vector2>().x > 0;
 
         if (getUpPressed)
         {
