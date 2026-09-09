@@ -150,13 +150,22 @@ Started working on adding gamecube controller functionality
 
 Day 18 (9/8/26):
 Started working on a cape for the player
+
+Day 19 (9/9/26):
+Implemented pausing
+	New action in the Input Action Asset
+		Still need to add the gcc button
+	GameManager has a reference to the controls and sets Time.timeScale = 0 to stop everything that depends on Time.deltaTime
+		Still need to implement the UI for this
+Included keyboard controls in the Input Action Asset
+	Finished updating all input controls to use the FighterControls instead of direct keyboard polling
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
 	Hitbox offset needs adjusting from flipping sides
 	May not be an issue once real hitboxes are added
 Game Manager
-	Fighter health system (percents set up, but no moves or other fighters yet)
+	UI for percents
 	Timer (functionally done, just needs UI)
 3d models
 Animations
