@@ -147,6 +147,9 @@ Started working on adding gamecube controller functionality
 			Each control scheme has Actions on it which are tied to specific input from the controller
 				Done by hitting the plus next to the action, adding a binding, and hitting Listen in the Path section and selecting the correct input
 	Now I just need to go back through all of the Keyboard.current code and switch to the Input Action system
+
+Day 18 (9/8/26):
+Started working on a cape for the player
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -186,7 +189,7 @@ Movement is updated twice in GroundedState.cs
 Adjust ledge mechanics
 	Cant grab the ledge when jumping up
 	Cant grab the ledge in tumble
-
+Pausing
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
@@ -254,3 +257,20 @@ DpadRight -> button14
 DpadUp -> button13
 DpadLeft -> button16
 DpadDown -> button15
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Rokoko for MoCap
+https://www.youtube.com/watch?v=0UVcyEOOUmY
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Character Design Ideas
+
+1. Sword Guy
+	Holds the sword I already Created
+	Same bandolier with the sheath that lucina has
+	Cape with a silver/gray insignia
+		Cape design looks similar to this https://www.youtube.com/watch?v=eVQCpGCpxWE
+	Wears a hood which partially hides his face
+		I dont want to model a whole face
+
+	Spring bones for cape physics
+2. Assassin Guy
+	Found a reference image, its the tatteredCloak image in the references folder
