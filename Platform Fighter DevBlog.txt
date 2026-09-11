@@ -159,6 +159,19 @@ Implemented pausing
 		Still need to implement the UI for this
 Included keyboard controls in the Input Action Asset
 	Finished updating all input controls to use the FighterControls instead of direct keyboard polling
+Turns out the Unity cloth component is not going to work
+	Does not respond well to fast motions so its not compatible with the fighting game environment
+	Im choosing to follow the Spring Bone approach
+		Add bones to the cape in Blender
+		Put a script on the cape that will calculate where the bones would go if they just blindly followed its parent
+			Make each bone lag behind the other one a bit, add gravity to the bones so at rest it goes back down
+
+Day 20 (9/10/26):
+Add the gcc input for pausing
+Add a basic idle pose to see if the cape looks good, animation to follow
+	Looks good for now, having the fighter stand at an angle to add some depth looks good
+		Need to refine the cape later so it doesnt clip into the fighter and get stuck
+			Ill probably end up remaking the whole model anyway
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -283,3 +296,4 @@ Character Design Ideas
 	Spring bones for cape physics
 2. Assassin Guy
 	Found a reference image, its the tatteredCloak image in the references folder
+	Found an image of a cool sword he could use, also in the references folder

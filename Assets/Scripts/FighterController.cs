@@ -13,7 +13,7 @@ public class FighterController : MonoBehaviour
 
     [SerializeField] CharacterController controller;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] SkinnedMeshRenderer meshRenderer;
     [SerializeField] Fighter fighter;
     [SerializeField] public Fighter grabbedFighter;
 
