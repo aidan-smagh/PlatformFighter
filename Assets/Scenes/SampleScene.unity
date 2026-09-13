@@ -508,6 +508,7 @@ MonoBehaviour:
   pummelHitbox: {fileID: 1309016525}
   shield: {fileID: 982487938}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
+  idleAnimation: {fileID: 0}
   hitboxes: []
   swordHitboxes: []
 --- !u!1 &169990156
@@ -1438,6 +1439,7 @@ MonoBehaviour:
   pummelHitbox: {fileID: 792110749}
   shield: {fileID: 1344913746}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
+  idleAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -3377,6 +3379,7 @@ MonoBehaviour:
   pummelHitbox: {fileID: 787329643}
   shield: {fileID: 25032924}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
+  idleAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -3675,6 +3678,7 @@ MonoBehaviour:
   pummelHitbox: {fileID: 1945207630}
   shield: {fileID: 1224967347}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
+  idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}

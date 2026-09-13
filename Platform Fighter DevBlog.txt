@@ -181,6 +181,10 @@ Forward smash animation finished in Blender and hooked up in Unity
 	Updated AttackHitbox.cs and hitbox logic
 		Fighter.cs keeps a hashset of the target that has been hit and if the fighter has already hit a target dont apply the hit from anything else
 			Fixes the multiple hitboxes on the sword from triggering a move hitting multiple times
+Made a short idle animation
+	Implemented it by adding a serializefield on the FighterController and then overriding the animatorcontroller in the Awake() similarly to how attack animation is done
+	Similar thing will be done with Jump and Ledge animations
+	Might be worth adding those animations to the MoveSetData for simplicity
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes

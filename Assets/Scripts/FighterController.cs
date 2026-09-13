@@ -26,6 +26,7 @@ public class FighterController : MonoBehaviour
     [SerializeField] public GameObject shield;
 
     [SerializeField] public MovesetData moveSet;
+    [SerializeField] public AnimationClip idleAnimation;
 
     [System.Serializable]
     public struct FlippableHitbox
@@ -72,6 +73,10 @@ public class FighterController : MonoBehaviour
 
         var baseController = animator.runtimeAnimatorController;
         animator.runtimeAnimatorController = new AnimatorOverrideController(baseController);
+
+        var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+        overrideController["IdlePlaceholder"] = idleAnimation;
+        animator.Play("Idle", 0, 0f);
     }
 
     void OnEnable()
