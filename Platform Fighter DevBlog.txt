@@ -175,7 +175,12 @@ Add a basic idle pose to see if the cape looks good, animation to follow
 Made a basic forward smash animation of a sword thrust to test applying animations to the movesets
 
 Day 21 (9/13/26):
-
+Forward smash animation finished in Blender and hooked up in Unity
+	Made a basic AnimatorController that will have all the general states for a fighter
+		An overrided AnimatorController is created on Awake() and then the animation clip is changed to the clip assigned to the MoveData object
+	Updated AttackHitbox.cs and hitbox logic
+		Fighter.cs keeps a hashset of the target that has been hit and if the fighter has already hit a target dont apply the hit from anything else
+			Fixes the multiple hitboxes on the sword from triggering a move hitting multiple times
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes

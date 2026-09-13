@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Fighter : MonoBehaviour
 {
@@ -31,10 +32,27 @@ public class Fighter : MonoBehaviour
         public float r;
     }
 
+    HashSet<Fighter> hitTargetsThisSwing = new HashSet<Fighter>();
+
+    public void ClearHitTargets()
+    {
+        hitTargetsThisSwing.Clear();
+    }
+
+    public bool HasAlreadyHit(Fighter target)
+    {
+        return hitTargetsThisSwing.Contains(target);
+    }
+
+    public void RegisterHit(Fighter target)
+    {
+        hitTargetsThisSwing.Add(target);
+    }
+
     void Awake()
     {
         fighter = gameObject;
-        fighterController = gameObject.GetComponent<FighterController>();
+        fighterController = GetComponent<FighterController>();
     }
 
     public void RemoveStock()
@@ -76,7 +94,7 @@ public class Fighter : MonoBehaviour
     }
 
     public void CalculateMoveHit(Fighter other, MoveData move)
-    {
+    {   
         KnockbackData payload = new KnockbackData 
         { 
             d = move.damage,
@@ -93,7 +111,7 @@ public class Fighter : MonoBehaviour
         }
 
         other.currentPercent += move.damage;
-        Vector2 direction = AngleToDirection(45f, fighterController.facingRight);
+        Vector2 direction = AngleToDirection(move.launchAngle, fighterController.facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
         ApplyKnockback(other, knockbackVelocity, enterTumble);
     }

@@ -50,14 +50,17 @@ public class GroundedState : IFighterState
             //if (Keyboard.current.eKey.wasPressedThisFrame)
             if (fighter.Controls.Player.Attack.WasPressedThisFrame())
             {
-                Debug.Log("here");
                 MoveData forwardSmash = fighter.moveSet.forwardSmash;
+                fighter.Stats.ClearHitTargets();
                 var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
                 overrideController["AttackPlaceholder"] = forwardSmash.animationClip;
                 fighter.animator.Play("Attack", 0, 0f);
 
-                EnableFSmashHitbox(fighter);
-                fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+                foreach (var hitbox in fighter.swordHitboxes)
+                {
+                    hitbox.Activate(forwardSmash);
+                }
+                
                 return;
             }
 

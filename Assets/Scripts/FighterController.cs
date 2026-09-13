@@ -35,6 +35,7 @@ public class FighterController : MonoBehaviour
     }
 
     [SerializeField] private List<FlippableHitbox> hitboxes;
+    [SerializeField] public List<AttackHitbox> swordHitboxes;
 
     public CharacterController Controller => controller;
     public Fighter Stats => fighter;
