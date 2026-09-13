@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &168835477
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -320,6 +320,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 168835477}
   fighter: {fileID: 168835484}
   grabbedFighter: {fileID: 0}
+  animator: {fileID: 0}
   fSmashHitbox: {fileID: 922137601}
   dSmashHitbox: {fileID: 260273785}
   grabHitbox: {fileID: 970130492}
@@ -858,6 +859,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 368078572}
   fighter: {fileID: 368078568}
   grabbedFighter: {fileID: 0}
+  animator: {fileID: 0}
   fSmashHitbox: {fileID: 858718958}
   dSmashHitbox: {fileID: 401842140}
   grabHitbox: {fileID: 566841355}
@@ -2374,7 +2376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.358
+      value: 27.47
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2460,6 +2462,9 @@ PrefabInstance:
       addedObject: {fileID: 1145179988}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1145179991}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1145179987}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
       insertIndex: -1
@@ -2535,6 +2540,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 530156764}
   fighter: {fileID: 1145179985}
   grabbedFighter: {fileID: 0}
+  animator: {fileID: 1145179991}
   fSmashHitbox: {fileID: 1621125767}
   dSmashHitbox: {fileID: 903042706}
   grabHitbox: {fileID: 1871576715}
@@ -2595,18 +2601,40 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2.02
-  m_Radius: 0.5
+  m_Height: 2.11
+  m_Radius: 0.54
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.02, z: 0}
+  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!4 &1145179990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   m_PrefabInstance: {fileID: 1145179982}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1145179991
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145179983}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  m_Controller: {fileID: 9100000, guid: e43b5a2cd2e9cfb45b69dcc91c2fd011, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1192005608
 GameObject:
   m_ObjectHideFlags: 0

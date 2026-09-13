@@ -16,6 +16,8 @@ public class FighterController : MonoBehaviour
     [SerializeField] SkinnedMeshRenderer meshRenderer;
     [SerializeField] Fighter fighter;
     [SerializeField] public Fighter grabbedFighter;
+    [SerializeField] public Animator animator;
+    
 
     [SerializeField] public GameObject fSmashHitbox;
     [SerializeField] public GameObject dSmashHitbox;
@@ -45,8 +47,9 @@ public class FighterController : MonoBehaviour
     public bool IsGrounded()
     {
         float castRadius = controller.radius * 0.9f;
+        Vector3 origin = transform.position + controller.center + Vector3.up * 0.1f;
         return Physics.SphereCast(
-            transform.position + Vector3.up * 0.1f,
+            origin,
             castRadius,
             Vector3.down,
             out RaycastHit hit,
@@ -64,8 +67,10 @@ public class FighterController : MonoBehaviour
             hb.baseOffset = hb.transform.localPosition;
             hitboxes[i] = hb;
         }
+        UpdateHitboxFacing(facingRight);
 
-    UpdateHitboxFacing(facingRight);
+        var baseController = animator.runtimeAnimatorController;
+        animator.runtimeAnimatorController = new AnimatorOverrideController(baseController);
     }
 
     void OnEnable()

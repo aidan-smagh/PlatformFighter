@@ -172,6 +172,10 @@ Add a basic idle pose to see if the cape looks good, animation to follow
 	Looks good for now, having the fighter stand at an angle to add some depth looks good
 		Need to refine the cape later so it doesnt clip into the fighter and get stuck
 			Ill probably end up remaking the whole model anyway
+Made a basic forward smash animation of a sword thrust to test applying animations to the movesets
+
+Day 21 (9/13/26):
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -292,6 +296,8 @@ Character Design Ideas
 		Cape design looks similar to this https://www.youtube.com/watch?v=eVQCpGCpxWE
 	Wears a hood which partially hides his face
 		I dont want to model a whole face
+	Make the sword bigger so its similar to Ike, heavy sword
+		Strong moves require two hands on the sword to generate enough power
 
 	Spring bones for cape physics
 2. Assassin Guy
