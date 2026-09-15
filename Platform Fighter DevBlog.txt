@@ -185,6 +185,12 @@ Made a short idle animation
 	Implemented it by adding a serializefield on the FighterController and then overriding the animatorcontroller in the Awake() similarly to how attack animation is done
 	Similar thing will be done with Jump and Ledge animations
 	Might be worth adding those animations to the MoveSetData for simplicity
+
+Day 22 (9/15/26):
+Created a walk and run animation and hooked them up in the GroundedState()
+	Reads the horizontalInput from the fighterController and plays the correct animation for each magnitude of input
+Also created a turn around animation
+	Still need to implement it
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -224,7 +230,7 @@ Movement is updated twice in GroundedState.cs
 Adjust ledge mechanics
 	Cant grab the ledge when jumping up
 	Cant grab the ledge in tumble
-Pausing
+Pausing UI
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

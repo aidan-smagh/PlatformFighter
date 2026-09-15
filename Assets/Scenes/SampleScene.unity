@@ -509,6 +509,9 @@ MonoBehaviour:
   shield: {fileID: 982487938}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
   idleAnimation: {fileID: 0}
+  walkAnimation: {fileID: 0}
+  runAnimation: {fileID: 0}
+  turnAroundAnimation: {fileID: 0}
   hitboxes: []
   swordHitboxes: []
 --- !u!1 &169990156
@@ -1440,6 +1443,9 @@ MonoBehaviour:
   shield: {fileID: 1344913746}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
   idleAnimation: {fileID: 0}
+  walkAnimation: {fileID: 0}
+  runAnimation: {fileID: 0}
+  turnAroundAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -3380,6 +3386,9 @@ MonoBehaviour:
   shield: {fileID: 25032924}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
   idleAnimation: {fileID: 0}
+  walkAnimation: {fileID: 0}
+  runAnimation: {fileID: 0}
+  turnAroundAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -3679,6 +3688,9 @@ MonoBehaviour:
   shield: {fileID: 1224967347}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
   idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  runAnimation: {fileID: 7878233008565332337, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  turnAroundAnimation: {fileID: -1080599278436106560, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}

@@ -292,7 +292,7 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""89221f71-d127-4dc9-9509-bbe9a7c8a62d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

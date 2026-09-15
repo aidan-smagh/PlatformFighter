@@ -27,6 +27,9 @@ public class FighterController : MonoBehaviour
 
     [SerializeField] public MovesetData moveSet;
     [SerializeField] public AnimationClip idleAnimation;
+    [SerializeField] public AnimationClip walkAnimation;
+    [SerializeField] public AnimationClip runAnimation;
+    [SerializeField] public AnimationClip turnAroundAnimation;
 
     [System.Serializable]
     public struct FlippableHitbox

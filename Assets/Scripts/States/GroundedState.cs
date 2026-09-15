@@ -4,6 +4,12 @@ using System.Collections;
 
 public class GroundedState : IFighterState
 {
+    private enum LocomotionState { Idle, Walking, Running }
+    private LocomotionState currentLocomotion = LocomotionState.Idle;
+
+    private const float walkThreshold = 0.01f;
+    private const float runThreshold = 0.5f;
+
     public void Enter(FighterController fighter)
     {
         fighter.DebugColor(Color.green);
@@ -11,6 +17,45 @@ public class GroundedState : IFighterState
 
     public void Tick(FighterController fighter)
     {
+        float horizontalInput = Mathf.Abs(fighter.HorizontalInput);
+
+        LocomotionState targetLocomotion;
+
+        if (horizontalInput <= walkThreshold)
+        {
+            targetLocomotion = LocomotionState.Idle;
+        }
+        else if (horizontalInput < runThreshold)
+        {
+            targetLocomotion = LocomotionState.Walking;
+        }
+        else
+        {
+            targetLocomotion = LocomotionState.Running;
+        }
+
+        if (targetLocomotion != currentLocomotion)
+        {
+            currentLocomotion = targetLocomotion;
+            var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
+
+            switch (currentLocomotion)
+            {
+                case LocomotionState.Idle:
+                    overrideController["IdlePlaceholder"] = fighter.idleAnimation;
+                    fighter.animator.Play("Idle", 0, 0f);
+                    break;
+                case LocomotionState.Walking:
+                    overrideController["WalkPlaceholder"] = fighter.walkAnimation;
+                    fighter.animator.Play("Walk", 0, 0f);
+                    break;
+                case LocomotionState.Running:
+                    overrideController["RunPlaceholder"] = fighter.runAnimation;
+                    fighter.animator.Play("Run", 0, 0f);
+                    break;
+            }
+        }
+
         HandleMove(fighter);
 
         if (fighter.velocity.y < 0)
@@ -61,14 +106,6 @@ public class GroundedState : IFighterState
                     hitbox.Activate(forwardSmash);
                 }
                 
-                return;
-            }
-
-            //will need to refactor this for combining attack and stick input
-            if (Keyboard.current.sKey.wasPressedThisFrame)
-            {
-                EnableDSmashHitbox(fighter);
-                fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
                 return;
             }
 
