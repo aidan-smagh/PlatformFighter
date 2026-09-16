@@ -191,6 +191,10 @@ Created a walk and run animation and hooked them up in the GroundedState()
 	Reads the horizontalInput from the fighterController and plays the correct animation for each magnitude of input
 Also created a turn around animation
 	Still need to implement it
+
+Day 23 (9/16/26):
+Fixed rotation bug on respawn
+Fixed fighter not returning to idle animation after FSmash
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
