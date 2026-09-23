@@ -195,6 +195,8 @@ Also created a turn around animation
 Day 23 (9/16/26):
 Fixed rotation bug on respawn
 Fixed fighter not returning to idle animation after FSmash
+
+Took a mental health break
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -235,6 +237,8 @@ Adjust ledge mechanics
 	Cant grab the ledge when jumping up
 	Cant grab the ledge in tumble
 Pausing UI
+Blender box outline thing tied to stage music
+	Will have to prerender in Blender and export all of them to Unity and swap the skybox depending on the song selected
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
