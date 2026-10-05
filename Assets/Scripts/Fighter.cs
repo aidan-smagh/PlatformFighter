@@ -64,7 +64,6 @@ public class Fighter : MonoBehaviour
         CharacterController cc = gameObject.GetComponent<CharacterController>();
         cc.enabled = false;
         fighter.transform.position = spawnPoint.transform.position;
-        fighter.transform.rotation = spawnPoint.transform.rotation;
         knockbackVelocity = Vector3.zero;
         cc.enabled = true;
         fighterController.ChangeState(new GroundedState());
