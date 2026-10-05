@@ -4,11 +4,13 @@ using System.Collections;
 
 public class GroundedState : IFighterState
 {
-    private enum LocomotionState { Idle, Walking, Running }
+    private enum LocomotionState { Idle, Walking, Running, TurnAround }
     private LocomotionState currentLocomotion = LocomotionState.Idle;
 
     private const float walkThreshold = 0.01f;
     private const float runThreshold = 0.5f;
+
+    private bool isFacingRight = true;
 
     public void Enter(FighterController fighter)
     {
@@ -19,9 +21,16 @@ public class GroundedState : IFighterState
     {
         float horizontalInput = Mathf.Abs(fighter.HorizontalInput);
 
+        bool turnedAround = fighter.facingRight != isFacingRight;
+        isFacingRight = fighter.facingRight;
+
         LocomotionState targetLocomotion;
 
-        if (horizontalInput <= walkThreshold)
+        if (turnedAround)
+        {
+            targetLocomotion = LocomotionState.TurnAround;
+        }
+        else if (horizontalInput <= walkThreshold)
         {
             targetLocomotion = LocomotionState.Idle;
         }
@@ -52,6 +61,11 @@ public class GroundedState : IFighterState
                 case LocomotionState.Running:
                     overrideController["RunPlaceholder"] = fighter.runAnimation;
                     fighter.animator.Play("Run", 0, 0f);
+                    break;
+                case LocomotionState.TurnAround:
+                    Quaternion rotation = fighter.transform.rotation;
+                    rotation.y = rotation.y * -1;
+                    fighter.transform.rotation = rotation;
                     break;
             }
         }

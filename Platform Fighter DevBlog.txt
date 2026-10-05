@@ -142,7 +142,7 @@ Day 17 (9/5/26):
 Finished working on the sword
 Started working on adding gamecube controller functionality
 	Using this package - https://github.com/enfyy/Unity-GameCubeController.git
-	Uses the Input Action Asset
+	Uses the Input Action Asset 
 		Define a control scheme - named it Player
 			Each control scheme has Actions on it which are tied to specific input from the controller
 				Done by hitting the plus next to the action, adding a binding, and hitting Listen in the Path section and selecting the correct input
@@ -191,6 +191,12 @@ Created a walk and run animation and hooked them up in the GroundedState()
 	Reads the horizontalInput from the fighterController and plays the correct animation for each magnitude of input
 Also created a turn around animation
 	Still need to implement it
+
+Day 23 (10/5/26): Triumphant Return
+Finally had some free time from my classes
+Implemented mirroring of animations for when turning around
+	Takes the current y rotation value and multiplies it by -1
+Turn around animation will be played for a small threshold value of horizontal input
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes

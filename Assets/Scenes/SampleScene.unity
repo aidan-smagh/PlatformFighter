@@ -3670,7 +3670,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   currentJumps: 0
   groundCheckDistance: 0.2
-  facingRight: 0
+  facingRight: 1
   isShieldActive: 0
   isPlayerControlled: 1
   controller: {fileID: 1145179988}
