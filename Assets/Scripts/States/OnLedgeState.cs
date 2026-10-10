@@ -30,14 +30,14 @@ public class OnLedgeState : IFighterState
         if (fighter.Controls.Player.Jump.WasPressedThisFrame())
         {
             fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
-            fighter.ChangeState(new AirborneState());
+            fighter.ChangeState(new AirborneState(fighter.facingRight));
             return;
         }
         //drop
         //else if (Keyboard.current.sKey.wasPressedThisFrame)
         else if (fighter.Controls.Player.FastFall.WasPressedThisFrame())
         {
-            fighter.ChangeState(new AirborneState());
+            fighter.ChangeState(new AirborneState(fighter.facingRight));
             return;
         }
         //roll

@@ -63,9 +63,7 @@ public class GroundedState : IFighterState
                     fighter.animator.Play("Run", 0, 0f);
                     break;
                 case LocomotionState.TurnAround:
-                    Quaternion rotation = fighter.transform.rotation;
-                    rotation.y = rotation.y * -1;
-                    fighter.transform.rotation = rotation;
+                    fighter.turnedAround(isFacingRight);
                     break;
             }
         }
@@ -102,7 +100,7 @@ public class GroundedState : IFighterState
             if (fighter.Controls.Player.Jump.WasPressedThisFrame())
             {
                 fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
-                fighter.ChangeState(new AirborneState());
+                fighter.ChangeState(new AirborneState(isFacingRight));
                 return;
             }
 
@@ -143,7 +141,7 @@ public class GroundedState : IFighterState
 
         if (!fighter.IsGrounded())
         {
-            fighter.ChangeState(new AirborneState());
+            fighter.ChangeState(new AirborneState(isFacingRight));
         }
     }
 

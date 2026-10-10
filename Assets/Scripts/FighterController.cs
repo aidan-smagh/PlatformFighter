@@ -156,4 +156,10 @@ public class FighterController : MonoBehaviour
             fighter.decayRate * Time.deltaTime
         );
     }
+
+    public void turnedAround(bool isFacingRight)
+    {
+        float yAngle = isFacingRight ? 90f : -90f;
+        fighter.transform.rotation = Quaternion.Euler(0f, yAngle, 0f);
+    }
 }

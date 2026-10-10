@@ -3,6 +3,14 @@ using UnityEngine.InputSystem;
 
 public class AirborneState : IFighterState
 {
+
+    private bool isFacingRight;
+
+    public AirborneState(bool isFacingRight)
+    {
+        this.isFacingRight = isFacingRight;
+    } 
+
     public void Enter(FighterController fighter)
     {
         fighter.DebugColor(Color.blue);
@@ -10,8 +18,13 @@ public class AirborneState : IFighterState
 
     public void Tick(FighterController fighter)
     {
+        //Debug.Log(isFacingRight);
+        
+        bool turnedAround = fighter.facingRight != isFacingRight;
+        isFacingRight = fighter.facingRight;
 
-        //if (Keyboard.current.spaceKey.wasPressedThisFrame && fighter.currentJumps > 0)
+        if (turnedAround) fighter.turnedAround(isFacingRight);
+
         if (fighter.Controls.Player.Jump.WasPressedThisFrame() && fighter.currentJumps > 0)
         {
             fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);

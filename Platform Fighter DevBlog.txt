@@ -203,6 +203,9 @@ Finally had some free time from my classes
 Implemented mirroring of animations for when turning around
 	Takes the current y rotation value and multiplies it by -1
 Turn around animation will be played for a small threshold value of horizontal input
+
+Day 25 (10/9/26):
+Fixed the mirroring for animations, particularly in the Airborne state
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
