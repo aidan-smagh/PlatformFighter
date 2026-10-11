@@ -8,7 +8,7 @@ public class FighterController : MonoBehaviour
     public float currentJumps;
     public float groundCheckDistance = 0.2f;
     public bool facingRight;
-    public bool isShieldActive;
+    public bool isBlockActive;
     public bool isPlayerControlled;
 
     [SerializeField] CharacterController controller;
@@ -26,10 +26,14 @@ public class FighterController : MonoBehaviour
     [SerializeField] public GameObject shield;
 
     [SerializeField] public MovesetData moveSet;
+    
     [SerializeField] public AnimationClip idleAnimation;
     [SerializeField] public AnimationClip walkAnimation;
     [SerializeField] public AnimationClip runAnimation;
     [SerializeField] public AnimationClip turnAroundAnimation;
+    [SerializeField] public AnimationClip blockStartAnimation;
+    [SerializeField] public AnimationClip blockHoldAnimation;
+    [SerializeField] public AnimationClip blockExitAnimation;
 
     [System.Serializable]
     public struct FlippableHitbox

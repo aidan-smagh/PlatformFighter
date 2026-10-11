@@ -206,6 +206,15 @@ Turn around animation will be played for a small threshold value of horizontal i
 
 Day 25 (10/9/26):
 Fixed the mirroring for animations, particularly in the Airborne state
+Fixed grabbing bug where the grabbed fighter position was adjusted based off the hitbox not the grabbing fighter
+Created basic blocking animations
+Made a BlockState which handles the animations playing
+	Will update later with blocking logic for actual gameplay
+
+Day 26 (10/10/26):
+Changed the logic for the BlockState so animation switches are cleaner.
+	Still needs refining but should be fine for now
+Started working on an enemy ai system
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -246,8 +255,12 @@ Adjust ledge mechanics
 	Cant grab the ledge when jumping up
 	Cant grab the ledge in tumble
 Pausing UI
-Blender box outline thing tied to stage music
-	Will have to prerender in Blender and export all of them to Unity and swap the skybox depending on the song selected
+Parrying instead of shielding
+	Successful parry you take no damage and enemy has extra endlag
+	Non successful parry you take partial damage
+		Parry cooldown to not allow spam Parrying
+		Guard can break if you just hold the block
+			Similar to sekiro
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

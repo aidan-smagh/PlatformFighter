@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GroundedState : IFighterState
 {
-    private enum LocomotionState { Idle, Walking, Running, TurnAround }
+    private enum LocomotionState { Idle, Walking, Running, TurnAround, None }
     private LocomotionState currentLocomotion = LocomotionState.Idle;
 
     private const float walkThreshold = 0.01f;
@@ -12,9 +12,12 @@ public class GroundedState : IFighterState
 
     private bool isFacingRight = true;
 
+    LocomotionState targetLocomotion;
+
     public void Enter(FighterController fighter)
     {
         fighter.DebugColor(Color.green);
+        currentLocomotion = LocomotionState.None;
     }
 
     public void Tick(FighterController fighter)
@@ -23,8 +26,6 @@ public class GroundedState : IFighterState
 
         bool turnedAround = fighter.facingRight != isFacingRight;
         isFacingRight = fighter.facingRight;
-
-        LocomotionState targetLocomotion;
 
         if (turnedAround)
         {
@@ -83,14 +84,14 @@ public class GroundedState : IFighterState
             Vector2 dir = fighter.Controls.Player.Move.ReadValue<Vector2>();
             
             //if (Keyboard.current.rKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Shield.IsPressed() && dir.x > 0)
+            if (fighter.Controls.Player.Block.IsPressed() && dir.x > 0)
             {
                 fighter.ChangeState(new RollState(1f));
                 return;
             }
 
             //if (Keyboard.current.qKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Shield.IsPressed() && dir.x < 0)
+            if (fighter.Controls.Player.Block.IsPressed() && dir.x < 0)
             {
                 fighter.ChangeState(new RollState(-1f));
                 return;
@@ -130,12 +131,9 @@ public class GroundedState : IFighterState
             }
 
             //if (Keyboard.current.leftShiftKey.isPressed)
-            if (fighter.Controls.Player.Shield.IsPressed())
+            if (fighter.Controls.Player.Block.IsPressed())
             {
-                fighter.isShieldActive = true;
-            } else
-            {
-                fighter.isShieldActive = false;
+                fighter.ChangeState(new BlockState());
             }
         }
 

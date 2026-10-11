@@ -5,6 +5,7 @@ public class AirborneState : IFighterState
 {
 
     private bool isFacingRight;
+    private bool turnedAround;
 
     public AirborneState(bool isFacingRight)
     {
@@ -14,14 +15,13 @@ public class AirborneState : IFighterState
     public void Enter(FighterController fighter)
     {
         fighter.DebugColor(Color.blue);
+        turnedAround = fighter.facingRight != isFacingRight;
+        isFacingRight = fighter.facingRight;
     }
 
     public void Tick(FighterController fighter)
-    {
-        //Debug.Log(isFacingRight);
-        
-        bool turnedAround = fighter.facingRight != isFacingRight;
-        isFacingRight = fighter.facingRight;
+    {   
+
 
         if (turnedAround) fighter.turnedAround(isFacingRight);
 
@@ -31,7 +31,6 @@ public class AirborneState : IFighterState
             fighter.currentJumps -= 1;
         }
         
-        //if (Keyboard.current.sKey.isPressed)
         if (fighter.Controls.Player.FastFall.IsPressed())
         {  
             float currentGravity = fighter.velocity.y < 0 ? fighter.Stats.gravity * fighter.Stats.fallMultiplier : fighter.Stats.gravity;

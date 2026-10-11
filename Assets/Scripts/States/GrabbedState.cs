@@ -17,6 +17,7 @@ public class GrabbedState : IFighterState
 
     public void Enter(FighterController fighter)
     {
+        Debug.Log(grabberPos);
         fighter.DebugColor(Color.pink);
         Vector3 pos = grabberPos;
         pos.x = grabberPos.x += grabOffset;

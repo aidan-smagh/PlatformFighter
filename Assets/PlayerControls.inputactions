@@ -34,7 +34,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shield",
+                    "name": "Block",
                     "type": "Button",
                     "id": "f3ca58b6-6a88-413a-9f64-e79595a779fa",
                     "expectedControlType": "",
@@ -133,7 +133,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Shield",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -144,7 +144,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shield",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -155,7 +155,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shield",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

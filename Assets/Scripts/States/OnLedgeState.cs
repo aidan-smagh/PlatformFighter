@@ -42,7 +42,7 @@ public class OnLedgeState : IFighterState
         }
         //roll
         //else if (Keyboard.current.rKey.wasPressedThisFrame)
-        else if (fighter.Controls.Player.Shield.IsPressed())
+        else if (fighter.Controls.Player.Block.IsPressed())
         {
             //roll logic here (use lerp)
             fighter.ChangeState(new GroundedState());
