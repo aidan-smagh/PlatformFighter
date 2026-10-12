@@ -51,6 +51,8 @@ public class FighterController : MonoBehaviour
 
     public IFighterState currentState { get; set; }
 
+    public IFighterInput Input { get; set; }
+
     private FighterControls controls;
 
     public bool IsGrounded()
@@ -84,6 +86,11 @@ public class FighterController : MonoBehaviour
         var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
         overrideController["IdlePlaceholder"] = idleAnimation;
         animator.Play("Idle", 0, 0f);
+
+        if (isPlayerControlled)
+            Input = new PlayerFighterInput(Controls);
+        else
+            Input = new AIFighterInput();
     }
 
     void OnEnable()
@@ -106,16 +113,14 @@ public class FighterController : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerControlled)
-        {
-            ReadHorizontalState();
-        }
+        ReadHorizontalState();
+        
         currentState.Tick(this);
     }
 
     void ReadHorizontalState()
     {
-        float h = controls.Player.Move.ReadValue<Vector2>().x;    
+        float h = Input.Move.x; 
 
         HorizontalInput = h;
 

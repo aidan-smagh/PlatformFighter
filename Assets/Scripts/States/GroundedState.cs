@@ -79,62 +79,41 @@ public class GroundedState : IFighterState
         Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
         fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
 
-        if (fighter.isPlayerControlled)
+        Vector2 dir = fighter.Input.Move;
+
+        if (fighter.Input.JumpPressed)
         {
-            Vector2 dir = fighter.Controls.Player.Move.ReadValue<Vector2>();
+            fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
+            fighter.ChangeState(new AirborneState(isFacingRight));
+            return;
+        }
+
+        if (fighter.Input.AttackPressed)
+        {
+            MoveData forwardSmash = fighter.moveSet.forwardSmash;
+            fighter.Stats.ClearHitTargets();
+            var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
+            overrideController["AttackPlaceholder"] = forwardSmash.animationClip;
+            fighter.animator.Play("Attack", 0, 0f);
+
+            foreach (var hitbox in fighter.swordHitboxes)
+            {
+                hitbox.Activate(forwardSmash);
+            }
             
-            //if (Keyboard.current.rKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Block.IsPressed() && dir.x > 0)
-            {
-                fighter.ChangeState(new RollState(1f));
-                return;
-            }
+            return;
+        }
 
-            //if (Keyboard.current.qKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Block.IsPressed() && dir.x < 0)
-            {
-                fighter.ChangeState(new RollState(-1f));
-                return;
-            }
+        if (fighter.Input.GrabPressed)
+        {
+            EnableGrabHitbox(fighter);
+            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+            return;
+        }
 
-            //if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Jump.WasPressedThisFrame())
-            {
-                fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
-                fighter.ChangeState(new AirborneState(isFacingRight));
-                return;
-            }
-
-            //if (Keyboard.current.eKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Attack.WasPressedThisFrame())
-            {
-                MoveData forwardSmash = fighter.moveSet.forwardSmash;
-                fighter.Stats.ClearHitTargets();
-                var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
-                overrideController["AttackPlaceholder"] = forwardSmash.animationClip;
-                fighter.animator.Play("Attack", 0, 0f);
-
-                foreach (var hitbox in fighter.swordHitboxes)
-                {
-                    hitbox.Activate(forwardSmash);
-                }
-                
-                return;
-            }
-
-            //if (Keyboard.current.tKey.wasPressedThisFrame)
-            if (fighter.Controls.Player.Grab.WasPressedThisFrame())
-            {
-                EnableGrabHitbox(fighter);
-                fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
-                return;
-            }
-
-            //if (Keyboard.current.leftShiftKey.isPressed)
-            if (fighter.Controls.Player.Block.IsPressed())
-            {
-                fighter.ChangeState(new BlockState());
-            }
+        if (fighter.Input.BlockHeld)
+        {
+            fighter.ChangeState(new BlockState());
         }
 
         if (!fighter.IsGrounded())

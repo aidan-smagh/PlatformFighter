@@ -4,7 +4,6 @@ public class AttackHitbox : MonoBehaviour
 {
     [SerializeField] Fighter fighter;
     MoveData move;
-    Fighter dummy;
     Collider collider;
 
     void Awake()
@@ -26,8 +25,9 @@ public class AttackHitbox : MonoBehaviour
         if (!other.CompareTag("Fighter")) return;
         
         Fighter target = other.gameObject.GetComponentInParent<Fighter>();
+
         if (target == null) return;
-        if (fighter.HasAlreadyHit(target)) return; // shared check across all hitboxes
+        if (fighter.HasAlreadyHit(target)) return;
 
         fighter.CalculateMoveHit(target, move);
         fighter.RegisterHit(target);

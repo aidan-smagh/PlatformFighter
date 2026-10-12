@@ -25,24 +25,20 @@ public class OnLedgeState : IFighterState
     {
         bool onRightSide = fighter.transform.position.x > 0;
         
-        //jump
-        //if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        if (fighter.Controls.Player.Jump.WasPressedThisFrame())
+        if (fighter.Input.JumpPressed)
         {
             fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
             fighter.ChangeState(new AirborneState(fighter.facingRight));
             return;
         }
-        //drop
-        //else if (Keyboard.current.sKey.wasPressedThisFrame)
-        else if (fighter.Controls.Player.FastFall.WasPressedThisFrame())
+
+        else if (fighter.Input.FastFallPressed)
         {
             fighter.ChangeState(new AirborneState(fighter.facingRight));
             return;
         }
-        //roll
-        //else if (Keyboard.current.rKey.wasPressedThisFrame)
-        else if (fighter.Controls.Player.Block.IsPressed())
+
+        else if (fighter.Input.BlockHeld)
         {
             //roll logic here (use lerp)
             fighter.ChangeState(new GroundedState());

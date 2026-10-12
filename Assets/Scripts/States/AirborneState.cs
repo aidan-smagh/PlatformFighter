@@ -25,13 +25,13 @@ public class AirborneState : IFighterState
 
         if (turnedAround) fighter.turnedAround(isFacingRight);
 
-        if (fighter.Controls.Player.Jump.WasPressedThisFrame() && fighter.currentJumps > 0)
+        if (fighter.Input.JumpPressed && fighter.currentJumps > 0)
         {
             fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
             fighter.currentJumps -= 1;
         }
         
-        if (fighter.Controls.Player.FastFall.IsPressed())
+        if (fighter.Input.FastFallPressed)
         {  
             float currentGravity = fighter.velocity.y < 0 ? fighter.Stats.gravity * fighter.Stats.fallMultiplier : fighter.Stats.gravity;
             fighter.velocity.y += currentGravity * Time.deltaTime;

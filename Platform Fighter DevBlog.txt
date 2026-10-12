@@ -214,7 +214,11 @@ Made a BlockState which handles the animations playing
 Day 26 (10/10/26):
 Changed the logic for the BlockState so animation switches are cleaner.
 	Still needs refining but should be fine for now
-Started working on an enemy ai system
+Started working on an enemy ai system (behavior tree)
+
+Day 27 (10/12/26):
+Created an abstraction for detecting inputs so that I can simulate input for the enemy ai
+Made the AIController script that will be expanded eventually to have the behavior tree but it allows the enemy to walk and attack so its good for testing other features
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -261,6 +265,9 @@ Parrying instead of shielding
 		Parry cooldown to not allow spam Parrying
 		Guard can break if you just hold the block
 			Similar to sekiro
+Impact frames on final stock when a move will kill
+Redo roll logic in the Rollstate
+Update grabbed/grabbing controls to reflect new abstraction
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
@@ -348,3 +355,21 @@ Character Design Ideas
 2. Assassin Guy
 	Found a reference image, its the tatteredCloak image in the references folder
 	Found an image of a cool sword he could use, also in the references folder
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Enemy AI Behavior Tree Notes
+
+Each action only needs to know if it succeeded or failed
+Ancestors decide what to do next
+
+Fallback(?)(or)
+	Ex. If you fail, then go to the next option
+Sequence(->)(and)
+	Ex. Peel the banana -> eat the banana
+
+Fallback and Sequence are nodes themselves
+	Actions are also nodes
+
+Tick method that moves you through the Tree
+	Start with the root
+		Tick to the first child
+			Depending on behavior, move to sibling node or tick back up to root node

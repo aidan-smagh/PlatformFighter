@@ -149,9 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be4291a2197cc44f9394cb5801fd19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldManager
-  collider: {fileID: 25032926}
-  decayRate: 0.0005
-  regenRate: 0.0005
 --- !u!58 &25032926
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -492,7 +489,7 @@ MonoBehaviour:
   currentJumps: 0
   groundCheckDistance: 0.2
   facingRight: 0
-  isShieldActive: 0
+  isBlockActive: 0
   isPlayerControlled: 0
   controller: {fileID: 168835482}
   groundMask:
@@ -512,7 +509,9 @@ MonoBehaviour:
   walkAnimation: {fileID: 0}
   runAnimation: {fileID: 0}
   turnAroundAnimation: {fileID: 0}
-  blockAnimation: {fileID: 0}
+  blockStartAnimation: {fileID: 0}
+  blockHoldAnimation: {fileID: 0}
+  blockExitAnimation: {fileID: 0}
   hitboxes: []
   swordHitboxes: []
 --- !u!1 &169990156
@@ -662,7 +661,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1427,7 +1426,7 @@ MonoBehaviour:
   currentJumps: 0
   groundCheckDistance: 0.2
   facingRight: 0
-  isShieldActive: 0
+  isBlockActive: 0
   isPlayerControlled: 1
   controller: {fileID: 368078571}
   groundMask:
@@ -1447,7 +1446,9 @@ MonoBehaviour:
   walkAnimation: {fileID: 0}
   runAnimation: {fileID: 0}
   turnAroundAnimation: {fileID: 0}
-  blockAnimation: {fileID: 0}
+  blockStartAnimation: {fileID: 0}
+  blockHoldAnimation: {fileID: 0}
+  blockExitAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -2469,7 +2470,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3112,9 +3113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be4291a2197cc44f9394cb5801fd19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldManager
-  collider: {fileID: 982487941}
-  decayRate: 0.0005
-  regenRate: 0.0005
 --- !u!58 &982487941
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3323,6 +3321,7 @@ GameObject:
   - component: {fileID: 1076516465}
   - component: {fileID: 1076516464}
   - component: {fileID: 1076516463}
+  - component: {fileID: 1076516469}
   m_Layer: 0
   m_Name: SwordGuy (1)
   m_TagString: Fighter
@@ -3371,7 +3370,7 @@ MonoBehaviour:
   currentJumps: 0
   groundCheckDistance: 0.2
   facingRight: 0
-  isShieldActive: 0
+  isBlockActive: 0
   isPlayerControlled: 0
   controller: {fileID: 1076516467}
   groundMask:
@@ -3387,11 +3386,13 @@ MonoBehaviour:
   pummelHitbox: {fileID: 787329643}
   shield: {fileID: 25032924}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
-  idleAnimation: {fileID: 0}
-  walkAnimation: {fileID: 0}
-  runAnimation: {fileID: 0}
-  turnAroundAnimation: {fileID: 0}
-  blockAnimation: {fileID: 0}
+  idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  runAnimation: {fileID: 7878233008565332337, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  turnAroundAnimation: {fileID: -1080599278436106560, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  blockStartAnimation: {fileID: 0}
+  blockHoldAnimation: {fileID: 0}
+  blockExitAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -3502,6 +3503,19 @@ Transform:
   - {fileID: 25032927}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1076516469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076516462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca77e203a1042814f9b75c08f4967255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIController
+  fighter: {fileID: 1076516464}
 --- !u!1 &1088624816
 GameObject:
   m_ObjectHideFlags: 0
@@ -3674,7 +3688,7 @@ MonoBehaviour:
   currentJumps: 0
   groundCheckDistance: 0.2
   facingRight: 1
-  isShieldActive: 0
+  isBlockActive: 0
   isPlayerControlled: 1
   controller: {fileID: 1145179988}
   groundMask:
@@ -3694,7 +3708,9 @@ MonoBehaviour:
   walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   runAnimation: {fileID: 7878233008565332337, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   turnAroundAnimation: {fileID: -1080599278436106560, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
-  blockAnimation: {fileID: -1729618345870627131, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  blockStartAnimation: {fileID: 0}
+  blockHoldAnimation: {fileID: 0}
+  blockExitAnimation: {fileID: 0}
   hitboxes:
   - transform: {fileID: 858718959}
     baseOffset: {x: 0, y: 0, z: 0}
@@ -3891,7 +3907,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4037,9 +4053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be4291a2197cc44f9394cb5801fd19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldManager
-  collider: {fileID: 1224967349}
-  decayRate: 0.0005
-  regenRate: 0.0005
 --- !u!58 &1224967349
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4284,9 +4297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be4291a2197cc44f9394cb5801fd19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldManager
-  collider: {fileID: 1344913749}
-  decayRate: 0.0005
-  regenRate: 0.0005
 --- !u!58 &1344913749
 CircleCollider2D:
   m_ObjectHideFlags: 0
