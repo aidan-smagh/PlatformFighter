@@ -29,6 +29,8 @@ public class AttackHitbox : MonoBehaviour
         if (target == null) return;
         if (fighter.HasAlreadyHit(target)) return;
 
+        int result = fighter.ReceiveHit(target, move);
+        Debug.Log(result);
         fighter.CalculateMoveHit(target, move);
         fighter.RegisterHit(target);
     }

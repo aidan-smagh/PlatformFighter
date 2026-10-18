@@ -219,6 +219,16 @@ Started working on an enemy ai system (behavior tree)
 Day 27 (10/12/26):
 Created an abstraction for detecting inputs so that I can simulate input for the enemy ai
 Made the AIController script that will be expanded eventually to have the behavior tree but it allows the enemy to walk and attack so its good for testing other features
+Fixed bug where the enemy hitboxes would not trigger knockback on the player
+
+Day 28 (10/14/26):
+Implemented the parry mechanic
+	Still need to do the rest of the logic, but the window for parrying is there
+		Need to refine the window size, but that comes later once the game has a feel
+
+Day 29 (10/18/26):
+Added a sound effect for a parry using an AudioSource component and a .wav file for the sound effect
+	Still need to add the damage reduction logic
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -355,6 +365,10 @@ Character Design Ideas
 2. Assassin Guy
 	Found a reference image, its the tatteredCloak image in the references folder
 	Found an image of a cool sword he could use, also in the references folder
+
+3. Crow guy from ig
+
+4. Gotta have a dog with a sword in its mouth (word to Sif)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Enemy AI Behavior Tree Notes
 

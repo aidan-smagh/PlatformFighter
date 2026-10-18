@@ -114,4 +114,21 @@ public class Fighter : MonoBehaviour
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
         ApplyKnockback(other, knockbackVelocity, enterTumble);
     }
+
+    public int ReceiveHit(Fighter other, MoveData move)
+    {
+        FighterController fc = other.GetComponent<FighterController>();
+        if (fc.currentState is BlockState block)
+        {
+            bool inParryWindow = block.currentBlockFrame >= BlockState.ParryStart
+                    && block.currentBlockFrame <  BlockState.ParryEnd;
+
+            if (inParryWindow)
+            {
+                fc.audioSource.PlayOneShot(fc.parrySFX, 0.8f);
+                return 1;
+            }
+        }
+        return -1;
+    }
 }

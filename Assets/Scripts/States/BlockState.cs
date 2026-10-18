@@ -8,6 +8,10 @@ public class BlockState : IFighterState
     private const int StartupFrames = 4;
     private const int ExitFrames = 6;
 
+    public const int ParryStart = 0;
+    public const int ParryEnd = 1000;
+    public int currentBlockFrame = 0;
+
     private BlockPhase phase;
     private int phaseFrame;
 
@@ -39,6 +43,7 @@ public class BlockState : IFighterState
                 break;
             
             case BlockPhase.Hold:
+                currentBlockFrame++;
                 if (!fighter.Controls.Player.Block.IsPressed())
                     SetPhase(fighter, BlockPhase.Exit, "BlockExit");
                 break;

@@ -35,6 +35,9 @@ public class FighterController : MonoBehaviour
     [SerializeField] public AnimationClip blockHoldAnimation;
     [SerializeField] public AnimationClip blockExitAnimation;
 
+    [SerializeField] public AudioSource audioSource;
+    [SerializeField] public AudioClip parrySFX;
+
     [System.Serializable]
     public struct FlippableHitbox
     {
