@@ -14,6 +14,8 @@ public class Fighter : MonoBehaviour
     public float knockbackPowerScaleFactor = 0.12f;
     public float tumbleThreshold = 80f;
 
+    private float damageReduction = 0.1f;
+
     [SerializeField] public float currentPercent = 0f;
     [SerializeField] int stocks = 3;
     [SerializeField] GameObject spawnPoint;
@@ -69,8 +71,10 @@ public class Fighter : MonoBehaviour
         fighterController.ChangeState(new GroundedState());
     }
 
-    double CalculateKnockback(Fighter other, KnockbackData payload)
+    double CalculateKnockback(Fighter other, KnockbackData payload, bool blockStatus)
     {
+        if (blockStatus == true) return 0;
+
         double knockbackPower = ((((other.currentPercent / 10 + (other.currentPercent * payload.d) / 20) * (200 / (other.weight + 100) * 1.4) + 18) * payload.s) + payload.b) * payload.r;
         return knockbackPower;
     }
@@ -92,8 +96,12 @@ public class Fighter : MonoBehaviour
         if (enterTumble) other.fighterController.ChangeState(new TumbleState());
     }
 
-    public void CalculateMoveHit(Fighter other, MoveData move)
+    public void CalculateMoveHit(Fighter other, MoveData move, bool blockStatus)
     {   
+        if (blockStatus == true) {
+            move.damage = move.damage * damageReduction;
+        } 
+
         KnockbackData payload = new KnockbackData 
         { 
             d = move.damage,
@@ -102,7 +110,8 @@ public class Fighter : MonoBehaviour
             r = 1f
         };
 
-        double knockbackPower = CalculateKnockback(other, payload);
+        double knockbackPower = CalculateKnockback(other, payload, blockStatus);
+        
         bool enterTumble = false;
         if (knockbackPower > tumbleThreshold)
         {
@@ -113,10 +122,13 @@ public class Fighter : MonoBehaviour
         Vector2 direction = AngleToDirection(move.launchAngle, fighterController.facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
         ApplyKnockback(other, knockbackVelocity, enterTumble);
+        RegisterHit(other);
     }
 
-    public int ReceiveHit(Fighter other, MoveData move)
+    public void ReceiveHit(Fighter other, MoveData move)
     {
+        bool blockStatus = false;
+
         FighterController fc = other.GetComponent<FighterController>();
         if (fc.currentState is BlockState block)
         {
@@ -126,9 +138,9 @@ public class Fighter : MonoBehaviour
             if (inParryWindow)
             {
                 fc.audioSource.PlayOneShot(fc.parrySFX, 0.8f);
-                return 1;
+                blockStatus = true;
             }
         }
-        return -1;
+        CalculateMoveHit(other, move, blockStatus);
     }
 }

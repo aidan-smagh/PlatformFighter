@@ -369,6 +369,8 @@ Character Design Ideas
 3. Crow guy from ig
 
 4. Gotta have a dog with a sword in its mouth (word to Sif)
+
+5. Doesnt necessarily have to be its own character but smash attacks that slice the space-time continuum and leave slash marks along the moves path that stay for awhile and deal damage (like poison damage) whenever someone touches them
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Enemy AI Behavior Tree Notes
 
