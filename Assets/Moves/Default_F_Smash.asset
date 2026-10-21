@@ -15,7 +15,7 @@ MonoBehaviour:
   moveName: Forward Smash
   damage: 20
   knockbackScaling: 0.75
-  baseKnockback: 75
+  baseKnockback: 61
   launchAngle: 30
   startupTime: 0
   activeTime: 0

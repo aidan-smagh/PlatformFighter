@@ -11,7 +11,7 @@ public class Fighter : MonoBehaviour
     public float weight = 100;
     public float decayRate = 0.15f;
     public Vector2 knockbackVelocity;
-    public float knockbackPowerScaleFactor = 0.12f;
+    public float knockbackPowerScaleFactor = 0f;
     public float tumbleThreshold = 80f;
 
     private float damageReduction = 0.1f;
@@ -76,6 +76,7 @@ public class Fighter : MonoBehaviour
         if (blockStatus == true) return 0;
 
         double knockbackPower = ((((other.currentPercent / 10 + (other.currentPercent * payload.d) / 20) * (200 / (other.weight + 100) * 1.4) + 18) * payload.s) + payload.b) * payload.r;
+        Debug.Log("knockbackPower" + knockbackPower);
         return knockbackPower;
     }
 
@@ -93,18 +94,19 @@ public class Fighter : MonoBehaviour
     void ApplyKnockback(Fighter other, Vector2 velocity, bool enterTumble)
     {
         other.knockbackVelocity += velocity;
-        if (enterTumble) other.fighterController.ChangeState(new TumbleState());
+        //if (enterTumble) other.fighterController.ChangeState(new TumbleState());
     }
 
     public void CalculateMoveHit(Fighter other, MoveData move, bool blockStatus)
     {   
+        float moveDamage = move.damage;
         if (blockStatus == true) {
-            move.damage = move.damage * damageReduction;
+            moveDamage = moveDamage * damageReduction;
         } 
 
         KnockbackData payload = new KnockbackData 
         { 
-            d = move.damage,
+            d = moveDamage,
             s = move.knockbackScaling,
             b = move.baseKnockback,
             r = 1f
@@ -118,17 +120,17 @@ public class Fighter : MonoBehaviour
             enterTumble = true;
         }
 
-        other.currentPercent += move.damage;
+        other.currentPercent += moveDamage;
         Vector2 direction = AngleToDirection(move.launchAngle, fighterController.facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
+        Debug.Log(knockbackPowerScaleFactor);
         ApplyKnockback(other, knockbackVelocity, enterTumble);
-        RegisterHit(other);
     }
 
     public void ReceiveHit(Fighter other, MoveData move)
     {
+        RegisterHit(other);
         bool blockStatus = false;
-
         FighterController fc = other.GetComponent<FighterController>();
         if (fc.currentState is BlockState block)
         {

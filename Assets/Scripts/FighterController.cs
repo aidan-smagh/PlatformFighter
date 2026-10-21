@@ -160,7 +160,7 @@ public class FighterController : MonoBehaviour
         }
     }
 
-    void ApplyKnockbackDecay()
+    public void ApplyKnockbackDecay()
     {
         fighter.knockbackVelocity = Vector2.Lerp(
             fighter.knockbackVelocity, 

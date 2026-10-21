@@ -22,6 +22,8 @@ public class GroundedState : IFighterState
 
     public void Tick(FighterController fighter)
     {
+        fighter.ApplyKnockbackDecay();
+
         float horizontalInput = Mathf.Abs(fighter.HorizontalInput);
 
         bool turnedAround = fighter.facingRight != isFacingRight;

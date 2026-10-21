@@ -21,7 +21,7 @@ public class AirborneState : IFighterState
 
     public void Tick(FighterController fighter)
     {   
-
+        fighter.ApplyKnockbackDecay();
 
         if (turnedAround) fighter.turnedAround(isFacingRight);
 

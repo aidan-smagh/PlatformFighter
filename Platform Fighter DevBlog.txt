@@ -229,6 +229,9 @@ Implemented the parry mechanic
 Day 29 (10/18/26):
 Added a sound effect for a parry using an AudioSource component and a .wav file for the sound effect
 	Still need to add the damage reduction logic
+
+Day 30 (10/20/26):
+Introduced damage reduction on block
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
