@@ -4,12 +4,17 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float timeRemaining = 60f;
+    [SerializeField] private float timeRemaining = 300f;
     [SerializeField] private GameObject fighterUIContainer;
+    [SerializeField] private GameObject timerUIContainer;
     
     private bool isTimerRunning = false;
     private FighterControls controls;
     private bool isPaused = false;
+
+    TextMeshProUGUI timerTmpText;
+
+    GameObject[] fighters;
 
     Dictionary<Fighter, TextMeshProUGUI> fighterPercents = new Dictionary<Fighter, TextMeshProUGUI>();
 
@@ -30,8 +35,18 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Starts the timer automatically
-        isTimerRunning = true; 
-        GameObject[] fighters = GameObject.FindGameObjectsWithTag("Fighter");
+        isTimerRunning = true;
+
+        //initialize timerUI
+        GameObject timerTextObj = new GameObject("Timer");
+        timerTextObj.transform.SetParent(GameObject.Find(timerUIContainer.name).transform, false);
+        timerTextObj.AddComponent<RectTransform>();
+        timerTextObj.AddComponent<CanvasRenderer>();
+        timerTmpText = timerTextObj.AddComponent<TextMeshProUGUI>();
+        timerTmpText.fontSize = 28;
+
+        //grab each fighter in the scene and map the generated text object to the fighter in a dict
+        fighters = GameObject.FindGameObjectsWithTag("Fighter");
         foreach (var fighter in fighters)
         {
             Fighter entry = fighter.GetComponent<Fighter>();
@@ -49,10 +64,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        foreach (var fighter in fighters)
+        {
+            Fighter f = fighter.GetComponent<Fighter>();
+            if (f.stocks == 0)
+            {
+                Debug.Log("game over");
+                Time.timeScale = 0;
+            }
+        }
+
+        DisplayTime(timeRemaining);
         foreach (var entry in fighterPercents)
         {
             if (entry.Key == null) continue;
-            entry.Value.text = entry.Key.currentPercent + "%";
+            entry.Value.text = entry.Key.currentPercent + "% - " + entry.Key.stocks;
         }
         if (!isTimerRunning) return;
 
@@ -66,7 +92,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Time has run out!");
             timeRemaining = 0;
             isTimerRunning = false;
-            DisplayTime(timeRemaining);
+            //DisplayTime(timeRemaining);
         }
 
         if (!isPaused)
@@ -93,6 +119,7 @@ public class GameManager : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         // Formats the text into "00:00"
+        timerTmpText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         //timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

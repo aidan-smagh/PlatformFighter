@@ -17,7 +17,7 @@ public class Fighter : MonoBehaviour
     private float damageReduction = 0.1f;
 
     [SerializeField] public float currentPercent = 0f;
-    [SerializeField] int stocks = 3;
+    [SerializeField] public int stocks = 3;
     [SerializeField] GameObject spawnPoint;
     
     public int Stocks => stocks;

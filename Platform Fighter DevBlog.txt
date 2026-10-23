@@ -232,14 +232,25 @@ Added a sound effect for a parry using an AudioSource component and a .wav file 
 
 Day 30 (10/20/26):
 Introduced damage reduction on block
+Created a canvas that shows each fighter's current percent
+	Used a horizontal layout group to space the text gameobjects
+	Text is spawned at runtime in the GameManager and then updated in the update loop
+
+Day 31 (10/23/26):
+Created basic UI for the Timer
+	Time limit is set as a SerializeField in GameManager
+	Update loop goes through the counts down the time
+		Calls DisplayTime(timeRemaining) which actually sets the text of the generated text gameobject to the current time formatted
+Made a basic game over condition
+	Right now it just loops through each fighter and checks if stocks = 0
+		Only two fighters max so the loop efficiency if negligible
+		If stocks == 0 for either fighter, right now it just stops the update loops
+			Will need to update with UI and showing victory screen, then going back to menu
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
-	Hitbox offset needs adjusting from flipping sides
-	May not be an issue once real hitboxes are added
-Game Manager
-	UI for percents
-	Timer (functionally done, just needs UI)
+GameManager
+	Loss state
 3d models
 Animations
 Multiplayer
@@ -281,6 +292,7 @@ Parrying instead of shielding
 Impact frames on final stock when a move will kill
 Redo roll logic in the Rollstate
 Update grabbed/grabbing controls to reflect new abstraction
+Character Selection Menu
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
