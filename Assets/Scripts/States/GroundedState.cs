@@ -122,6 +122,11 @@ public class GroundedState : IFighterState
         {
             fighter.ChangeState(new AirborneState(isFacingRight));
         }
+
+        if (fighter.Input.FastFallPressed && fighter.TryGetPlatform(out Collider platform))
+        {
+            fighter.DropThrough(platform);
+        }
     }
 
     public void Exit(FighterController fighter) { }

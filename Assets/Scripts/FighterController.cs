@@ -49,6 +49,14 @@ public class FighterController : MonoBehaviour
     [SerializeField] private List<FlippableHitbox> hitboxes;
     [SerializeField] public List<AttackHitbox> swordHitboxes;
 
+    public struct IgnoredPlatform
+    {
+        public Collider collider;
+        public bool dropping;
+    }
+
+    public readonly List<IgnoredPlatform> ignoredPlatforms = new List<IgnoredPlatform>();
+
     public CharacterController Controller => controller;
     public Fighter Stats => fighter;
     public float HorizontalInput { get; private set; }
@@ -61,21 +69,89 @@ public class FighterController : MonoBehaviour
 
     private int combinedMask;
 
-    public bool IsGrounded => CastDown(combinedMask);
-    public bool IsOnPlatform => CastDown(platformMask.value);
+    public Collider ignoredPlatform;
 
-    public bool CastDown(int mask)
+    public bool IsGrounded => CastDown(combinedMask, out _);
+
+    public bool CastDown(int mask, out RaycastHit hit)
     {
         float castRadius = controller.radius * 0.9f;
-        Vector3 origin = transform.position + controller.center + Vector3.up * 0.1f;
-        return Physics.SphereCast(
-            origin,
-            castRadius,
-            Vector3.down,
-            out RaycastHit hit,
-            controller.height / 2f + groundCheckDistance - 0.1f - castRadius,
-            mask
-        );
+        float startOffset = 0.1f;
+        Vector3 origin = transform.position + controller.center + Vector3.up * startOffset;
+        float distance = controller.height / 2f - castRadius + startOffset + groundCheckDistance;
+
+        foreach (var h in Physics.SphereCastAll(origin, castRadius, Vector3.down, distance, mask))
+        {
+            if (IsIgnored(h.collider)) continue;
+            hit = h;
+            return true;
+        }
+        hit = default;
+        return false;
+    }
+
+    public void IgnorePlatform(Collider platform, bool dropping)
+    {
+        if (IsIgnored(platform)) return;
+        Physics.IgnoreCollision(controller, platform, true);
+        ignoredPlatforms.Add(new IgnoredPlatform { collider = platform, dropping = dropping });
+    }
+
+    public void DropThrough(Collider platform) => IgnorePlatform(platform, true);
+
+    private bool IsIgnored(Collider c)
+    {
+        foreach (var p in ignoredPlatforms)
+            if (p.collider == c) return true;
+        return false;
+    }
+
+    public void ClearIgnoredPlatforms()
+    {
+        foreach (var p in ignoredPlatforms)
+            if (p.collider != null) Physics.IgnoreCollision(controller, p.collider, false);
+        ignoredPlatforms.Clear();
+    }
+
+    public bool TryGetPlatform(out Collider platform)
+    {
+        bool onPlatform = CastDown(platformMask.value, out RaycastHit hit);
+        platform = onPlatform ? hit.collider : null;
+        return onPlatform;
+    }
+
+    void UpdatePlatformPassThrough()
+    {
+        Bounds b = controller.bounds;
+
+        if (velocity.y > 0f)
+        {
+            float lookahead = velocity.y * Time.deltaTime + 0.1f;
+            float bottom = b.center.y;
+            float top = b.max.y + lookahead;
+            Vector3 center = new Vector3(b.center.x, (bottom + top) / 2f, b.center.z);
+            Vector3 halfExtents = new Vector3(b.extents.x, (top - bottom) / 2f, b.extents.z);
+
+            foreach (var col in Physics.OverlapBox(center, halfExtents, Quaternion.identity, platformMask.value))
+                IgnorePlatform(col, false);
+        }
+
+        // Restore collision
+        for (int i = ignoredPlatforms.Count - 1; i >= 0; i--)
+        {
+            var p = ignoredPlatforms[i];
+            if (p.collider == null) { ignoredPlatforms.RemoveAt(i); continue; }
+
+            bool done = p.dropping
+                ? b.max.y < p.collider.bounds.min.y      // head is below the platform's underside
+                : b.min.y >= p.collider.bounds.max.y;    // feet are above the platform's top
+
+            if (done)
+            {
+                Physics.IgnoreCollision(controller, p.collider, false);
+                ignoredPlatforms.RemoveAt(i);
+            }
+        }
     }
 
     void Awake()
@@ -119,8 +195,6 @@ public class FighterController : MonoBehaviour
 
     void Start()
     {
-
-
         currentJumps = fighter.numJumps;
         ChangeState(new GroundedState());
     }
@@ -128,7 +202,8 @@ public class FighterController : MonoBehaviour
     void Update()
     {
         ReadHorizontalState();
-        
+
+        UpdatePlatformPassThrough();
         currentState.Tick(this);
     }
 
