@@ -24,7 +24,6 @@ public class FighterController : MonoBehaviour
     [SerializeField] public GameObject dSmashHitbox;
     [SerializeField] public GameObject grabHitbox;
     [SerializeField] public GameObject pummelHitbox;
-    [SerializeField] public GameObject shield;
 
     [SerializeField] public MovesetData moveSet;
     
@@ -35,6 +34,11 @@ public class FighterController : MonoBehaviour
     [SerializeField] public AnimationClip blockStartAnimation;
     [SerializeField] public AnimationClip blockHoldAnimation;
     [SerializeField] public AnimationClip blockExitAnimation;
+    [SerializeField] public AnimationClip jumpAnimation;
+    [SerializeField] public AnimationClip forwardAirAnimation;
+    [SerializeField] public AnimationClip backAirAnimation;
+    [SerializeField] public AnimationClip upAirAnimation;
+    [SerializeField] public AnimationClip downAirAnimation;
 
     [SerializeField] public AudioSource audioSource;
     [SerializeField] public AudioClip parrySFX;
@@ -157,13 +161,6 @@ public class FighterController : MonoBehaviour
     void Awake()
     {
         controls = new FighterControls();
-        for (int i = 0; i < hitboxes.Count; i++)
-        {
-            var hb = hitboxes[i];
-            hb.baseOffset = hb.transform.localPosition;
-            hitboxes[i] = hb;
-        }
-        UpdateHitboxFacing(facingRight);
 
         var baseController = animator.runtimeAnimatorController;
         animator.runtimeAnimatorController = new AnimatorOverrideController(baseController);
@@ -217,11 +214,6 @@ public class FighterController : MonoBehaviour
 
         if (h > 0f) facingRight = true;
         else if (h < 0f) facingRight = false;
-
-        if (facingRight != previousFacing)
-        {
-            UpdateHitboxFacing(facingRight);
-        }
     }
 
     public void ChangeState(IFighterState newState)
@@ -234,16 +226,6 @@ public class FighterController : MonoBehaviour
     public void DebugColor(Color color)
     {
         meshRenderer.material.color = color;
-    }
-
-    void UpdateHitboxFacing(bool facing)
-    {
-        foreach (var hb in hitboxes)
-        {
-            Vector3 pos = hb.baseOffset;
-            pos.x = facing ? Mathf.Abs(hb.baseOffset.x) : -Mathf.Abs(hb.baseOffset.x);
-            hb.transform.localPosition = pos;
-        }
     }
 
     public void ApplyKnockbackDecay()

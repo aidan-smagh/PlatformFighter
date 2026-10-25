@@ -248,16 +248,50 @@ Made a basic game over condition
 			Will need to update with UI and showing victory screen, then going back to menu
 
 Day 32 (10/24/26):
-Made a platform
+Made a platform with collision so you can land on it and end up in GroundedState
+	You can also drop through the platform which will put you into Airborne state until you hit the ground, in which case you will be put in GroundedState
+Made placeholder UpAir, DownAir, BackAir, and ForwardAir animations and hooked them up in the Airborne state
+	Backair still needs to be fixed due to a bug with fighter.facingRight being updated weirdly in the airborne state
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
+
 Hitboxes and hurtboxes
 GameManager
 	Loss state
 3d models
 Animations
+	Double Jump
+	Fair
+	Nair
+	Bair
+	Dair
+	DSmash
+	UpSmash
+	Ftilt
+	DownTilt
+	UpTilt
+	Grab
+	Pummel
+	UpThrow
+	ForwardThrow
+	BackThrow
+	DownThrow
+	Release (enemy mashed out)
+	GetUpAttack (ledge)
+	GetUpAttack (supine)
+	Roll
+	Roll (supine)
+	Roll (ledge)
+	LedgeHang
+	UpB
+	SideB
+	DownB
+	Crouch
+	Walk
+	Run
+	Block
 Multiplayer
-	Could use Unitys multiplayer support as a baseline and switch to implementing my own rollback netcode is necessary
+	MS Rollback project
 AI opponents
 Jump Effect
 Hit Effects
@@ -277,8 +311,6 @@ Each of the fighter states will have its own associated movesets
 	Airborne - aerials
 	Ledge - get up attack
 	Supine - get up Attack 
-Implement shielding
-	Just need the visual component
 DummyController y velocity hovers around 2 for some reason
 Roll from ledge
 Movement is updated twice in GroundedState.cs
@@ -301,6 +333,8 @@ The thing that reinforces the feeling of a fighter getting hit is the over the t
 	The snappiness of the camera to widen once one fighter is hit further
 		Camera cant feel like its lazily moving
 	Character percent UI needs to fade when fighters would move behind it
+Big code cleanup is due sometime
+	I can feel the files getting messier
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
