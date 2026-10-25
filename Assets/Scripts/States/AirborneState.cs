@@ -45,7 +45,7 @@ public class AirborneState : IFighterState
         Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
         fighter.Controller.Move((fighter.velocity + horizontal + knockback) * Time.deltaTime);
 
-        if (fighter.IsGrounded())
+        if (fighter.IsGrounded)
         {
             fighter.ChangeState(new GroundedState());
         }

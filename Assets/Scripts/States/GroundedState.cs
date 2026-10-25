@@ -118,7 +118,7 @@ public class GroundedState : IFighterState
             fighter.ChangeState(new BlockState());
         }
 
-        if (!fighter.IsGrounded())
+        if (!fighter.IsGrounded)
         {
             fighter.ChangeState(new AirborneState(isFacingRight));
         }

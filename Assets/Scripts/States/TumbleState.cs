@@ -24,9 +24,9 @@ public class TumbleState : IFighterState
 
         if (!hasLeftGround)
         {
-            if (!fighter.IsGrounded()) hasLeftGround = true;
+            if (!fighter.IsGrounded) hasLeftGround = true;
         }
-        else if (fighter.IsGrounded())
+        else if (fighter.IsGrounded)
         {
             fighter.ChangeState(new SupineState());
         }

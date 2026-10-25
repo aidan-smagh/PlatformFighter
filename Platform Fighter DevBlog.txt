@@ -246,6 +246,9 @@ Made a basic game over condition
 		Only two fighters max so the loop efficiency if negligible
 		If stocks == 0 for either fighter, right now it just stops the update loops
 			Will need to update with UI and showing victory screen, then going back to menu
+
+Day 32 (10/24/26):
+Made a platform
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 Hitboxes and hurtboxes
@@ -293,6 +296,11 @@ Impact frames on final stock when a move will kill
 Redo roll logic in the Rollstate
 Update grabbed/grabbing controls to reflect new abstraction
 Character Selection Menu
+The thing that reinforces the feeling of a fighter getting hit is the over the top vfx like in Ultimate, compared to Brawlhalla and Nick All Stars
+	It needs to actually feel like people are being hit
+	The snappiness of the camera to widen once one fighter is hit further
+		Camera cant feel like its lazily moving
+	Character percent UI needs to fade when fighters would move behind it
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

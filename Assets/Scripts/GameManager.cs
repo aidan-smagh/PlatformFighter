@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
 
         // Formats the text into "00:00"
         timerTmpText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        //timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
 

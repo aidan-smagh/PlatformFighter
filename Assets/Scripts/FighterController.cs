@@ -12,7 +12,8 @@ public class FighterController : MonoBehaviour
     public bool isPlayerControlled;
 
     [SerializeField] CharacterController controller;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] public LayerMask groundMask;
+    [SerializeField] public LayerMask platformMask;
     [SerializeField] SkinnedMeshRenderer meshRenderer;
     [SerializeField] Fighter fighter;
     [SerializeField] public Fighter grabbedFighter;
@@ -58,7 +59,12 @@ public class FighterController : MonoBehaviour
 
     private FighterControls controls;
 
-    public bool IsGrounded()
+    private int combinedMask;
+
+    public bool IsGrounded => CastDown(combinedMask);
+    public bool IsOnPlatform => CastDown(platformMask.value);
+
+    public bool CastDown(int mask)
     {
         float castRadius = controller.radius * 0.9f;
         Vector3 origin = transform.position + controller.center + Vector3.up * 0.1f;
@@ -68,7 +74,7 @@ public class FighterController : MonoBehaviour
             Vector3.down,
             out RaycastHit hit,
             controller.height / 2f + groundCheckDistance - 0.1f - castRadius,
-            groundMask
+            mask
         );
     }
 
@@ -94,6 +100,9 @@ public class FighterController : MonoBehaviour
             Input = new PlayerFighterInput(Controls);
         else
             Input = new AIFighterInput();
+        
+        combinedMask = 0;
+        combinedMask = groundMask.value | platformMask.value;
     }
 
     void OnEnable()
@@ -110,6 +119,8 @@ public class FighterController : MonoBehaviour
 
     void Start()
     {
+
+
         currentJumps = fighter.numJumps;
         ChangeState(new GroundedState());
     }
