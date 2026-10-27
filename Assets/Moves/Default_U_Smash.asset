@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3bf9aaa3ee66d45be578df1e51eec4, type: 3}
   m_Name: Default_U_Smash
   m_EditorClassIdentifier: Assembly-CSharp::MoveData
-  moveName: 
+  moveName: Up Smash
   damage: 25
   knockbackScaling: 0.8
   baseKnockback: 80
@@ -23,3 +23,5 @@ MonoBehaviour:
   hitboxSize: {x: 1, y: 1, z: 1}
   hitboxOffset: {x: 0, y: 0, z: 0}
   animationClip: {fileID: 0}
+  velocityX: 0
+  velocityY: 0

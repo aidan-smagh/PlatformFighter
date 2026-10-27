@@ -252,6 +252,11 @@ Made a platform with collision so you can land on it and end up in GroundedState
 	You can also drop through the platform which will put you into Airborne state until you hit the ground, in which case you will be put in GroundedState
 Made placeholder UpAir, DownAir, BackAir, and ForwardAir animations and hooked them up in the Airborne state
 	Backair still needs to be fixed due to a bug with fighter.facingRight being updated weirdly in the airborne state
+
+Day 33 (10/27/26):
+Adjusted the way momentum works in the air
+	Added airSpeed and airAccel values so movement isnt so stiff
+Added an UpB sample, need to abstract it from the code and put it in the move data
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
@@ -283,6 +288,8 @@ Animations
 	Roll (supine)
 	Roll (ledge)
 	LedgeHang
+	LedgeGetUp (no attack)
+	LedgeJump
 	UpB
 	SideB
 	DownB

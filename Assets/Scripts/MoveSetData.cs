@@ -13,6 +13,10 @@ public class MovesetData : ScriptableObject
     public MoveData downTilt;
     public MoveData upTilt;
 
+    public MoveData upSpecial;
+    public MoveData sideSpecial;
+    public MoveData downSpecial;
+
     public MoveData upThrow;
     public MoveData downThrow;
     public MoveData forwardThrow;
@@ -21,6 +25,4 @@ public class MovesetData : ScriptableObject
     public MoveData pummel;
 
     public MoveData dashAttack;
-
-    //implement specials later if wanted
 }

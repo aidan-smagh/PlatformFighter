@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Fighter : MonoBehaviour
 {
-    public float runSpeed = 10f;
+    public float runSpeed = 8f;
     public float jumpHeight = 2.5f;
     public float fallMultiplier = 2.5f;
     public float gravity = -20f;

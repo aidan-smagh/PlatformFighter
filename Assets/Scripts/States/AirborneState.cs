@@ -80,19 +80,20 @@ public class AirborneState : IFighterState
             fighter.velocity.y += fighter.Stats.gravity * Time.deltaTime;
         }
 
+        if (fighter.IsGrounded && fighter.velocity.y <= 0f)
+        {
+            fighter.ChangeState(new GroundedState());
+        }
+
         float target = fighter.HorizontalInput * fighter.Stats.airSpeed;
         fighter.velocity.x = Mathf.MoveTowards(fighter.velocity.x, target, fighter.Stats.airAccel * Time.deltaTime);
         Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
         fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
-
-        if (fighter.IsGrounded)
-        {
-            fighter.ChangeState(new GroundedState());
-        }
     }
 
     public void Exit(FighterController fighter)
     {
         fighter.velocity.x = 0f;
+        fighter.velocity.y = -5f;
     }
 }

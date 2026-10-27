@@ -22,4 +22,8 @@ public class MoveData : ScriptableObject
 
     [Header("Animation")]
     public AnimationClip animationClip;
+
+    [Header("SelfMovement")]
+    public float velocityX;
+    public float velocityY;
 }
