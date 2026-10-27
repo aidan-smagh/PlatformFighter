@@ -8,4 +8,5 @@ public interface IFighterInput
     bool AttackPressed { get; }
     bool GrabPressed { get; }
     bool FastFallPressed { get; }
+    bool SpecialPressed { get; }
 }

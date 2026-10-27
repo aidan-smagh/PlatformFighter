@@ -2484,6 +2484,8 @@ MonoBehaviour:
   knockbackVelocity: {x: 0, y: 0}
   knockbackPowerScaleFactor: 0.18
   tumbleThreshold: 80
+  airAccel: 1
+  airSpeed: 6
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 1192005608}
@@ -2530,7 +2532,7 @@ MonoBehaviour:
   blockExitAnimation: {fileID: 0}
   jumpAnimation: {fileID: 0}
   forwardAirAnimation: {fileID: 0}
-  backwardAirAnimation: {fileID: 0}
+  backAirAnimation: {fileID: 0}
   upAirAnimation: {fileID: 0}
   downAirAnimation: {fileID: 0}
   audioSource: {fileID: 0}
@@ -2811,6 +2813,8 @@ MonoBehaviour:
   knockbackVelocity: {x: 0, y: 0}
   knockbackPowerScaleFactor: 0
   tumbleThreshold: 80
+  airAccel: 75
+  airSpeed: 10
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 1192005608}
@@ -2857,7 +2861,7 @@ MonoBehaviour:
   blockExitAnimation: {fileID: 7232115992008613039, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   jumpAnimation: {fileID: -7843072957423894538, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   forwardAirAnimation: {fileID: -8784006835002089752, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
-  backwardAirAnimation: {fileID: 1952600153744989346, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  backAirAnimation: {fileID: 0}
   upAirAnimation: {fileID: 5915579817921309314, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   downAirAnimation: {fileID: 7133071052553134853, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   audioSource: {fileID: 1930465750}

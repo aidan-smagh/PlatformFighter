@@ -18,6 +18,7 @@ public class GroundedState : IFighterState
     {
         fighter.DebugColor(Color.green);
         currentLocomotion = LocomotionState.None;
+        fighter.Stats.numJumps = 1;
     }
 
     public void Tick(FighterController fighter)

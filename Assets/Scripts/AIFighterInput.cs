@@ -9,11 +9,13 @@ public class AIFighterInput : IFighterInput
     public bool AttackPressed { get; private set; }
     public bool GrabPressed { get; private set; }
     public bool FastFallPressed { get; private set; }
+    public bool SpecialPressed { get; private set; }
 
     public void PressJump() => JumpPressed = true;
     public void PressAttack() => AttackPressed = true;
     public void PressGrab() => GrabPressed = true;
     public void PressFastFall() => FastFallPressed = true;
+    public void PressSpecial() => SpecialPressed = true;
 
     public void ClearPressed()
     {
@@ -21,5 +23,6 @@ public class AIFighterInput : IFighterInput
         AttackPressed = false;
         GrabPressed = false;
         FastFallPressed = false;
+        SpecialPressed = false;
     }
 }

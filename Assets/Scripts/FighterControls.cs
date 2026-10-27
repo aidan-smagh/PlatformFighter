@@ -154,6 +154,15 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Specials"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed6f52f5-256f-4860-9007-7270d40f1ed9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -418,6 +427,17 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24b3e41e-2e25-47b1-bf72-fa826b7c0139"",
+                    ""path"": ""<HID::mayflash limited GameCube Controller Adapter>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Specials"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1012,6 +1032,7 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
         m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
         m_Player_FastFall = m_Player.FindAction("FastFall", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Specials = m_Player.FindAction("Specials", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1112,6 +1133,7 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Grab;
     private readonly InputAction m_Player_FastFall;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Specials;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1151,6 +1173,10 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Specials".
+        /// </summary>
+        public InputAction @Specials => m_Wrapper.m_Player_Specials;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1198,6 +1224,9 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Specials.started += instance.OnSpecials;
+            @Specials.performed += instance.OnSpecials;
+            @Specials.canceled += instance.OnSpecials;
         }
 
         /// <summary>
@@ -1230,6 +1259,9 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Specials.started -= instance.OnSpecials;
+            @Specials.performed -= instance.OnSpecials;
+            @Specials.canceled -= instance.OnSpecials;
         }
 
         /// <summary>
@@ -1579,6 +1611,13 @@ public partial class @FighterControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Specials" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecials(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

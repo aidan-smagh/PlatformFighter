@@ -15,4 +15,5 @@ public class PlayerFighterInput : IFighterInput
     public bool AttackPressed => controls.Player.Attack.WasPressedThisFrame();
     public bool GrabPressed => controls.Player.Grab.WasPressedThisFrame();
     public bool FastFallPressed => controls.Player.FastFall.IsPressed();
+    public bool SpecialPressed => controls.Player.Specials.WasPressedThisFrame();
 }

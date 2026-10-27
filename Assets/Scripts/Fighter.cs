@@ -13,6 +13,8 @@ public class Fighter : MonoBehaviour
     public Vector2 knockbackVelocity;
     public float knockbackPowerScaleFactor = 0f;
     public float tumbleThreshold = 80f;
+    public float airAccel = 800f;
+    public float airSpeed = 100f;
 
     private float damageReduction = 0.1f;
 

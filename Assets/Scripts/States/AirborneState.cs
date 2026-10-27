@@ -27,31 +27,40 @@ public class AirborneState : IFighterState
 
     public void Tick(FighterController fighter)
     {   
+        Debug.Log(fighter.velocity);
         fighter.ApplyKnockbackDecay();
-        Debug.Log(fighter.facingRight);
 
         if (turnedAround) fighter.turnedAround(isFacingRight);
 
         if (fighter.Input.AttackPressed && fighter.facingRight && fighter.Input.Move.x > 0)
         {
+            Debug.Log("forward air");
             overrideController["ForwardAirPlaceholder"] = fighter.forwardAirAnimation;
             fighter.animator.Play("ForwardAir", 0, 0f);
         }
         else if (fighter.Input.AttackPressed && fighter.facingRight && fighter.Input.Move.x < 0)
         {
+            Debug.Log("back air");
             overrideController["BackAirPlaceholder"] = fighter.backAirAnimation;
             fighter.animator.Play("BackAir", 0, 0f);
         }
-
-        if (fighter.Input.AttackPressed && fighter.Input.Move.y < 0)
+        else if (fighter.Input.AttackPressed && fighter.Input.Move.y < 0)
         {
+            Debug.Log("down air");
             overrideController["DownAirPlaceholder"] = fighter.downAirAnimation;
             fighter.animator.Play("DownAir", 0, 0f);
         }
         else if (fighter.Input.AttackPressed && fighter.Input.Move.y > 0)
         {
+            Debug.Log("up air");
             overrideController["UpAirPlaceholder"] = fighter.upAirAnimation;
             fighter.animator.Play("UpAir", 0, 0f);
+        }
+        else if (fighter.Input.SpecialPressed && fighter.Input.Move.y > 0)
+        {
+            Debug.Log("up B");
+            fighter.velocity.y = 15f;
+            fighter.Stats.numJumps = 0;
         }
 
         if (fighter.Input.JumpPressed && fighter.currentJumps > 0)
@@ -71,9 +80,10 @@ public class AirborneState : IFighterState
             fighter.velocity.y += fighter.Stats.gravity * Time.deltaTime;
         }
 
-        Vector3 horizontal = new Vector3(fighter.HorizontalInput, 0, 0) * fighter.Stats.runSpeed;
+        float target = fighter.HorizontalInput * fighter.Stats.airSpeed;
+        fighter.velocity.x = Mathf.MoveTowards(fighter.velocity.x, target, fighter.Stats.airAccel * Time.deltaTime);
         Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
-        fighter.Controller.Move((fighter.velocity + horizontal + knockback) * Time.deltaTime);
+        fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
 
         if (fighter.IsGrounded)
         {
@@ -81,5 +91,8 @@ public class AirborneState : IFighterState
         }
     }
 
-    public void Exit(FighterController fighter) { }
+    public void Exit(FighterController fighter)
+    {
+        fighter.velocity.x = 0f;
+    }
 }

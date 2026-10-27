@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Specials",
+                    "type": "Button",
+                    "id": "ed6f52f5-256f-4860-9007-7270d40f1ed9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -332,6 +341,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24b3e41e-2e25-47b1-bf72-fa826b7c0139",
+                    "path": "<HID::mayflash limited GameCube Controller Adapter>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Specials",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
