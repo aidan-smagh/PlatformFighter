@@ -96,14 +96,13 @@ public class GroundedState : IFighterState
             MoveData forwardSmash = fighter.moveSet.forwardSmash;
             fighter.Stats.ClearHitTargets();
             var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
-            overrideController["AttackPlaceholder"] = forwardSmash.animationClip;
+            overrideController["ForwardSmash"] = forwardSmash.animationClip;
             fighter.animator.Play("Attack", 0, 0f);
 
             foreach (var hitbox in fighter.swordHitboxes)
             {
                 hitbox.Activate(forwardSmash);
             }
-            
             return;
         }
 
@@ -137,16 +136,6 @@ public class GroundedState : IFighterState
         fighter.Controller.Move(new Vector3(fighter.HorizontalInput, 0, 0) * fighter.Stats.runSpeed * Time.deltaTime);
     }
 
-    public void EnableFSmashHitbox(FighterController fighter)
-    {
-        fighter.fSmashHitbox.SetActive(true);
-    }
-
-    public void EnableDSmashHitbox(FighterController fighter)
-    {
-        fighter.dSmashHitbox.SetActive(true);
-    }
-
     public void EnableGrabHitbox(FighterController fighter)
     {
         fighter.grabHitbox.SetActive(true);
@@ -155,8 +144,6 @@ public class GroundedState : IFighterState
     IEnumerator DisableHitboxCoroutine(FighterController fighter)
     {
         yield return new WaitForSeconds(0.5f);
-        fighter.fSmashHitbox.SetActive(false);
-        fighter.dSmashHitbox.SetActive(false);
         fighter.grabHitbox.SetActive(false);
     }
 

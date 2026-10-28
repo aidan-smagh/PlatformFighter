@@ -257,6 +257,8 @@ Day 33 (10/27/26):
 Adjusted the way momentum works in the air
 	Added airSpeed and airAccel values so movement isnt so stiff
 Added an UpB sample, need to abstract it from the code and put it in the move data
+Completely forgot to make an AnimatorOverrideController so the animations werent being set up properly
+	Fixed it for FSmash but will need to make the changes for every other move
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 

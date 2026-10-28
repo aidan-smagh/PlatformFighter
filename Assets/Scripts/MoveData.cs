@@ -15,6 +15,7 @@ public class MoveData : ScriptableObject
     public float startupTime;
     public float activeTime;
     public float endLag;
+    public float hitstunInflicted;
 
     [Header("Hitbox")]
     public Vector3 hitboxSize;

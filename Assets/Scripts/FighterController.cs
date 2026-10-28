@@ -20,11 +20,7 @@ public class FighterController : MonoBehaviour
     [SerializeField] public Fighter grabbedFighter;
     [SerializeField] public Animator animator;
     
-
-    [SerializeField] public GameObject fSmashHitbox;
-    [SerializeField] public GameObject dSmashHitbox;
     [SerializeField] public GameObject grabHitbox;
-    [SerializeField] public GameObject pummelHitbox;
 
     [SerializeField] public MovesetData moveSet;
     
@@ -44,14 +40,6 @@ public class FighterController : MonoBehaviour
     [SerializeField] public AudioSource audioSource;
     [SerializeField] public AudioClip parrySFX;
 
-    [System.Serializable]
-    public struct FlippableHitbox
-    {
-        public Transform transform;
-        [HideInInspector] public Vector3 baseOffset;
-    }
-
-    [SerializeField] private List<FlippableHitbox> hitboxes;
     [SerializeField] public List<AttackHitbox> swordHitboxes;
 
     public struct IgnoredPlatform

@@ -4,7 +4,6 @@ using System.Collections;
 
 public class GrabbingState : IFighterState
 {
-
     Fighter dummy;
 
     public void Enter(FighterController fighter)
@@ -19,8 +18,6 @@ public class GrabbingState : IFighterState
         if (fighter.Controls.Player.Attack.WasPressedThisFrame())
         {
             //pummel
-            EnablePummelHitbox(fighter);
-            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
             return;
         }
 
@@ -37,16 +34,5 @@ public class GrabbingState : IFighterState
     public void Exit(FighterController fighter)
     {
         
-    }
-
-    public void EnablePummelHitbox(FighterController fighter)
-    {
-        fighter.pummelHitbox.SetActive(true);
-    }
-
-    IEnumerator DisableHitboxCoroutine(FighterController fighter)
-    {
-        yield return new WaitForSeconds(0.5f);
-        fighter.pummelHitbox.SetActive(false);
     }
 }

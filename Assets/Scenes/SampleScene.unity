@@ -2518,10 +2518,7 @@ MonoBehaviour:
   fighter: {fileID: 1076516463}
   grabbedFighter: {fileID: 0}
   animator: {fileID: 1076516466}
-  fSmashHitbox: {fileID: 1685017701}
-  dSmashHitbox: {fileID: 171632358}
   grabHitbox: {fileID: 252673774}
-  pummelHitbox: {fileID: 787329643}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
   idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
@@ -2537,15 +2534,6 @@ MonoBehaviour:
   downAirAnimation: {fileID: 0}
   audioSource: {fileID: 0}
   parrySFX: {fileID: 0}
-  hitboxes:
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
   swordHitboxes:
   - {fileID: 756128341}
   - {fileID: 190094704}
@@ -2847,10 +2835,7 @@ MonoBehaviour:
   fighter: {fileID: 1145179985}
   grabbedFighter: {fileID: 0}
   animator: {fileID: 1145179991}
-  fSmashHitbox: {fileID: 1621125767}
-  dSmashHitbox: {fileID: 903042706}
   grabHitbox: {fileID: 1871576715}
-  pummelHitbox: {fileID: 1945207630}
   moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
   idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
@@ -2866,15 +2851,6 @@ MonoBehaviour:
   downAirAnimation: {fileID: 7133071052553134853, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   audioSource: {fileID: 1930465750}
   parrySFX: {fileID: 8300000, guid: af1f0a08dd8168b4a80fcca6ddd034fe, type: 3}
-  hitboxes:
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
-  - transform: {fileID: 0}
-    baseOffset: {x: 0, y: 0, z: 0}
   swordHitboxes:
   - {fileID: 2019606097}
   - {fileID: 802041868}
@@ -2942,7 +2918,7 @@ Animator:
   m_GameObject: {fileID: 919132148018917919}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
-  m_Controller: {fileID: 9100000, guid: e43b5a2cd2e9cfb45b69dcc91c2fd011, type: 2}
+  m_Controller: {fileID: 22100000, guid: 7180e7754dc710542b3e297b58436a64, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
