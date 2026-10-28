@@ -1,11 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class OnLedgeState : IFighterState
 {
     private readonly Transform ledgePoint;
-
     private readonly Transform getUpPosition;
+
+    private int currentLockInputFrames;
+    private int maxLockInputFrames = 600;
+
+    bool onRightSide;
 
     public OnLedgeState(Transform ledgePoint, Transform getUpPosition)
     {
@@ -14,6 +19,7 @@ public class OnLedgeState : IFighterState
     }
     public void Enter(FighterController fighter)
     {
+        currentLockInputFrames = 0;
         fighter.velocity = Vector3.zero;
         fighter.DebugColor(Color.orange);
         Vector3 pos = ledgePoint.position;
@@ -23,7 +29,11 @@ public class OnLedgeState : IFighterState
 
     public void Tick(FighterController fighter)
     {
-        bool onRightSide = fighter.transform.position.x > 0;
+        if (currentLockInputFrames <= maxLockInputFrames)
+        {
+            currentLockInputFrames++;
+            return;
+        }
         
         if (fighter.Input.JumpPressed)
         {
@@ -63,5 +73,4 @@ public class OnLedgeState : IFighterState
     }
 
     public void Exit(FighterController fighter) { }
-
 }

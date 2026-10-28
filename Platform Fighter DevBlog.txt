@@ -342,6 +342,7 @@ The thing that reinforces the feeling of a fighter getting hit is the over the t
 	Character percent UI needs to fade when fighters would move behind it
 Big code cleanup is due sometime
 	I can feel the files getting messier
+Need to combine all the facingRight logic into one system
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

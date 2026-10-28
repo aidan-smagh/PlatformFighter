@@ -30,7 +30,7 @@ public class AirborneState : IFighterState
         Debug.Log(fighter.velocity);
         fighter.ApplyKnockbackDecay();
 
-        if (turnedAround) fighter.turnedAround(isFacingRight);
+        if (turnedAround) fighter.TurnedAround(isFacingRight);
 
         if (fighter.Input.AttackPressed && fighter.facingRight && fighter.Input.Move.x > 0)
         {

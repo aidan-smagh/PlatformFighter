@@ -67,7 +67,7 @@ public class GroundedState : IFighterState
                     fighter.animator.Play("Run", 0, 0f);
                     break;
                 case LocomotionState.TurnAround:
-                    fighter.turnedAround(isFacingRight);
+                    fighter.TurnedAround(isFacingRight);
                     break;
             }
         }

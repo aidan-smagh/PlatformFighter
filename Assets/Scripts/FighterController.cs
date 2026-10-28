@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Collections;
 
 public class FighterController : MonoBehaviour
 {
@@ -237,7 +238,7 @@ public class FighterController : MonoBehaviour
         );
     }
 
-    public void turnedAround(bool isFacingRight)
+    public void TurnedAround(bool isFacingRight)
     {
         float yAngle = isFacingRight ? 90f : -90f;
         fighter.transform.rotation = Quaternion.Euler(0f, yAngle, 0f);
