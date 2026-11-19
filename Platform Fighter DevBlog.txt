@@ -259,6 +259,10 @@ Adjusted the way momentum works in the air
 Added an UpB sample, need to abstract it from the code and put it in the move data
 Completely forgot to make an AnimatorOverrideController so the animations werent being set up properly
 	Fixed it for FSmash but will need to make the changes for every other move
+
+Day 34 (11/18/26):
+Made a new art design for the stage and implemented it
+Added a placeholder skybox
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
@@ -345,6 +349,9 @@ The thing that reinforces the feeling of a fighter getting hit is the over the t
 Big code cleanup is due sometime
 	I can feel the files getting messier
 Need to combine all the facingRight logic into one system
+Replace AssetStore assets with my own art:
+	Skybox
+	Ground and stoneruins textures
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:
