@@ -14,6 +14,11 @@ public class MovesetData : ScriptableObject
     public MoveData downTilt;
     public MoveData upTilt;
 
+    public MoveData forwardAir;
+    public MoveData backAir;
+    public MoveData upAir;
+    public MoveData downAir;
+
     public MoveData upSpecial;
     public MoveData sideSpecial;
     public MoveData downSpecial;
@@ -35,4 +40,16 @@ public class MovesetData : ScriptableObject
     public float airAccel;
     public float airSpeed;
     public float jumpHeight;
+
+    [Header("Inherent Animations")]
+    public AnimationClip idleAnimation;
+    public AnimationClip walkAnimation;
+    public AnimationClip runAnimation;
+    public AnimationClip jumpAnimation;
+    public AnimationClip turnAroundAnimation;
+
+    [Header("Block Animations")]
+    public AnimationClip blockStartAnimation;
+    public AnimationClip blockHoldAnimation;
+    public AnimationClip blockExitAnimation;
 }

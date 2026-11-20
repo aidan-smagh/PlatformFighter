@@ -19,6 +19,10 @@ MonoBehaviour:
   forwardTilt: {fileID: 0}
   downTilt: {fileID: 0}
   upTilt: {fileID: 0}
+  forwardAir: {fileID: 0}
+  backAir: {fileID: 0}
+  upAir: {fileID: 0}
+  downAir: {fileID: 0}
   upSpecial: {fileID: 0}
   sideSpecial: {fileID: 0}
   downSpecial: {fileID: 0}
@@ -33,4 +37,13 @@ MonoBehaviour:
   fallMultiplier: 2.5
   numJumps: 1
   airAccel: 800
-  airSpeed: 100
+  airSpeed: 8
+  jumpHeight: 2.5
+  idleAnimation: {fileID: 0}
+  walkAnimation: {fileID: 0}
+  runAnimation: {fileID: 0}
+  jumpAnimation: {fileID: 0}
+  turnAroundAnimation: {fileID: 0}
+  blockStartAnimation: {fileID: 0}
+  blockHoldAnimation: {fileID: 0}
+  blockExitAnimation: {fileID: 0}

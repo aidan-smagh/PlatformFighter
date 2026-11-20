@@ -1618,7 +1618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1076516463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1631,21 +1631,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8f27e58dd7639439674ce99ef163fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fighter
-  runSpeed: 10
   jumpHeight: 2.5
   fallMultiplier: 2.5
   gravity: -20
   numJumps: 1
-  weight: 100
   decayRate: 0.15
   knockbackVelocity: {x: 0, y: 0}
-  knockbackPowerScaleFactor: 0.18
-  tumbleThreshold: 80
   airAccel: 1
   airSpeed: 6
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 1192005608}
+  moveSet: {fileID: 0}
 --- !u!114 &1076516464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,7 +1669,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   meshRenderer: {fileID: 659737706}
-  fighter: {fileID: 1076516463}
   grabbedFighter: {fileID: 0}
   animator: {fileID: 1076516466}
   grabHitbox: {fileID: 252673774}
@@ -1695,6 +1691,7 @@ MonoBehaviour:
   - {fileID: 756128341}
   - {fileID: 190094704}
   - {fileID: 1181094928}
+  fighter: {fileID: 1076516463}
   ignoredPlatform: {fileID: 0}
 --- !u!54 &1076516465
 Rigidbody:

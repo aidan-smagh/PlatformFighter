@@ -24,6 +24,7 @@ public class GroundedState : IFighterState
     public void Tick(FighterController fc)
     {
         fc.ApplyKnockbackDecay();
+        HandleMove(fc);
 
         float horizontalInput = Mathf.Abs(fc.HorizontalInput);
 
@@ -55,15 +56,15 @@ public class GroundedState : IFighterState
             switch (currentLocomotion)
             {
                 case LocomotionState.Idle:
-                    overrideController["IdlePlaceholder"] = fc.idleAnimation;
+                    overrideController["IdlePlaceholder"] = fc.fighter.moveSet.idleAnimation;
                     fc.animator.Play("Idle", 0, 0f);
                     break;
                 case LocomotionState.Walking:
-                    overrideController["WalkPlaceholder"] = fc.walkAnimation;
+                    overrideController["WalkPlaceholder"] = fc.fighter.moveSet.walkAnimation;
                     fc.animator.Play("Walk", 0, 0f);
                     break;
                 case LocomotionState.Running:
-                    overrideController["RunPlaceholder"] = fc.runAnimation;
+                    overrideController["RunPlaceholder"] = fc.fighter.moveSet.runAnimation;
                     fc.animator.Play("Run", 0, 0f);
                     break;
                 case LocomotionState.TurnAround:
@@ -72,15 +73,10 @@ public class GroundedState : IFighterState
             }
         }
 
-        HandleMove(fc);
-
         if (fc.velocity.y < 0)
         {
             fc.currentJumps = fc.fighter.moveSet.numJumps;
         }
-
-        Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
-        fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
 
         Vector2 dir = fc.Input.Move;
 
@@ -131,9 +127,12 @@ public class GroundedState : IFighterState
 
     public void Exit(FighterController fc) { }
 
-    void HandleMove(FighterController fc)
+    private void HandleMove(FighterController fc)
     {   
-        fc.Controller.Move(new Vector3(fc.HorizontalInput, 0, 0) * fc.fighter.moveSet.runSpeed * Time.deltaTime);
+        Vector3 inputMovement = new Vector3(fc.HorizontalInput, 0, 0) * fc.fighter.moveSet.runSpeed;
+        Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
+        Vector3 motion = inputMovement + fc.velocity + knockback;
+        fc.Controller.Move(motion * Time.deltaTime);
     }
 
     public void EnableGrabHitbox(FighterController fc)
@@ -146,6 +145,4 @@ public class GroundedState : IFighterState
         yield return new WaitForSeconds(0.5f);
         fc.grabHitbox.SetActive(false);
     }
-
-
 }

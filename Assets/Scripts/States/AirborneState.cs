@@ -21,7 +21,7 @@ public class AirborneState : IFighterState
         isFacingRight = fc.facingRight;
 
         overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
-        overrideController["JumpPlaceholder"] = fc.jumpAnimation;
+        overrideController["JumpPlaceholder"] = fc.fighter.moveSet.jumpAnimation;
         fc.animator.Play("Jump", 0, 0f);
     }
 
@@ -33,22 +33,26 @@ public class AirborneState : IFighterState
 
         if (fc.Input.AttackPressed && fc.facingRight && fc.Input.Move.x > 0)
         {
-            overrideController["ForwardAirPlaceholder"] = fc.forwardAirAnimation;
+            MoveData forwardAir = fc.fighter.moveSet.forwardAir;
+            overrideController["ForwardAirPlaceholder"] = forwardAir.animationClip;
             fc.animator.Play("ForwardAir", 0, 0f);
         }
         else if (fc.Input.AttackPressed && fc.facingRight && fc.Input.Move.x < 0)
         {
-            overrideController["BackAirPlaceholder"] = fc.backAirAnimation;
+            MoveData backAir = fc.fighter.moveSet.backAir;
+            overrideController["BackAirPlaceholder"] = backAir.animationClip;
             fc.animator.Play("BackAir", 0, 0f);
         }
         else if (fc.Input.AttackPressed && fc.Input.Move.y < 0)
         {
-            overrideController["DownAirPlaceholder"] = fc.downAirAnimation;
+            MoveData downAir = fc.fighter.moveSet.downAir;
+            overrideController["DownAirPlaceholder"] = downAir.animationClip;
             fc.animator.Play("DownAir", 0, 0f);
         }
         else if (fc.Input.AttackPressed && fc.Input.Move.y > 0)
         {
-            overrideController["UpAirPlaceholder"] = fc.upAirAnimation;
+            MoveData upAir = fc.fighter.moveSet.upAir;
+            overrideController["UpAirPlaceholder"] = upAir.animationClip;
             fc.animator.Play("UpAir", 0, 0f);
         }
         else if (fc.Input.SpecialPressed && fc.Input.Move.y > 0)
@@ -61,6 +65,7 @@ public class AirborneState : IFighterState
         {
             fc.velocity.y = Mathf.Sqrt(fc.fighter.moveSet.jumpHeight * -2f * fc.fighter.gravity);
             fc.currentJumps -= 1;
+            overrideController["JumpPlaceholder"] = fc.fighter.moveSet.jumpAnimation;
             fc.animator.Play("Jump", 0, 0f);
         }
         
@@ -79,15 +84,20 @@ public class AirborneState : IFighterState
             fc.ChangeState(new GroundedState());
         }
 
-        float target = fc.HorizontalInput * fc.fighter.moveSet.airSpeed;
-        fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, target, fc.fighter.moveSet.airAccel * Time.deltaTime);
-        Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
-        fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
+        HandleMove(fc);
     }
 
     public void Exit(FighterController fc)
     {
         fc.velocity.x = 0f;
         fc.velocity.y = -5f;
+    }
+
+    private void HandleMove(FighterController fc)
+    {
+        float target = fc.HorizontalInput * fc.fighter.moveSet.airSpeed;
+        fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, target, fc.fighter.moveSet.airAccel * Time.deltaTime);
+        Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
+        fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
     }
 }

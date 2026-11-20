@@ -13,29 +13,13 @@ public class FighterController : MonoBehaviour
     public bool isPlayerControlled;
 
     [SerializeField] CharacterController controller;
-    [SerializeField] public LayerMask groundMask;
-    [SerializeField] public LayerMask platformMask;
-    [SerializeField] SkinnedMeshRenderer meshRenderer;
-    //[SerializeField] Fighter fighter;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask platformMask;
+    [SerializeField] private SkinnedMeshRenderer meshRenderer;
     [SerializeField] public Fighter grabbedFighter;
     [SerializeField] public Animator animator;
     
     [SerializeField] public GameObject grabHitbox;
-
-    [SerializeField] public MovesetData moveSet;
-    
-    [SerializeField] public AnimationClip idleAnimation;
-    [SerializeField] public AnimationClip walkAnimation;
-    [SerializeField] public AnimationClip runAnimation;
-    [SerializeField] public AnimationClip turnAroundAnimation;
-    [SerializeField] public AnimationClip blockStartAnimation;
-    [SerializeField] public AnimationClip blockHoldAnimation;
-    [SerializeField] public AnimationClip blockExitAnimation;
-    [SerializeField] public AnimationClip jumpAnimation;
-    [SerializeField] public AnimationClip forwardAirAnimation;
-    [SerializeField] public AnimationClip backAirAnimation;
-    [SerializeField] public AnimationClip upAirAnimation;
-    [SerializeField] public AnimationClip downAirAnimation;
 
     [SerializeField] public AudioSource audioSource;
     [SerializeField] public AudioClip parrySFX;
@@ -51,7 +35,6 @@ public class FighterController : MonoBehaviour
     public readonly List<IgnoredPlatform> ignoredPlatforms = new List<IgnoredPlatform>();
 
     public CharacterController Controller => controller;
-    //public Fighter Stats => fighter;
     public Fighter fighter;
     public float HorizontalInput { get; private set; }
 
@@ -66,6 +49,41 @@ public class FighterController : MonoBehaviour
     public Collider ignoredPlatform;
 
     public bool IsGrounded => CastDown(combinedMask, out _);
+
+    void Awake()
+    {
+        controls = new FighterControls();
+
+        var baseController = animator.runtimeAnimatorController;
+        animator.runtimeAnimatorController = new AnimatorOverrideController(baseController);
+
+        var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+        overrideController["IdlePlaceholder"] = fighter.moveSet.idleAnimation;
+        animator.Play("Idle", 0, 0f);
+
+        if (isPlayerControlled)
+            Input = new PlayerFighterInput(Controls);
+        else
+            Input = new AIFighterInput();
+        
+        combinedMask = 0;
+        combinedMask = groundMask.value | platformMask.value;
+    }
+
+    void Start()
+    {
+        currentJumps = fighter.moveSet.numJumps;
+        ChangeState(new GroundedState());
+        fighter = GetComponent<Fighter>();
+    }
+
+    void Update()
+    {
+        ReadHorizontalState();
+
+        UpdatePlatformPassThrough();
+        currentState.Tick(this);
+    }
 
     public bool CastDown(int mask, out RaycastHit hit)
     {
@@ -148,26 +166,6 @@ public class FighterController : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        controls = new FighterControls();
-
-        var baseController = animator.runtimeAnimatorController;
-        animator.runtimeAnimatorController = new AnimatorOverrideController(baseController);
-
-        var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
-        overrideController["IdlePlaceholder"] = idleAnimation;
-        animator.Play("Idle", 0, 0f);
-
-        if (isPlayerControlled)
-            Input = new PlayerFighterInput(Controls);
-        else
-            Input = new AIFighterInput();
-        
-        combinedMask = 0;
-        combinedMask = groundMask.value | platformMask.value;
-    }
-
     void OnEnable()
     {
         controls.Player.Enable();
@@ -179,21 +177,6 @@ public class FighterController : MonoBehaviour
     }
 
     public FighterControls Controls => controls;
-
-    void Start()
-    {
-        currentJumps = fighter.numJumps;
-        ChangeState(new GroundedState());
-        fighter = GetComponent<Fighter>();
-    }
-
-    void Update()
-    {
-        ReadHorizontalState();
-
-        UpdatePlatformPassThrough();
-        currentState.Tick(this);
-    }
 
     void ReadHorizontalState()
     {
