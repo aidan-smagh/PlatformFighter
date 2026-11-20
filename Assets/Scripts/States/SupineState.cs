@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class SupineState : IFighterState
 {
-    public void Enter(FighterController fighter)
+    public void Enter(FighterController fc)
     {
-        fighter.DebugColor(Color.yellow);
+        fc.DebugColor(Color.yellow);
 
-        fighter.transform.rotation = Quaternion.Euler(0, 0, 90f);
+        fc.transform.rotation = Quaternion.Euler(0, 0, 90f);
 
-        Vector3 pos = fighter.transform.position;
+        Vector3 pos = fc.transform.position;
         pos.y = 26.2f;
-        fighter.transform.position = pos;
+        fc.transform.position = pos;
     }
 
-    public void Tick(FighterController fighter)
+    public void Tick(FighterController fc)
     {
         
     }
 
-    public void Exit(FighterController fighter)
+    public void Exit(FighterController fc)
     {
         
     }

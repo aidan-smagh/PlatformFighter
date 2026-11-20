@@ -2010,16 +2010,14 @@ MonoBehaviour:
   fallMultiplier: 2.5
   gravity: -20
   numJumps: 1
-  weight: 100
   decayRate: 0.15
   knockbackVelocity: {x: 0, y: 0}
-  knockbackPowerScaleFactor: 0
-  tumbleThreshold: 80
   airAccel: 75
   airSpeed: 10
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 0}
+  moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
 --- !u!1 &8690519472090816723
 GameObject:
   m_ObjectHideFlags: 0

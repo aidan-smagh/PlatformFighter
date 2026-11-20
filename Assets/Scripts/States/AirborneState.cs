@@ -14,86 +14,80 @@ public class AirborneState : IFighterState
         this.isFacingRight = isFacingRight;
     } 
 
-    public void Enter(FighterController fighter)
+    public void Enter(FighterController fc)
     {
-        fighter.DebugColor(Color.blue);
-        turnedAround = fighter.facingRight != isFacingRight;
-        isFacingRight = fighter.facingRight;
+        fc.DebugColor(Color.blue);
+        turnedAround = fc.facingRight != isFacingRight;
+        isFacingRight = fc.facingRight;
 
-        overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
-        overrideController["JumpPlaceholder"] = fighter.jumpAnimation;
-        fighter.animator.Play("Jump", 0, 0f);
+        overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
+        overrideController["JumpPlaceholder"] = fc.jumpAnimation;
+        fc.animator.Play("Jump", 0, 0f);
     }
 
-    public void Tick(FighterController fighter)
+    public void Tick(FighterController fc)
     {   
-        Debug.Log(fighter.velocity);
-        fighter.ApplyKnockbackDecay();
+        fc.ApplyKnockbackDecay();
 
-        if (turnedAround) fighter.TurnedAround(isFacingRight);
+        if (turnedAround) fc.TurnedAround(isFacingRight);
 
-        if (fighter.Input.AttackPressed && fighter.facingRight && fighter.Input.Move.x > 0)
+        if (fc.Input.AttackPressed && fc.facingRight && fc.Input.Move.x > 0)
         {
-            Debug.Log("forward air");
-            overrideController["ForwardAirPlaceholder"] = fighter.forwardAirAnimation;
-            fighter.animator.Play("ForwardAir", 0, 0f);
+            overrideController["ForwardAirPlaceholder"] = fc.forwardAirAnimation;
+            fc.animator.Play("ForwardAir", 0, 0f);
         }
-        else if (fighter.Input.AttackPressed && fighter.facingRight && fighter.Input.Move.x < 0)
+        else if (fc.Input.AttackPressed && fc.facingRight && fc.Input.Move.x < 0)
         {
-            Debug.Log("back air");
-            overrideController["BackAirPlaceholder"] = fighter.backAirAnimation;
-            fighter.animator.Play("BackAir", 0, 0f);
+            overrideController["BackAirPlaceholder"] = fc.backAirAnimation;
+            fc.animator.Play("BackAir", 0, 0f);
         }
-        else if (fighter.Input.AttackPressed && fighter.Input.Move.y < 0)
+        else if (fc.Input.AttackPressed && fc.Input.Move.y < 0)
         {
-            Debug.Log("down air");
-            overrideController["DownAirPlaceholder"] = fighter.downAirAnimation;
-            fighter.animator.Play("DownAir", 0, 0f);
+            overrideController["DownAirPlaceholder"] = fc.downAirAnimation;
+            fc.animator.Play("DownAir", 0, 0f);
         }
-        else if (fighter.Input.AttackPressed && fighter.Input.Move.y > 0)
+        else if (fc.Input.AttackPressed && fc.Input.Move.y > 0)
         {
-            Debug.Log("up air");
-            overrideController["UpAirPlaceholder"] = fighter.upAirAnimation;
-            fighter.animator.Play("UpAir", 0, 0f);
+            overrideController["UpAirPlaceholder"] = fc.upAirAnimation;
+            fc.animator.Play("UpAir", 0, 0f);
         }
-        else if (fighter.Input.SpecialPressed && fighter.Input.Move.y > 0)
+        else if (fc.Input.SpecialPressed && fc.Input.Move.y > 0)
         {
-            Debug.Log("up B");
-            fighter.velocity.y = 15f;
-            fighter.Stats.numJumps = 0;
+            fc.velocity.y = 15f;
+            fc.fighter.moveSet.numJumps = 0;
         }
 
-        if (fighter.Input.JumpPressed && fighter.currentJumps > 0)
+        if (fc.Input.JumpPressed && fc.currentJumps > 0)
         {
-            fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
-            fighter.currentJumps -= 1;
-            fighter.animator.Play("Jump", 0, 0f);
+            fc.velocity.y = Mathf.Sqrt(fc.fighter.moveSet.jumpHeight * -2f * fc.fighter.gravity);
+            fc.currentJumps -= 1;
+            fc.animator.Play("Jump", 0, 0f);
         }
         
-        if (fighter.Input.FastFallPressed)
+        if (fc.Input.FastFallPressed)
         {  
-            float currentGravity = fighter.velocity.y < 0 ? fighter.Stats.gravity * fighter.Stats.fallMultiplier : fighter.Stats.gravity;
-            fighter.velocity.y += currentGravity * Time.deltaTime;
+            float currentGravity = fc.velocity.y < 0 ? fc.fighter.gravity * fc.fighter.moveSet.fallMultiplier : fc.fighter.gravity;
+            fc.velocity.y += currentGravity * Time.deltaTime;
         } 
         else
         {
-            fighter.velocity.y += fighter.Stats.gravity * Time.deltaTime;
+            fc.velocity.y += fc.fighter.gravity * Time.deltaTime;
         }
 
-        if (fighter.IsGrounded && fighter.velocity.y <= 0f)
+        if (fc.IsGrounded && fc.velocity.y <= 0f)
         {
-            fighter.ChangeState(new GroundedState());
+            fc.ChangeState(new GroundedState());
         }
 
-        float target = fighter.HorizontalInput * fighter.Stats.airSpeed;
-        fighter.velocity.x = Mathf.MoveTowards(fighter.velocity.x, target, fighter.Stats.airAccel * Time.deltaTime);
-        Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
-        fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
+        float target = fc.HorizontalInput * fc.fighter.moveSet.airSpeed;
+        fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, target, fc.fighter.moveSet.airAccel * Time.deltaTime);
+        Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
+        fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
     }
 
-    public void Exit(FighterController fighter)
+    public void Exit(FighterController fc)
     {
-        fighter.velocity.x = 0f;
-        fighter.velocity.y = -5f;
+        fc.velocity.x = 0f;
+        fc.velocity.y = -5f;
     }
 }

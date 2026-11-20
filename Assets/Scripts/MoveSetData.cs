@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewMoveset", menuName = "Fighter/Moveset")]
 public class MovesetData : ScriptableObject
 {
+    [Header("Moves")]
     public MoveData jab;
 
     public MoveData forwardSmash;
@@ -25,4 +26,13 @@ public class MovesetData : ScriptableObject
     public MoveData pummel;
 
     public MoveData dashAttack;
+
+    [Header("Stats")]
+    public float weight;
+    public float runSpeed;
+    public float fallMultiplier;
+    public float numJumps;
+    public float airAccel;
+    public float airSpeed;
+    public float jumpHeight;
 }

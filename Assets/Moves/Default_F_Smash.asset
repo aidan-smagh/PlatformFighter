@@ -23,6 +23,6 @@ MonoBehaviour:
   hitstunInflicted: 0
   hitboxSize: {x: 1, y: 1, z: 1}
   hitboxOffset: {x: 0, y: 0, z: 0}
-  animationClip: {fileID: 5915579817921309314, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
+  animationClip: {fileID: -5795666277629343369, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   velocityX: 0
   velocityY: 0

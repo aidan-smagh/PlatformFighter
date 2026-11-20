@@ -15,18 +15,18 @@ public class BlockState : IFighterState
     private BlockPhase phase;
     private int phaseFrame;
 
-    public void Enter(FighterController fighter)
+    public void Enter(FighterController fc)
     {
-        fighter.DebugColor(Color.teal);
-        var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
-        overrideController["BlockStartPlaceholder"] = fighter.blockStartAnimation;
-        overrideController["BlockHoldPlaceholder"] = fighter.blockHoldAnimation;
-        overrideController["BlockExitPlaceholder"] = fighter.blockExitAnimation;
+        fc.DebugColor(Color.teal);
+        var overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
+        overrideController["BlockStartPlaceholder"] = fc.blockStartAnimation;
+        overrideController["BlockHoldPlaceholder"] = fc.blockHoldAnimation;
+        overrideController["BlockExitPlaceholder"] = fc.blockExitAnimation;
 
-        SetPhase(fighter, BlockPhase.Startup, "BlockStart");
+        SetPhase(fc, BlockPhase.Startup, "BlockStart");
     }
 
-    public void Tick(FighterController fighter)
+    public void Tick(FighterController fc)
     {
         phaseFrame++;
 
@@ -35,34 +35,34 @@ public class BlockState : IFighterState
             case BlockPhase.Startup:
                 if (phaseFrame >= StartupFrames)
                 {
-                    if (fighter.Controls.Player.Block.IsPressed())
-                        SetPhase(fighter, BlockPhase.Hold, "BlockHold");
+                    if (fc.Controls.Player.Block.IsPressed())
+                        SetPhase(fc, BlockPhase.Hold, "BlockHold");
                     else
-                        SetPhase(fighter, BlockPhase.Exit, "BlockExit");
+                        SetPhase(fc, BlockPhase.Exit, "BlockExit");
                 }
                 break;
             
             case BlockPhase.Hold:
                 currentBlockFrame++;
-                if (!fighter.Controls.Player.Block.IsPressed())
-                    SetPhase(fighter, BlockPhase.Exit, "BlockExit");
+                if (!fc.Controls.Player.Block.IsPressed())
+                    SetPhase(fc, BlockPhase.Exit, "BlockExit");
                 break;
 
             case BlockPhase.Exit:
                 if (phaseFrame >= ExitFrames)
-                    fighter.ChangeState(new GroundedState());
+                    fc.ChangeState(new GroundedState());
                 break;
         }        
     }
 
-    public void Exit(FighterController fighter)
+    public void Exit(FighterController fc)
     {
     }
 
-    private void SetPhase(FighterController fighter, BlockPhase newPhase, string animState)
+    private void SetPhase(FighterController fc, BlockPhase newPhase, string animState)
     {
         phase = newPhase;
         phaseFrame = 0;
-        fighter.animator.Play(animState, 0, 0f);
+        fc.animator.Play(animState, 0, 0f);
     }
 }

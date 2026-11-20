@@ -37,7 +37,7 @@ public class OnLedgeState : IFighterState
         
         if (fighter.Input.JumpPressed)
         {
-            fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
+            fighter.velocity.y = Mathf.Sqrt(fighter.fighter.moveSet.jumpHeight * -2f * fighter.fighter.gravity);
             fighter.ChangeState(new AirborneState(fighter.facingRight));
             return;
         }

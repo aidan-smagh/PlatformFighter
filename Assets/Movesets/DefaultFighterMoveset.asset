@@ -19,9 +19,18 @@ MonoBehaviour:
   forwardTilt: {fileID: 0}
   downTilt: {fileID: 0}
   upTilt: {fileID: 0}
+  upSpecial: {fileID: 0}
+  sideSpecial: {fileID: 0}
+  downSpecial: {fileID: 0}
   upThrow: {fileID: 0}
   downThrow: {fileID: 0}
   forwardThrow: {fileID: 0}
   backThrow: {fileID: 0}
   pummel: {fileID: 0}
   dashAttack: {fileID: 0}
+  weight: 100
+  runSpeed: 8
+  fallMultiplier: 2.5
+  numJumps: 1
+  airAccel: 800
+  airSpeed: 100

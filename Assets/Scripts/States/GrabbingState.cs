@@ -6,16 +6,15 @@ public class GrabbingState : IFighterState
 {
     Fighter dummy;
 
-    public void Enter(FighterController fighter)
+    public void Enter(FighterController fc)
     {
-        fighter.DebugColor(Color.purple);
-        dummy = fighter.grabbedFighter;
+        fc.DebugColor(Color.purple);
+        dummy = fc.grabbedFighter;
     }
 
-    public void Tick(FighterController fighter)
+    public void Tick(FighterController fc)
     {
-        //if (Keyboard.current.eKey.wasPressedThisFrame)
-        if (fighter.Controls.Player.Attack.WasPressedThisFrame())
+        if (fc.Controls.Player.Attack.WasPressedThisFrame())
         {
             //pummel
             return;
@@ -25,13 +24,13 @@ public class GrabbingState : IFighterState
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             //up throw
-            dummy.CalculateMoveHit(dummy, fighter.moveSet.upThrow, false);
-            fighter.ChangeState(new GroundedState());
+            dummy.CalculateMoveHit(dummy, fc.fighter.moveSet.upThrow, false);
+            fc.ChangeState(new GroundedState());
             return;
         }
     }
 
-    public void Exit(FighterController fighter)
+    public void Exit(FighterController fc)
     {
         
     }

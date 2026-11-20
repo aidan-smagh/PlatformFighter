@@ -15,17 +15,16 @@ public class GrabbedState : IFighterState
         this.grabberPos = grabberPos;
     }
 
-    public void Enter(FighterController fighter)
+    public void Enter(FighterController fc)
     {
-        Debug.Log(grabberPos);
-        fighter.DebugColor(Color.pink);
+        fc.DebugColor(Color.pink);
         Vector3 pos = grabberPos;
         pos.x = grabberPos.x += grabOffset;
-        fighter.transform.position = pos;
-        inputsNeeded = Mathf.Max((int)fighter.GetComponent<Fighter>().currentPercent, 5);
+        fc.transform.position = pos;
+        inputsNeeded = Mathf.Max((int)fc.GetComponent<Fighter>().currentPercent, 5);
     }
 
-    public void Tick(FighterController fighter)
+    public void Tick(FighterController fc)
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -34,11 +33,11 @@ public class GrabbedState : IFighterState
 
         if (currentInputs >= inputsNeeded)
         {
-            fighter.ChangeState(new GroundedState());
+            fc.ChangeState(new GroundedState());
         }
     }
 
-    public void Exit(FighterController fighter)
+    public void Exit(FighterController fc)
     {
         
     }

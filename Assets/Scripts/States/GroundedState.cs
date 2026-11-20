@@ -14,21 +14,21 @@ public class GroundedState : IFighterState
 
     LocomotionState targetLocomotion;
 
-    public void Enter(FighterController fighter)
+    public void Enter(FighterController fc)
     {
-        fighter.DebugColor(Color.green);
+        fc.DebugColor(Color.green);
         currentLocomotion = LocomotionState.None;
-        fighter.Stats.numJumps = 1;
+        fc.fighter.moveSet.numJumps = 1;
     }
 
-    public void Tick(FighterController fighter)
+    public void Tick(FighterController fc)
     {
-        fighter.ApplyKnockbackDecay();
+        fc.ApplyKnockbackDecay();
 
-        float horizontalInput = Mathf.Abs(fighter.HorizontalInput);
+        float horizontalInput = Mathf.Abs(fc.HorizontalInput);
 
-        bool turnedAround = fighter.facingRight != isFacingRight;
-        isFacingRight = fighter.facingRight;
+        bool turnedAround = fc.facingRight != isFacingRight;
+        isFacingRight = fc.facingRight;
 
         if (turnedAround)
         {
@@ -50,101 +50,101 @@ public class GroundedState : IFighterState
         if (targetLocomotion != currentLocomotion)
         {
             currentLocomotion = targetLocomotion;
-            var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
+            var overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
 
             switch (currentLocomotion)
             {
                 case LocomotionState.Idle:
-                    overrideController["IdlePlaceholder"] = fighter.idleAnimation;
-                    fighter.animator.Play("Idle", 0, 0f);
+                    overrideController["IdlePlaceholder"] = fc.idleAnimation;
+                    fc.animator.Play("Idle", 0, 0f);
                     break;
                 case LocomotionState.Walking:
-                    overrideController["WalkPlaceholder"] = fighter.walkAnimation;
-                    fighter.animator.Play("Walk", 0, 0f);
+                    overrideController["WalkPlaceholder"] = fc.walkAnimation;
+                    fc.animator.Play("Walk", 0, 0f);
                     break;
                 case LocomotionState.Running:
-                    overrideController["RunPlaceholder"] = fighter.runAnimation;
-                    fighter.animator.Play("Run", 0, 0f);
+                    overrideController["RunPlaceholder"] = fc.runAnimation;
+                    fc.animator.Play("Run", 0, 0f);
                     break;
                 case LocomotionState.TurnAround:
-                    fighter.TurnedAround(isFacingRight);
+                    fc.TurnedAround(isFacingRight);
                     break;
             }
         }
 
-        HandleMove(fighter);
+        HandleMove(fc);
 
-        if (fighter.velocity.y < 0)
+        if (fc.velocity.y < 0)
         {
-            fighter.currentJumps = fighter.Stats.numJumps;
+            fc.currentJumps = fc.fighter.moveSet.numJumps;
         }
 
-        Vector3 knockback = new Vector3(fighter.Stats.knockbackVelocity.x, fighter.Stats.knockbackVelocity.y, 0f);
-        fighter.Controller.Move((fighter.velocity + knockback) * Time.deltaTime);
+        Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
+        fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
 
-        Vector2 dir = fighter.Input.Move;
+        Vector2 dir = fc.Input.Move;
 
-        if (fighter.Input.JumpPressed)
+        if (fc.Input.JumpPressed)
         {
-            fighter.velocity.y = Mathf.Sqrt(fighter.Stats.jumpHeight * -2f * fighter.Stats.gravity);
-            fighter.ChangeState(new AirborneState(isFacingRight));
+            fc.velocity.y = Mathf.Sqrt(fc.fighter.moveSet.jumpHeight * -2f * fc.fighter.gravity);
+            fc.ChangeState(new AirborneState(isFacingRight));
             return;
         }
 
-        if (fighter.Input.AttackPressed)
+        if (fc.Input.AttackPressed)
         {
-            MoveData forwardSmash = fighter.moveSet.forwardSmash;
-            fighter.Stats.ClearHitTargets();
-            var overrideController = fighter.animator.runtimeAnimatorController as AnimatorOverrideController;
+            MoveData forwardSmash = fc.fighter.moveSet.forwardSmash;
+            fc.fighter.ClearHitTargets();
+            var overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
             overrideController["ForwardSmash"] = forwardSmash.animationClip;
-            fighter.animator.Play("Attack", 0, 0f);
+            fc.animator.Play("Attack", 0, 0f);
 
-            foreach (var hitbox in fighter.swordHitboxes)
+            foreach (var hitbox in fc.swordHitboxes)
             {
                 hitbox.Activate(forwardSmash);
             }
             return;
         }
 
-        if (fighter.Input.GrabPressed)
+        if (fc.Input.GrabPressed)
         {
-            EnableGrabHitbox(fighter);
-            fighter.StartCoroutine(DisableHitboxCoroutine(fighter));
+            EnableGrabHitbox(fc);
+            fc.StartCoroutine(DisableHitboxCoroutine(fc));
             return;
         }
 
-        if (fighter.Input.BlockHeld)
+        if (fc.Input.BlockHeld)
         {
-            fighter.ChangeState(new BlockState());
+            fc.ChangeState(new BlockState());
         }
 
-        if (!fighter.IsGrounded)
+        if (!fc.IsGrounded)
         {
-            fighter.ChangeState(new AirborneState(isFacingRight));
+            fc.ChangeState(new AirborneState(isFacingRight));
         }
 
-        if (fighter.Input.FastFallPressed && fighter.TryGetPlatform(out Collider platform))
+        if (fc.Input.FastFallPressed && fc.TryGetPlatform(out Collider platform))
         {
-            fighter.DropThrough(platform);
+            fc.DropThrough(platform);
         }
     }
 
-    public void Exit(FighterController fighter) { }
+    public void Exit(FighterController fc) { }
 
-    void HandleMove(FighterController fighter)
+    void HandleMove(FighterController fc)
     {   
-        fighter.Controller.Move(new Vector3(fighter.HorizontalInput, 0, 0) * fighter.Stats.runSpeed * Time.deltaTime);
+        fc.Controller.Move(new Vector3(fc.HorizontalInput, 0, 0) * fc.fighter.moveSet.runSpeed * Time.deltaTime);
     }
 
-    public void EnableGrabHitbox(FighterController fighter)
+    public void EnableGrabHitbox(FighterController fc)
     {
-        fighter.grabHitbox.SetActive(true);
+        fc.grabHitbox.SetActive(true);
     }
 
-    IEnumerator DisableHitboxCoroutine(FighterController fighter)
+    IEnumerator DisableHitboxCoroutine(FighterController fc)
     {
         yield return new WaitForSeconds(0.5f);
-        fighter.grabHitbox.SetActive(false);
+        fc.grabHitbox.SetActive(false);
     }
 
 

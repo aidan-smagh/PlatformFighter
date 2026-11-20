@@ -16,7 +16,7 @@ public class FighterController : MonoBehaviour
     [SerializeField] public LayerMask groundMask;
     [SerializeField] public LayerMask platformMask;
     [SerializeField] SkinnedMeshRenderer meshRenderer;
-    [SerializeField] Fighter fighter;
+    //[SerializeField] Fighter fighter;
     [SerializeField] public Fighter grabbedFighter;
     [SerializeField] public Animator animator;
     
@@ -51,7 +51,8 @@ public class FighterController : MonoBehaviour
     public readonly List<IgnoredPlatform> ignoredPlatforms = new List<IgnoredPlatform>();
 
     public CharacterController Controller => controller;
-    public Fighter Stats => fighter;
+    //public Fighter Stats => fighter;
+    public Fighter fighter;
     public float HorizontalInput { get; private set; }
 
     public IFighterState currentState { get; set; }
@@ -183,6 +184,7 @@ public class FighterController : MonoBehaviour
     {
         currentJumps = fighter.numJumps;
         ChangeState(new GroundedState());
+        fighter = GetComponent<Fighter>();
     }
 
     void Update()

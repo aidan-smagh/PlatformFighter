@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 public class Fighter : MonoBehaviour
 {
-    public float runSpeed = 8f;
+    //public float runSpeed = 8f;
     public float jumpHeight = 2.5f;
     public float fallMultiplier = 2.5f;
     public float gravity = -20f;
     public float numJumps = 1;
-    public float weight = 100;
+    //private float weight = 100;
     public float decayRate = 0.15f;
     public Vector2 knockbackVelocity;
-    public float knockbackPowerScaleFactor = 0f;
-    public float tumbleThreshold = 80f;
+    private float knockbackPowerScaleFactor = 0.15f;
+    private float tumbleThreshold = 80f;
     public float airAccel = 800f;
     public float airSpeed = 100f;
 
@@ -21,6 +21,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] public float currentPercent = 0f;
     [SerializeField] public int stocks = 3;
     [SerializeField] GameObject spawnPoint;
+    [SerializeField] public MovesetData moveSet;
     
     public int Stocks => stocks;
     GameObject fighter;
@@ -77,7 +78,7 @@ public class Fighter : MonoBehaviour
     {
         if (blockStatus == true) return 0;
 
-        double knockbackPower = ((((other.currentPercent / 10 + (other.currentPercent * payload.d) / 20) * (200 / (other.weight + 100) * 1.4) + 18) * payload.s) + payload.b) * payload.r;
+        double knockbackPower = ((((other.currentPercent / 10 + (other.currentPercent * payload.d) / 20) * (200 / (other.moveSet.weight + 100) * 1.4) + 18) * payload.s) + payload.b) * payload.r;
         Debug.Log("knockbackPower" + knockbackPower);
         return knockbackPower;
     }
