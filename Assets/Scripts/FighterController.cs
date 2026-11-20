@@ -18,6 +18,7 @@ public class FighterController : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer meshRenderer;
     [SerializeField] public Fighter grabbedFighter;
     [SerializeField] public Animator animator;
+    [SerializeField] public RuntimeAnimatorController baseController;
     
     [SerializeField] public GameObject grabHitbox;
 
@@ -54,13 +55,6 @@ public class FighterController : MonoBehaviour
     {
         controls = new FighterControls();
 
-        var baseController = animator.runtimeAnimatorController;
-        animator.runtimeAnimatorController = new AnimatorOverrideController(baseController);
-
-        var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
-        overrideController["IdlePlaceholder"] = fighter.moveSet.idleAnimation;
-        animator.Play("Idle", 0, 0f);
-
         if (isPlayerControlled)
             Input = new PlayerFighterInput(Controls);
         else
@@ -72,9 +66,14 @@ public class FighterController : MonoBehaviour
 
     void Start()
     {
-        currentJumps = fighter.moveSet.numJumps;
-        ChangeState(new GroundedState());
         fighter = GetComponent<Fighter>();
+        currentJumps = fighter.moveSet.numJumps;
+
+        var oc = new AnimatorOverrideController(baseController);
+        animator.runtimeAnimatorController = oc;
+        ApplyAnimationOverrides(oc);
+
+        ChangeState(new GroundedState());
     }
 
     void Update()
@@ -215,5 +214,50 @@ public class FighterController : MonoBehaviour
     {
         float yAngle = isFacingRight ? 90f : -90f;
         fighter.transform.rotation = Quaternion.Euler(0f, yAngle, 0f);
+    }
+
+    private void ApplyAnimationOverrides(AnimatorOverrideController oc)
+    {
+        oc["Idle"]  = fighter.moveSet.idleAnimation;
+        oc["Walk"]  = fighter.moveSet.walkAnimation;
+        oc["Run"]   = fighter.moveSet.runAnimation;
+        oc["Jump"] = fighter.moveSet.jumpAnimation;
+
+        oc["ForwardSmash"] = fighter.moveSet.forwardSmash.animationClip;
+        oc["DownSmash"] = fighter.moveSet.downSmash.animationClip;
+        oc["UpSmash"] = fighter.moveSet.upSmash.animationClip;
+        
+        /*
+        oc["ForwardTilt"] = fighter.moveSet.forwardTilt.animationClip;
+        oc["DownTilt"] = fighter.moveSet.downTilt.animationClip;
+        oc["UpTilt"] = fighter.moveSet.upTilt.animationClip;
+
+        oc["ForwardAir"] = fighter.moveSet.forwardAir.animationClip;
+        oc["BackAir"] = fighter.moveSet.backAir.animationClip;
+        oc["DownAir"] = fighter.moveSet.downAir.animationClip;
+        oc["UpAir"] = fighter.moveSet.upAir.animationClip;
+
+        oc["UpSpecial"] = fighter.moveSet.upSpecial.animationClip;
+        oc["DownSpecial"] = fighter.moveSet.downSpecial.animationClip;
+        oc["SideSpecial"] = fighter.moveSet.sideSpecial.animationClip;
+
+        oc["UpThrow"] = fighter.moveSet.upThrow.animationClip;
+        oc["DownThrow"] = fighter.moveSet.downThrow.animationClip;
+        oc["ForwardThrow"] = fighter.moveSet.forwardThrow.animationClip;
+        oc["BackThrow"] = fighter.moveSet.backThrow.animationClip;
+
+        oc["DashAttack"] = fighter.moveSet.dashAttack.animationClip;
+
+        oc["Pummel"] = fighter.moveSet.pummelAnimation;
+        oc["Grab"] = fighter.moveSet.grabAnimation;
+
+        oc["BlockStart"] = fighter.moveSet.blockStartAnimation;
+        oc["BlockHold"] = fighter.moveSet.blockHold;
+        oc["BlockExit"] = fighter.moveSet.blockExit;
+        
+        oc["TurnAround"] = fighter.moveSet.turnAroundAnimation;
+        oc["DoubleJump"] = fighter.moveSet.doubleJumpAnimation;
+        oc["GrabRelease"] = fighter.moveSet.releaseAnimation;
+        */
     }
 }

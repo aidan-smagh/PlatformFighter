@@ -18,10 +18,6 @@ public class BlockState : IFighterState
     public void Enter(FighterController fc)
     {
         fc.DebugColor(Color.teal);
-        var overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
-        overrideController["BlockStartPlaceholder"] = fc.fighter.moveSet.blockStartAnimation;
-        overrideController["BlockHoldPlaceholder"] = fc.fighter.moveSet.blockHoldAnimation;
-        overrideController["BlockExitPlaceholder"] = fc.fighter.moveSet.blockExitAnimation;
 
         SetPhase(fc, BlockPhase.Startup, "BlockStart");
     }

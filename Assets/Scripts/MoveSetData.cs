@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "NewMoveset", menuName = "Fighter/Moveset")]
 public class MovesetData : ScriptableObject

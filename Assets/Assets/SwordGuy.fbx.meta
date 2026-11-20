@@ -31,7 +31,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.002|BackAir
+      name: BackAir
       takeName: Armature.002|BackAir
       internalID: 1952600153744989346
       firstFrame: 0
@@ -60,7 +60,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|BlockExit
+      name: BlockExit
       takeName: Armature.002|BlockExit
       internalID: 7232115992008613039
       firstFrame: 0
@@ -89,7 +89,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|BlockHold
+      name: BlockHold
       takeName: Armature.002|BlockHold
       internalID: -4476228490730106637
       firstFrame: 0
@@ -118,7 +118,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|BlockStart
+      name: BlockStart
       takeName: Armature.002|BlockStart
       internalID: 4248243029547119538
       firstFrame: 0
@@ -147,7 +147,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|DownAir
+      name: DownAir
       takeName: Armature.002|DownAir
       internalID: 7133071052553134853
       firstFrame: 0
@@ -176,7 +176,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|ForwardAir
+      name: ForwardAir
       takeName: Armature.002|ForwardAir
       internalID: -8784006835002089752
       firstFrame: 0
@@ -234,7 +234,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|Idle
+      name: Idle
       takeName: Armature.002|Idle
       internalID: -4187070084771750883
       firstFrame: 0
@@ -263,7 +263,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|Jump
+      name: Jump
       takeName: Armature.002|Jump
       internalID: -7843072957423894538
       firstFrame: 0
@@ -292,7 +292,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|Run
+      name: Run
       takeName: Armature.002|Run
       internalID: 7878233008565332337
       firstFrame: 0
@@ -350,7 +350,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature.002|Walk
+      name: Walk
       takeName: Armature.002|Walk
       internalID: -2630020535824132839
       firstFrame: 0

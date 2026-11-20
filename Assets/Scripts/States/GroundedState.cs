@@ -56,15 +56,12 @@ public class GroundedState : IFighterState
             switch (currentLocomotion)
             {
                 case LocomotionState.Idle:
-                    overrideController["IdlePlaceholder"] = fc.fighter.moveSet.idleAnimation;
                     fc.animator.Play("Idle", 0, 0f);
                     break;
                 case LocomotionState.Walking:
-                    overrideController["WalkPlaceholder"] = fc.fighter.moveSet.walkAnimation;
                     fc.animator.Play("Walk", 0, 0f);
                     break;
                 case LocomotionState.Running:
-                    overrideController["RunPlaceholder"] = fc.fighter.moveSet.runAnimation;
                     fc.animator.Play("Run", 0, 0f);
                     break;
                 case LocomotionState.TurnAround:
@@ -91,9 +88,7 @@ public class GroundedState : IFighterState
         {
             MoveData forwardSmash = fc.fighter.moveSet.forwardSmash;
             fc.fighter.ClearHitTargets();
-            var overrideController = fc.animator.runtimeAnimatorController as AnimatorOverrideController;
-            overrideController["ForwardSmash"] = forwardSmash.animationClip;
-            fc.animator.Play("Attack", 0, 0f);
+            fc.animator.Play("ForwardSmash", 0, 0f);
 
             foreach (var hitbox in fc.swordHitboxes)
             {
