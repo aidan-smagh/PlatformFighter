@@ -6,6 +6,8 @@ public class AirborneState : IFighterState
 
     private bool isFacingRight;
     private bool turnedAround;
+    private float horizontalInputDampening = 0.50f;
+    private float maxTarget = 0f;
 
     AnimatorOverrideController overrideController;
 
@@ -88,8 +90,10 @@ public class AirborneState : IFighterState
 
     private void HandleMove(FighterController fc)
     {
-        float target = fc.HorizontalInput * fc.fighter.moveSet.airSpeed;
-        fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, target, fc.fighter.moveSet.airAccel * Time.deltaTime);
+        float target = fc.HorizontalInput * horizontalInputDampening * fc.fighter.moveSet.airSpeed;
+        if (Mathf.Abs(target) > Mathf.Abs(maxTarget)) maxTarget = target;
+        maxTarget = Mathf.Abs(maxTarget) * (fc.facingRight ? 1f : -1f);
+        fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, maxTarget, fc.fighter.moveSet.airAccel * Time.deltaTime);
         Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
         fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
     }
