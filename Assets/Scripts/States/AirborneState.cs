@@ -6,7 +6,7 @@ public class AirborneState : IFighterState
 
     private bool isFacingRight;
     private bool turnedAround;
-    private float horizontalInputDampening = 0.50f;
+    private float horizontalInputDampening = 0.75f;
     private float maxTarget = 0f;
 
     AnimatorOverrideController overrideController;

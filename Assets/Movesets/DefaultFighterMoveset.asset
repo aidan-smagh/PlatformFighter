@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83dc5fa5a32802b44984e6f492a2b0da, type: 3}
   m_Name: DefaultFighterMoveset
   m_EditorClassIdentifier: Assembly-CSharp::MovesetData
-  allMoves:
-  - {fileID: 0}
-  inherentAnimations: []
   jab: {fileID: 0}
   forwardSmash: {fileID: 11400000, guid: 1745ccad8e342dd48bebbc41cbf13969, type: 2}
   downSmash: {fileID: 11400000, guid: f587ff5e60ab1994b9d9e4bbc8da8283, type: 2}
@@ -36,12 +33,12 @@ MonoBehaviour:
   pummel: {fileID: 0}
   dashAttack: {fileID: 0}
   weight: 100
-  runSpeed: 8
+  runSpeed: 12
   fallMultiplier: 2.5
   numJumps: 1
-  airAccel: 800
-  airSpeed: 8
-  jumpHeight: 2.5
+  airAccel: 10
+  airSpeed: 10
+  jumpHeight: 3
   idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   runAnimation: {fileID: 7878233008565332337, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}

@@ -12,6 +12,10 @@ public class GroundedState : IFighterState
 
     private bool isFacingRight = true;
 
+    private bool jumpQueued;
+    private int jumpQueueFrames;
+    private const int shortHopWindow = 25;
+
     LocomotionState targetLocomotion;
 
     public void Enter(FighterController fc)
@@ -77,11 +81,25 @@ public class GroundedState : IFighterState
 
         Vector2 dir = fc.Input.Move;
 
-        if (fc.Input.JumpPressed)
+        if (!jumpQueued && fc.Input.JumpPressed && fc.currentJumps > 0)
         {
-            fc.velocity.y = Mathf.Sqrt(fc.fighter.moveSet.jumpHeight * -2f * fc.fighter.gravity);
-            fc.ChangeState(new AirborneState(isFacingRight));
-            return;
+            jumpQueued = true;
+            jumpQueueFrames = 0;
+        }
+
+        if (jumpQueued)
+        {
+            jumpQueueFrames++;
+            bool released = !fc.Input.JumpPressed;
+            if (released || jumpQueueFrames >= shortHopWindow)
+            {
+                float jumpHeight = fc.fighter.moveSet.jumpHeight;
+                if (released) jumpHeight *= 0.5f;
+                fc.velocity.y = Mathf.Sqrt(jumpHeight * -2f * fc.fighter.gravity);
+                fc.currentJumps--;
+                fc.animator.Play("Jump", 0, 0f);
+                jumpQueued = false;
+            }
         }
 
         if (fc.Input.AttackPressed)

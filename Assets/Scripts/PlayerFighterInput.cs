@@ -11,7 +11,7 @@ public class PlayerFighterInput : IFighterInput
 
     public Vector2 Move => controls.Player.Move.ReadValue<Vector2>();
     public bool BlockHeld => controls.Player.Block.IsPressed();
-    public bool JumpPressed => controls.Player.Jump.WasPressedThisFrame();
+    public bool JumpPressed => controls.Player.Jump.IsPressed();
     public bool AttackPressed => controls.Player.Attack.WasPressedThisFrame();
     public bool GrabPressed => controls.Player.Grab.WasPressedThisFrame();
     public bool FastFallPressed => controls.Player.FastFall.IsPressed();
