@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "NewMoveset", menuName = "Fighter/Moveset")]
 public class MovesetData : ScriptableObject
 {
+    public MoveData[] aerials = new MoveData[5];
+
     [Header("Moves")]
     public MoveData jab;
 
@@ -19,10 +21,12 @@ public class MovesetData : ScriptableObject
     public MoveData backAir;
     public MoveData upAir;
     public MoveData downAir;
+    public MoveData neutralAir;
 
     public MoveData upSpecial;
     public MoveData sideSpecial;
     public MoveData downSpecial;
+    public MoveData neutralSpecial;
 
     public MoveData upThrow;
     public MoveData downThrow;

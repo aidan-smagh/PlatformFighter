@@ -275,6 +275,9 @@ Also updated the editor version because i like the new stuff
 
 Day 36 (11/20/26):
 Added a short hop
+Made some updates to the player stats to refine movement, movement is feeling pretty good now (i want to find some sauce to add)
+Capped FPS at 120 so frame counting can be done consistently in the scripts
+	Need to turn off vsync to set your own frame rate
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
@@ -364,6 +367,10 @@ Need to combine all the facingRight logic into one system
 Replace AssetStore assets with my own art:
 	Skybox
 	Ground and stoneruins textures
+Change the if statements in the airborne state to use a lookup to call the correct move
+	Get the x and y input values and match them up to whatever move is needed then trigger the move
+	Use an enum for each of the attack types
+	May need some deadzones for the input values
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

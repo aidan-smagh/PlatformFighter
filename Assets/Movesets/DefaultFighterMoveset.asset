@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83dc5fa5a32802b44984e6f492a2b0da, type: 3}
   m_Name: DefaultFighterMoveset
   m_EditorClassIdentifier: Assembly-CSharp::MovesetData
+  aerials:
+  - {fileID: 11400000, guid: 39841202fe2e02243bf5b8f584716d86, type: 2}
+  - {fileID: 11400000, guid: 3cd8e6886bf113a48afa2115c903fb96, type: 2}
+  - {fileID: 11400000, guid: affea7194d6afd44b82e52362f2f4ad0, type: 2}
+  - {fileID: 11400000, guid: f62ad6b9089e053459162797711a98b6, type: 2}
+  - {fileID: 11400000, guid: 01489f78ad472154e8e19e0e57c92a1f, type: 2}
   jab: {fileID: 0}
   forwardSmash: {fileID: 11400000, guid: 1745ccad8e342dd48bebbc41cbf13969, type: 2}
   downSmash: {fileID: 11400000, guid: f587ff5e60ab1994b9d9e4bbc8da8283, type: 2}
@@ -19,13 +25,15 @@ MonoBehaviour:
   forwardTilt: {fileID: 0}
   downTilt: {fileID: 0}
   upTilt: {fileID: 0}
-  forwardAir: {fileID: 0}
-  backAir: {fileID: 0}
-  upAir: {fileID: 0}
-  downAir: {fileID: 0}
+  forwardAir: {fileID: 11400000, guid: 39841202fe2e02243bf5b8f584716d86, type: 2}
+  backAir: {fileID: 11400000, guid: 3cd8e6886bf113a48afa2115c903fb96, type: 2}
+  upAir: {fileID: 11400000, guid: affea7194d6afd44b82e52362f2f4ad0, type: 2}
+  downAir: {fileID: 11400000, guid: f62ad6b9089e053459162797711a98b6, type: 2}
+  neutralAir: {fileID: 11400000, guid: 01489f78ad472154e8e19e0e57c92a1f, type: 2}
   upSpecial: {fileID: 0}
   sideSpecial: {fileID: 0}
   downSpecial: {fileID: 0}
+  neutralSpecial: {fileID: 0}
   upThrow: {fileID: 0}
   downThrow: {fileID: 0}
   forwardThrow: {fileID: 0}
@@ -38,7 +46,7 @@ MonoBehaviour:
   numJumps: 1
   airAccel: 50
   airSpeed: 10
-  jumpHeight: 3
+  jumpHeight: 5
   fallSpeed: 2
   idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}

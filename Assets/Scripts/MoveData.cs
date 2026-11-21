@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewMove", menuName = "Fighter/Move")]
 public class MoveData : ScriptableObject
 {
+    [System.NonSerialized] public int animationHash;
+    public void OnEnable() => animationHash = Animator.StringToHash(moveName);
+
+
     public string moveName;
 
     [Header("Knockback")]

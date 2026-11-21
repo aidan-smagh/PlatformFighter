@@ -9,7 +9,7 @@ public class AirborneState : IFighterState
     private float horizontalInputDampening = 0.75f;
     private float maxTarget = 0f;
 
-    AnimatorOverrideController overrideController;
+    private enum Aerial { ForwardAir, BackAir, UpAir, DownAir, NeutralAir }
 
     public AirborneState(bool isFacingRight)
     {
@@ -31,30 +31,10 @@ public class AirborneState : IFighterState
 
         if (turnedAround) fc.TurnedAround(isFacingRight);
 
-        if (fc.Input.AttackPressed && fc.facingRight && fc.Input.Move.x > 0)
+        if (fc.Input.AttackPressed)
         {
-            MoveData forwardAir = fc.fighter.moveSet.forwardAir;
-            fc.animator.Play("ForwardAir", 0, 0f);
-        }
-        else if (fc.Input.AttackPressed && fc.facingRight && fc.Input.Move.x < 0)
-        {
-            MoveData backAir = fc.fighter.moveSet.backAir;
-            fc.animator.Play("BackAir", 0, 0f);
-        }
-        else if (fc.Input.AttackPressed && fc.Input.Move.y < 0)
-        {
-            MoveData downAir = fc.fighter.moveSet.downAir;
-            fc.animator.Play("DownAir", 0, 0f);
-        }
-        else if (fc.Input.AttackPressed && fc.Input.Move.y > 0)
-        {
-            MoveData upAir = fc.fighter.moveSet.upAir;
-            fc.animator.Play("UpAir", 0, 0f);
-        }
-        else if (fc.Input.SpecialPressed && fc.Input.Move.y > 0)
-        {
-            fc.velocity.y = 15f;
-            fc.fighter.moveSet.numJumps = 0;
+            MoveData move = fc.fighter.moveSet.aerials[(int)AttackLookup(fc.Input.Move, fc)];
+            fc.StartAttack(move);
         }
 
         if (fc.Input.JumpDown && fc.currentJumps > 0)
@@ -98,5 +78,17 @@ public class AirborneState : IFighterState
         fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, maxTarget, fc.fighter.moveSet.airAccel * Time.deltaTime);
         Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
         fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
+    }
+
+    private Aerial AttackLookup(Vector2 attackInput, FighterController fc)
+    {
+        float relX = attackInput.x * (fc.facingRight ? 1f : -1f);
+        const float threshold = 0.4f;
+
+        if (Mathf.Abs(attackInput.y) < threshold && Mathf.Abs(attackInput.x) < threshold) return Aerial.NeutralAir;
+
+        if (Mathf.Abs(attackInput.y) > Mathf.Abs(relX))
+            return attackInput.y > 0 ? Aerial.UpAir : Aerial.DownAir;
+        return relX > 0 ? Aerial.ForwardAir : Aerial.BackAir;
     }
 }

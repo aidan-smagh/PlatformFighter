@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3bf9aaa3ee66d45be578df1e51eec4, type: 3}
   m_Name: Default_F_Smash
   m_EditorClassIdentifier: Assembly-CSharp::MoveData
-  moveName: Forward Smash
+  animationState: 
+  moveName: ForwardSmash
   damage: 20
   knockbackScaling: 0.75
   baseKnockback: 61

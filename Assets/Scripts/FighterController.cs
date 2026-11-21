@@ -216,6 +216,13 @@ public class FighterController : MonoBehaviour
         fighter.transform.rotation = Quaternion.Euler(0f, yAngle, 0f);
     }
 
+    public void StartAttack(MoveData move)
+    {
+        fighter.ClearHitTargets();
+        //Debug.Log(move.moveName);
+        animator.Play(move.moveName, 0, 0f);
+    }
+
     private void ApplyAnimationOverrides(AnimatorOverrideController oc)
     {
         oc["Idle"]  = fighter.moveSet.idleAnimation;
