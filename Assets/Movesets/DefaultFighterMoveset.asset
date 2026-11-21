@@ -36,9 +36,10 @@ MonoBehaviour:
   runSpeed: 12
   fallMultiplier: 2.5
   numJumps: 1
-  airAccel: 10
+  airAccel: 50
   airSpeed: 10
   jumpHeight: 3
+  fallSpeed: 2
   idleAnimation: {fileID: -4187070084771750883, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   walkAnimation: {fileID: -2630020535824132839, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   runAnimation: {fileID: 7878233008565332337, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}

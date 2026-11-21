@@ -272,6 +272,9 @@ Big code cleanup happening (taking some time away from this made me realize how 
 Made it so the fighter does not lose aerial momentum if nothing is pressed
 	Trying to refine the controls so they are more responsive and feel nice
 Also updated the editor version because i like the new stuff
+
+Day 36 (11/20/26):
+Added a short hop
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 

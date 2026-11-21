@@ -23,6 +23,8 @@ public class AirborneState : IFighterState
         isFacingRight = fc.facingRight;
 
         fc.animator.Play("Jump", 0, 0f);
+
+        Debug.Log(fc.currentJumps);
     }
 
     public void Tick(FighterController fc)
@@ -57,7 +59,7 @@ public class AirborneState : IFighterState
             fc.fighter.moveSet.numJumps = 0;
         }
 
-        if (fc.Input.JumpPressed && fc.currentJumps > 0)
+        if (fc.Input.JumpDown && fc.currentJumps > 0)
         {
             fc.velocity.y = Mathf.Sqrt(fc.fighter.moveSet.jumpHeight * -2f * fc.fighter.gravity);
             fc.currentJumps -= 1;
@@ -71,7 +73,7 @@ public class AirborneState : IFighterState
         } 
         else
         {
-            fc.velocity.y += fc.fighter.gravity * Time.deltaTime;
+            fc.velocity.y += fc.fighter.gravity * fc.fighter.moveSet.fallSpeed * Time.deltaTime;
         }
 
         if (fc.IsGrounded && fc.velocity.y <= 0f)
@@ -86,6 +88,7 @@ public class AirborneState : IFighterState
     {
         fc.velocity.x = 0f;
         fc.velocity.y = -5f;
+        fc.currentJumps = fc.fighter.moveSet.numJumps;
     }
 
     private void HandleMove(FighterController fc)

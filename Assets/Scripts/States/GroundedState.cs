@@ -96,7 +96,6 @@ public class GroundedState : IFighterState
                 float jumpHeight = fc.fighter.moveSet.jumpHeight;
                 if (released) jumpHeight *= 0.5f;
                 fc.velocity.y = Mathf.Sqrt(jumpHeight * -2f * fc.fighter.gravity);
-                fc.currentJumps--;
                 fc.animator.Play("Jump", 0, 0f);
                 jumpQueued = false;
             }

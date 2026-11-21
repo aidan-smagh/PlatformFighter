@@ -41,6 +41,7 @@ public class MovesetData : ScriptableObject
     public float airAccel;
     public float airSpeed;
     public float jumpHeight;
+    public float fallSpeed;
 
     [Header("Inherent Animations")]
     public AnimationClip idleAnimation;
