@@ -7,7 +7,6 @@ public class AirborneState : IFighterState
     private bool isFacingRight;
     private bool turnedAround;
     private float horizontalInputDampening = 0.75f;
-    private float maxTarget = 0f;
 
     private enum Aerial { ForwardAir, BackAir, UpAir, DownAir, NeutralAir }
 
@@ -23,6 +22,7 @@ public class AirborneState : IFighterState
         isFacingRight = fc.facingRight;
 
         fc.animator.Play("Jump", 0, 0f);
+        fc.canTurn = false;
     }
 
     public void Tick(FighterController fc)
@@ -30,6 +30,7 @@ public class AirborneState : IFighterState
         fc.ApplyKnockbackDecay();
 
         if (turnedAround) fc.TurnedAround(isFacingRight);
+        turnedAround = false;
 
         if (fc.Input.AttackPressed)
         {
@@ -68,14 +69,14 @@ public class AirborneState : IFighterState
         fc.velocity.x = 0f;
         fc.velocity.y = -5f;
         fc.currentJumps = fc.fighter.moveSet.numJumps;
+        fc.canTurn = true;
     }
 
     private void HandleMove(FighterController fc)
     {
         float target = fc.HorizontalInput * horizontalInputDampening * fc.fighter.moveSet.airSpeed;
-        if (Mathf.Abs(target) > Mathf.Abs(maxTarget)) maxTarget = target;
-        maxTarget = Mathf.Abs(maxTarget) * (fc.facingRight ? 1f : -1f);
-        fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, maxTarget, fc.fighter.moveSet.airAccel * Time.deltaTime);
+        if (Mathf.Abs(fc.HorizontalInput) > 0.2f)
+            fc.velocity.x = Mathf.MoveTowards(fc.velocity.x, target, fc.fighter.moveSet.airAccel * Time.deltaTime);
         Vector3 knockback = new Vector3(fc.fighter.knockbackVelocity.x, fc.fighter.knockbackVelocity.y, 0f);
         fc.Controller.Move((fc.velocity + knockback) * Time.deltaTime);
     }
@@ -88,7 +89,7 @@ public class AirborneState : IFighterState
         if (Mathf.Abs(attackInput.y) < threshold && Mathf.Abs(attackInput.x) < threshold) return Aerial.NeutralAir;
 
         if (Mathf.Abs(attackInput.y) > Mathf.Abs(relX))
-            return attackInput.y > 0 ? Aerial.UpAir : Aerial.DownAir;
+            return attackInput.y > 0 ? Aerial.UpAir : Aerial.DownAir;       
         return relX > 0 ? Aerial.ForwardAir : Aerial.BackAir;
     }
 }

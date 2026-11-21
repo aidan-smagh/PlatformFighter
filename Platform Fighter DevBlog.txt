@@ -278,6 +278,13 @@ Added a short hop
 Made some updates to the player stats to refine movement, movement is feeling pretty good now (i want to find some sauce to add)
 Capped FPS at 120 so frame counting can be done consistently in the scripts
 	Need to turn off vsync to set your own frame rate
+
+Day 37 (11/21/26):
+Made a lookup for the aerial moves instead of using a bunch of if statements
+	MoveSetData has an array of the aerials and you index from it by using the enum defined in the airborne state
+		AttackLookup finds the correct element in the enum to use depending on the input vector
+	Passes the looked up move to fc.startattack() which will clear targets and play the animation by using the moveName from the MoveData
+		moveName needs to be an exact match to the animator state or else the animation will not override properly
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
@@ -363,14 +370,9 @@ The thing that reinforces the feeling of a fighter getting hit is the over the t
 	Character percent UI needs to fade when fighters would move behind it
 Big code cleanup is due sometime
 	I can feel the files getting messier
-Need to combine all the facingRight logic into one system
 Replace AssetStore assets with my own art:
 	Skybox
 	Ground and stoneruins textures
-Change the if statements in the airborne state to use a lookup to call the correct move
-	Get the x and y input values and match them up to whatever move is needed then trigger the move
-	Use an enum for each of the attack types
-	May need some deadzones for the input values
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

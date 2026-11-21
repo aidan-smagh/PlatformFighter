@@ -51,6 +51,8 @@ public class FighterController : MonoBehaviour
 
     public bool IsGrounded => CastDown(combinedMask, out _);
 
+    public bool canTurn;
+
     void Awake()
     {
         controls = new FighterControls();
@@ -177,13 +179,13 @@ public class FighterController : MonoBehaviour
 
     public FighterControls Controls => controls;
 
-    void ReadHorizontalState()
+    private void ReadHorizontalState()
     {
         float h = Input.Move.x; 
 
         HorizontalInput = h;
 
-        bool previousFacing = facingRight;
+        if (!canTurn) return;
 
         if (h > 0f) facingRight = true;
         else if (h < 0f) facingRight = false;
@@ -212,6 +214,7 @@ public class FighterController : MonoBehaviour
 
     public void TurnedAround(bool isFacingRight)
     {
+        Debug.Log(facingRight);
         float yAngle = isFacingRight ? 90f : -90f;
         fighter.transform.rotation = Quaternion.Euler(0f, yAngle, 0f);
     }
@@ -219,7 +222,6 @@ public class FighterController : MonoBehaviour
     public void StartAttack(MoveData move)
     {
         fighter.ClearHitTargets();
-        //Debug.Log(move.moveName);
         animator.Play(move.moveName, 0, 0f);
     }
 
