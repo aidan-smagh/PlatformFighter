@@ -7,6 +7,8 @@ public class GroundedState : IFighterState
     private enum LocomotionState { Idle, Walking, Running, TurnAround, None }
     private LocomotionState currentLocomotion = LocomotionState.Idle;
 
+    private enum GroundAttack { ForwardSmash, DownSmash, UpSmash, ForwardTilt, UpTilt, DownTilt, Jab, DashAttack }
+
     private const float walkThreshold = 0.01f;
     private const float runThreshold = 0.5f;
 
@@ -101,15 +103,8 @@ public class GroundedState : IFighterState
 
         if (fc.Input.AttackPressed)
         {
-            MoveData forwardSmash = fc.fighter.moveSet.forwardSmash;
-            fc.fighter.ClearHitTargets();
-            fc.animator.Play("ForwardSmash", 0, 0f);
-
-            foreach (var hitbox in fc.swordHitboxes)
-            {
-                hitbox.Activate(forwardSmash);
-            }
-            return;
+            MoveData move = fc.fighter.moveSet.groundAttacks[(int)AttackLookup(fc.Input.Move, fc)];
+            fc.StartAttack(move);
         }
 
         if (fc.Input.GrabPressed)
@@ -157,5 +152,23 @@ public class GroundedState : IFighterState
     {
         yield return new WaitForSeconds(0.5f);
         fc.grabHitbox.SetActive(false);
+    }
+
+    private GroundAttack AttackLookup(Vector2 attackInput, FighterController fc)
+    {
+        float relX = attackInput.x * (fc.facingRight ? 1f : -1f);
+        const float jabThreshold = 0.1f;
+        const float threshold = 0.6f;
+
+        if (Mathf.Abs(attackInput.y) < jabThreshold && Mathf.Abs(attackInput.x) < jabThreshold) return GroundAttack.Jab;
+
+        //if fighter is running and attacks, dash attack
+
+        if (Mathf.Abs(attackInput.y) > Mathf.Abs(attackInput.x))
+        {
+            if (attackInput.y > 0) return Mathf.Abs(attackInput.y) > threshold ? GroundAttack.UpSmash : GroundAttack.UpTilt;
+            return Mathf.Abs(attackInput.y) > threshold ? GroundAttack.DownSmash : GroundAttack.DownTilt;
+        }
+        return relX > threshold ? GroundAttack.ForwardSmash : GroundAttack.ForwardTilt;
     }
 }

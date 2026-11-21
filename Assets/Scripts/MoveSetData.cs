@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class MovesetData : ScriptableObject
 {
     public MoveData[] aerials = new MoveData[5];
+    public MoveData[] groundAttacks = new MoveData[8];
 
     [Header("Moves")]
     public MoveData jab;

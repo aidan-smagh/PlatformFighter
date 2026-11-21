@@ -18,6 +18,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: affea7194d6afd44b82e52362f2f4ad0, type: 2}
   - {fileID: 11400000, guid: f62ad6b9089e053459162797711a98b6, type: 2}
   - {fileID: 11400000, guid: 01489f78ad472154e8e19e0e57c92a1f, type: 2}
+  groundAttacks:
+  - {fileID: 11400000, guid: 1745ccad8e342dd48bebbc41cbf13969, type: 2}
+  - {fileID: 11400000, guid: f587ff5e60ab1994b9d9e4bbc8da8283, type: 2}
+  - {fileID: 11400000, guid: 9a1eb2c588593c5429d12da22c894eb2, type: 2}
+  - {fileID: 11400000, guid: 8cd5677eadec0ea4a801cf1a43dfff7d, type: 2}
+  - {fileID: 11400000, guid: 83a79edc32884bb45b4e34967c9badbf, type: 2}
+  - {fileID: 11400000, guid: 42cad9445f3a00649bd30b8102fe525b, type: 2}
+  - {fileID: 11400000, guid: 75724ab0a05bbd449ac929851c295add, type: 2}
+  - {fileID: 11400000, guid: 9d97ff31efd3f6d459edb627c7e36ce2, type: 2}
   jab: {fileID: 0}
   forwardSmash: {fileID: 11400000, guid: 1745ccad8e342dd48bebbc41cbf13969, type: 2}
   downSmash: {fileID: 11400000, guid: f587ff5e60ab1994b9d9e4bbc8da8283, type: 2}

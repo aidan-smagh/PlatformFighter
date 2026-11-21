@@ -285,6 +285,9 @@ Made a lookup for the aerial moves instead of using a bunch of if statements
 		AttackLookup finds the correct element in the enum to use depending on the input vector
 	Passes the looked up move to fc.startattack() which will clear targets and play the animation by using the moveName from the MoveData
 		moveName needs to be an exact match to the animator state or else the animation will not override properly
+Fixed turn around bug in the airborne state
+	Made a new bool variable named canTurn
+	Set to false in airborne state so any horizontal input will not change the fighters direction upon landing
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
