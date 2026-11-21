@@ -14,7 +14,7 @@ public class GroundedState : IFighterState
 
     private bool jumpQueued;
     private int jumpQueueFrames;
-    private const int shortHopWindow = 25;
+    private const int shortHopWindow = 8;
 
     LocomotionState targetLocomotion;
 
@@ -79,8 +79,6 @@ public class GroundedState : IFighterState
             fc.currentJumps = fc.fighter.moveSet.numJumps;
         }
 
-        Vector2 dir = fc.Input.Move;
-
         if (!jumpQueued && fc.Input.JumpPressed && fc.currentJumps > 0)
         {
             jumpQueued = true;
@@ -137,7 +135,10 @@ public class GroundedState : IFighterState
         }
     }
 
-    public void Exit(FighterController fc) { }
+    public void Exit(FighterController fc)
+    {
+
+    }
 
     private void HandleMove(FighterController fc)
     {   

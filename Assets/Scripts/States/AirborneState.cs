@@ -23,8 +23,6 @@ public class AirborneState : IFighterState
         isFacingRight = fc.facingRight;
 
         fc.animator.Play("Jump", 0, 0f);
-
-        Debug.Log(fc.currentJumps);
     }
 
     public void Tick(FighterController fc)
@@ -79,6 +77,7 @@ public class AirborneState : IFighterState
         if (fc.IsGrounded && fc.velocity.y <= 0f)
         {
             fc.ChangeState(new GroundedState());
+            return;
         }
 
         HandleMove(fc);

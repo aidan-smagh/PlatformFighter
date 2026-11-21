@@ -364,9 +364,6 @@ Need to combine all the facingRight logic into one system
 Replace AssetStore assets with my own art:
 	Skybox
 	Ground and stoneruins textures
-Fix grounded momentum bug after being airborne
-Dampen horizontal influence in the air some more while keeping the top speed
-	Player should not be able to move side to side so quickly in one jump
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Knockback information:

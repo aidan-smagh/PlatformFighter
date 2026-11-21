@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private FighterControls controls;
     private bool isPaused = false;
 
+    private const int targetFPS = 120;
+
     TextMeshProUGUI timerTmpText;
 
     GameObject[] fighters;
@@ -21,6 +23,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         controls = new FighterControls();
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFPS;
     }
 
     void OnEnable()
