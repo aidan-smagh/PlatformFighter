@@ -1618,7 +1618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1076516463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,7 +1637,7 @@ MonoBehaviour:
   currentPercent: 0
   stocks: 3
   spawnPoint: {fileID: 1192005608}
-  moveSet: {fileID: 0}
+  moveSet: {fileID: 11400000, guid: ed27db8f543f80e4fabbab0783229f5d, type: 2}
 --- !u!114 &1076516464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,12 +1670,10 @@ MonoBehaviour:
   grabHitbox: {fileID: 252673774}
   audioSource: {fileID: 0}
   parrySFX: {fileID: 0}
-  swordHitboxes:
-  - {fileID: 756128341}
-  - {fileID: 190094704}
-  - {fileID: 1181094928}
+  hitboxes: []
   fighter: {fileID: 1076516463}
   ignoredPlatform: {fileID: 0}
+  canTurn: 0
 --- !u!54 &1076516465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3045,10 +3043,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6092560645124854870, guid: 5db8eb796121e0f49b3462103999d050, type: 3}
-      propertyPath: spawnPoint
-      value: 
-      objectReference: {fileID: 1192005608}
     - target: {fileID: 8506628714398938122, guid: 5db8eb796121e0f49b3462103999d050, type: 3}
       propertyPath: m_Name
       value: SwordGuy

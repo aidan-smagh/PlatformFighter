@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3bf9aaa3ee66d45be578df1e51eec4, type: 3}
   m_Name: Default_F_Smash
   m_EditorClassIdentifier: Assembly-CSharp::MoveData
-  animationState: 
   moveName: ForwardSmash
   damage: 20
   knockbackScaling: 0.75
@@ -22,8 +21,7 @@ MonoBehaviour:
   activeTime: 0
   endLag: 20
   hitstunInflicted: 0
-  hitboxSize: {x: 1, y: 1, z: 1}
-  hitboxOffset: {x: 0, y: 0, z: 0}
+  hitboxIndices: 000000000100000002000000i
   animationClip: {fileID: -5795666277629343369, guid: e256a88f731560b4ebfab4cf29d399f9, type: 3}
   velocityX: 0
   velocityY: 0

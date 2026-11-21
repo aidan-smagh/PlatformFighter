@@ -1906,12 +1906,13 @@ MonoBehaviour:
   grabHitbox: {fileID: 2131288250210286236}
   audioSource: {fileID: 442437075877465114}
   parrySFX: {fileID: 8300000, guid: af1f0a08dd8168b4a80fcca6ddd034fe, type: 3}
-  swordHitboxes:
+  hitboxes:
   - {fileID: 7906461137543831318}
   - {fileID: 6757022350017418883}
   - {fileID: 6956019647917358839}
   fighter: {fileID: 6092560645124854870}
   ignoredPlatform: {fileID: 0}
+  canTurn: 0
 --- !u!114 &6092560645124854870
 MonoBehaviour:
   m_ObjectHideFlags: 0

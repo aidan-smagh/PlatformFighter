@@ -30,7 +30,5 @@ public class AttackHitbox : MonoBehaviour
         if (fighter.HasAlreadyHit(target)) return;
 
         fighter.ReceiveHit(target, move);
-        //fighter.CalculateMoveHit(target, move);
-        //fighter.RegisterHit(target);
     }
 }

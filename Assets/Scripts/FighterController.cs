@@ -25,7 +25,7 @@ public class FighterController : MonoBehaviour
     [SerializeField] public AudioSource audioSource;
     [SerializeField] public AudioClip parrySFX;
 
-    [SerializeField] public List<AttackHitbox> swordHitboxes;
+    [SerializeField] public List<AttackHitbox> hitboxes;
 
     public struct IgnoredPlatform
     {
@@ -214,13 +214,16 @@ public class FighterController : MonoBehaviour
 
     public void TurnedAround(bool isFacingRight)
     {
-        Debug.Log(facingRight);
         float yAngle = isFacingRight ? 90f : -90f;
         fighter.transform.rotation = Quaternion.Euler(0f, yAngle, 0f);
     }
 
     public void StartAttack(MoveData move)
     {
+        foreach (int i in move.hitboxIndices)
+        {
+            hitboxes[i].Activate(move);
+        }
         fighter.ClearHitTargets();
         animator.Play(move.moveName, 0, 0f);
     }

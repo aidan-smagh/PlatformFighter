@@ -6,7 +6,6 @@ public class MoveData : ScriptableObject
     [System.NonSerialized] public int animationHash;
     public void OnEnable() => animationHash = Animator.StringToHash(moveName);
 
-
     public string moveName;
 
     [Header("Knockback")]
@@ -22,8 +21,7 @@ public class MoveData : ScriptableObject
     public float hitstunInflicted;
 
     [Header("Hitbox")]
-    public Vector3 hitboxSize;
-    public Vector3 hitboxOffset;
+    public int[] hitboxIndices;
 
     [Header("Animation")]
     public AnimationClip animationClip;
