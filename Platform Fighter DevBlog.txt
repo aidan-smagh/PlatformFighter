@@ -288,6 +288,9 @@ Made a lookup for the aerial moves instead of using a bunch of if statements
 Fixed turn around bug in the airborne state
 	Made a new bool variable named canTurn
 	Set to false in airborne state so any horizontal input will not change the fighters direction upon landing
+Each moveData has a hitboxes field which acts as an index into the fighters hitboxes array
+	This makes it so that each move can have specified hitboxes activated instead of an all or nothing approach
+	Will also make it easier to handle the hitboxes for when separate fighters are allowed
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
@@ -371,8 +374,6 @@ The thing that reinforces the feeling of a fighter getting hit is the over the t
 	The snappiness of the camera to widen once one fighter is hit further
 		Camera cant feel like its lazily moving
 	Character percent UI needs to fade when fighters would move behind it
-Big code cleanup is due sometime
-	I can feel the files getting messier
 Replace AssetStore assets with my own art:
 	Skybox
 	Ground and stoneruins textures

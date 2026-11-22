@@ -156,8 +156,8 @@ public class FighterController : MonoBehaviour
             if (p.collider == null) { ignoredPlatforms.RemoveAt(i); continue; }
 
             bool done = p.dropping
-                ? b.max.y < p.collider.bounds.min.y      // head is below the platform's underside
-                : b.min.y >= p.collider.bounds.max.y;    // feet are above the platform's top
+                ? b.max.y < p.collider.bounds.min.y
+                : b.min.y >= p.collider.bounds.max.y;
 
             if (done)
             {

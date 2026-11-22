@@ -80,6 +80,7 @@ public class Fighter : MonoBehaviour
         other.knockbackVelocity += velocity;
         //if (enterTumble) other.fighterController.ChangeState(new TumbleState());
     }
+
     public void ReceiveHit(Fighter other, MoveData move)
     {
         RegisterHit(other);

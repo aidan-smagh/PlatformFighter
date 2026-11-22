@@ -25,11 +25,11 @@ public class GroundedState : IFighterState
         fc.DebugColor(Color.green);
         currentLocomotion = LocomotionState.None;
         fc.fighter.moveSet.numJumps = 1;
+        fc.fighter.knockbackVelocity = Vector2.zero;
     }
 
     public void Tick(FighterController fc)
     {
-        fc.ApplyKnockbackDecay();
         HandleMove(fc);
 
         float horizontalInput = Mathf.Abs(fc.HorizontalInput);
