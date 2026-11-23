@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: Default_UpTilt
   m_EditorClassIdentifier: Assembly-CSharp::MoveData
   moveName: UpTilt
-  damage: 0
-  knockbackScaling: 0
-  baseKnockback: 0
-  launchAngle: 0
+  damage: 16
+  knockbackScaling: 0.85
+  baseKnockback: 60
+  launchAngle: 90
   startupTime: 0
   activeTime: 0
   endLag: 0
   hitstunInflicted: 0
-  hitboxSize: {x: 0, y: 0, z: 0}
-  hitboxOffset: {x: 0, y: 0, z: 0}
-  animationClip: {fileID: 0}
+  hitboxIndices: 000000000100000002000000i
+  animationClip: {fileID: -623603649343465320, guid: a47e65dda5ff17a419afafc436617a36, type: 3}
   velocityX: 0
   velocityY: 0

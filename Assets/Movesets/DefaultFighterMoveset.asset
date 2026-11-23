@@ -33,7 +33,7 @@ MonoBehaviour:
   upSmash: {fileID: 11400000, guid: 9a1eb2c588593c5429d12da22c894eb2, type: 2}
   forwardTilt: {fileID: 0}
   downTilt: {fileID: 0}
-  upTilt: {fileID: 0}
+  upTilt: {fileID: 11400000, guid: 83a79edc32884bb45b4e34967c9badbf, type: 2}
   forwardAir: {fileID: 11400000, guid: 39841202fe2e02243bf5b8f584716d86, type: 2}
   backAir: {fileID: 11400000, guid: 3cd8e6886bf113a48afa2115c903fb96, type: 2}
   upAir: {fileID: 11400000, guid: affea7194d6afd44b82e52362f2f4ad0, type: 2}

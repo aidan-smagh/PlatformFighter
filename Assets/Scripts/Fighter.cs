@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Fighter : MonoBehaviour
 {
-    public float gravity = -20f;
+    public float gravity = -10f;
     public float decayRate = 0.15f;
     public Vector2 knockbackVelocity;
     private float knockbackPowerScaleFactor = 0.15f;
@@ -77,6 +77,10 @@ public class Fighter : MonoBehaviour
 
     void ApplyKnockback(Fighter other, Vector2 velocity, bool enterTumble)
     {
+        //clear current velocities so a new hit is fresh
+        other.fc.velocity = Vector2.zero;
+        other.knockbackVelocity = Vector2.zero;
+        
         other.knockbackVelocity += velocity;
         //if (enterTumble) other.fighterController.ChangeState(new TumbleState());
     }
@@ -106,7 +110,7 @@ public class Fighter : MonoBehaviour
         if (blockStatus == true) {
             moveDamage = moveDamage * damageReduction;
         } 
-
+        Debug.Log(move);
         KnockbackData payload = new KnockbackData 
         { 
             d = moveDamage,
@@ -126,7 +130,6 @@ public class Fighter : MonoBehaviour
         other.currentPercent += moveDamage;
         Vector2 direction = AngleToDirection(move.launchAngle, fc.facingRight);
         Vector2 knockbackVelocity = direction * (float)knockbackPower * knockbackPowerScaleFactor;
-        Debug.Log(knockbackPowerScaleFactor);
         ApplyKnockback(other, knockbackVelocity, enterTumble);
     }
 

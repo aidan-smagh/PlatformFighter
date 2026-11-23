@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MoveData
   moveName: ForwardAir
   damage: 10
-  knockbackScaling: 0.5
-  baseKnockback: 30
+  knockbackScaling: 0.9
+  baseKnockback: 75
   launchAngle: 75
   startupTime: 0
   activeTime: 0

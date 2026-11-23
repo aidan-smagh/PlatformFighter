@@ -81,7 +81,7 @@ public class FighterController : MonoBehaviour
     void Update()
     {
         ReadHorizontalState();
-
+        //if (!isPlayerControlled && !fighter.knockbackVelocity.Equals(Vector2.zero)) Debug.Log(fighter.knockbackVelocity);
         UpdatePlatformPassThrough();
         currentState.Tick(this);
     }

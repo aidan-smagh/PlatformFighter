@@ -291,6 +291,8 @@ Fixed turn around bug in the airborne state
 Each moveData has a hitboxes field which acts as an index into the fighters hitboxes array
 	This makes it so that each move can have specified hitboxes activated instead of an all or nothing approach
 	Will also make it easier to handle the hitboxes for when separate fighters are allowed
+Fixed small momentum bug after a hit fighter hits the stage
+	Set their knockback velocity on enter in the groundedstate
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Backlog:
 
